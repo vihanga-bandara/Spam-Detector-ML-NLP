@@ -19,6 +19,7 @@ data['listed_count_binary'] = (data.listed_count > 20000) == False
 features = ['screen_name_binary', 'name_binary', 'description_binary', 'status_binary', 'verified', 'followers_count',
             'friends_count', 'statuses_count', 'listed_count_binary', 'bot']
 
+# Training on DecisionTreeClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, roc_curve, auc
 from sklearn.model_selection import train_test_split
@@ -36,6 +37,22 @@ y_pred_test = clf.predict(X_test)
 
 print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
 print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
+
+# Training Random Forest Classifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+clf = RandomForestClassifier(min_samples_split=50, min_samples_leaf=200)
+
+# Training on decision tree classifier
+model = clf.fit(X_train, y_train)
+
+# Predicting on test data
+predicted = model.predict(X_test)
+
+# Checking accuracy
+print("Random Forest Classifier Accuracy: {0}".format(accuracy_score(y_test, predicted)))
+
 
 # Visualizing the Training set results
 from matplotlib.colors import ListedColormap
