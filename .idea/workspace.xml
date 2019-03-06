@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Spam-Detection-Spot-Bot-ML.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Spam-Detection-Spot-Bot-ML.iml" afterDir="false" />
+    <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="&#10;Changes done to initial spam user detecting model and added Twitter Fetch API methods">
+      <change afterPath="$PROJECT_DIR$/SpamTweetDetectModel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TwitterTweet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TwitterUser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Twitter_Authentication.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/SpamUserDetectModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TwitterAPI.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,6 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$TwitterAPI.coverage" NAME="TwitterAPI Coverage Results" MODIFIED="1551859102474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$Spam_Detection_Spot_Bot_ML.coverage" NAME="Spam-Detection-Spot-Bot-ML Coverage Results" MODIFIED="1551513767879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="FileEditorManager">
@@ -25,16 +31,37 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Main.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SpamUserDetectModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-              <folding>
-                <element signature="e#1#19#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="541">
+              <caret line="74" column="18" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TwitterUser.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TwitterTweet.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Twitter_Authentication.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -64,7 +91,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Main.ipynb" />
+        <option value="$PROJECT_DIR$/fetch_user.py" />
         <option value="$PROJECT_DIR$/Main.py" />
+        <option value="$PROJECT_DIR$/TwitterAPI.py" />
+        <option value="$PROJECT_DIR$/SpamTweetDetectModel.py" />
+        <option value="$PROJECT_DIR$/Twitter_Authentication.py" />
+        <option value="$PROJECT_DIR$/TwitterTweet.py" />
       </list>
     </option>
   </component>
@@ -88,11 +120,6 @@
               <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
               <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -104,7 +131,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../MachineLearning-Detecting-Twitter-Bots" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -118,7 +145,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.TwitterAPI">
     <configuration name="Spam-Detection-Spot-Bot-ML" type="JupiterNotebook" factoryName="Jupyter Notebook">
       <module name="Spam-Detection-Spot-Bot-ML" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -135,6 +162,28 @@
       <option name="additionalOptions" value="" />
       <option name="ipnbHost" value="127.0.0.1" />
       <option name="ipnbPort" value="8888" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TwitterAPI" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Spam-Detection-Spot-Bot-ML" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TwitterUser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -159,6 +208,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.TwitterAPI" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -177,6 +231,12 @@
       <workItem from="1551512896145" duration="2031000" />
       <workItem from="1551699729376" duration="1311000" />
       <workItem from="1551734873253" duration="403000" />
+      <workItem from="1551735576778" duration="65000" />
+      <workItem from="1551736089838" duration="964000" />
+      <workItem from="1551815789782" duration="689000" />
+      <workItem from="1551850882123" duration="3622000" />
+      <workItem from="1551859473238" duration="426000" />
+      <workItem from="1551859920913" duration="1706000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Spam User Detection Model">
       <created>1551735076162</created>
@@ -185,32 +245,46 @@
       <option name="project" value="LOCAL" />
       <updated>1551735076162</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Adding Classification Algorithm">
+      <created>1551735615952</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1551735615952</updated>
+    </task>
+    <task id="LOCAL-00003" summary="&#10;Changes done to initial spam user detecting model and added Twitter Fetch API methods">
+      <created>1551815881673</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1551815881673</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11173000" />
+    <option name="totallyTimeSpent" value="18645000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26674044" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28666297" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32937366" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32937366" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4991699" weight="0.39956802" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32937366" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4997233" weight="0.32829374" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5008301" side_tool="true" visible="true" weight="0.32721382" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.41810346" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32937366" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.55399567" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -218,7 +292,7 @@
       <window_info anchor="right" id="R Graphics" order="4" />
       <window_info anchor="right" id="R Packages" order="5" />
       <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="right" x="0" y="0" width="413" height="855" id="Documentation" order="7" side_tool="true" visible="true" weight="0.15938018" />
+      <window_info anchor="right" x="0" y="0" width="413" height="855" id="Documentation" order="7" side_tool="true" visible="true" weight="0.25235197" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,18 +300,48 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Spam User Detection Model" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Spam User Detection Model" />
+    <MESSAGE value="Adding Classification Algorithm" />
+    <MESSAGE value="&#10;Changes done to initial spam user detecting model and added Twitter Fetch API methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;Changes done to initial spam user detecting model and added Twitter Fetch API methods" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TwitterUser.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TwitterUser.py</url>
+          <line>5</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TwitterUser.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TwitterUser.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TwitterUser.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TwitterUser.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/training_data_2_csv_UTF.csv">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Main.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -245,15 +349,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-          <folding>
-            <element signature="e#1#19#0" expanded="true" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/training_data_2_csv_UTF.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpamUserDetectModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="74" column="18" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Twitter_Authentication.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterUser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TwitterTweet.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
