@@ -4,35 +4,35 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn
 
-#importing spam user training dataset
+# importing spam user training dataset
 data = pd.read_csv('training_data_2_csv_UTF.csv')
 
-#breaking the dataset into spam and ham
+# breaking the dataset into spam and ham
 SpamUsers = data[data.bot == 1]
 NonSpamUsers = data[data.bot == 1]
 
 # basic bag of words model
-#Maybe import the bag of words from a file that contins the words - this allows updating the model
+# Maybe import the bag of words from a file that contins the words - this allows updating the model
 bag_of_words_bot = r'bot|b0t|cannabis|tweet me|mishear|follow me|updates every|gorilla|yes_ofc|forget|expos|kill|bbb|truthe|fake|anony|free|virus|funky|RNA|jargon|nerd|swag|jack|chick|prison|paper|pokem|xx|freak|ffd|dunia|clone|genie|bbb|ffd|onlyman|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
 
-# feature engineering
+# Feature Engineering (some more relationships to be added)
 
-#check the screen name for words in the BoW
+# check the screen name for words in the BoW
 data['screen_name_binary'] = data.screen_name.str.contains(bag_of_words_bot, case=False, na=False)
 
-#check the name for words in the BoW
+# check the name for words in the BoW
 data['name_binary'] = data.name.str.contains(bag_of_words_bot, case=False, na=False)
 
-#check the description for words in the BoW
+# check the description for words in the BoW
 data['description_binary'] = data.description.str.contains(bag_of_words_bot, case=False, na=False)
 
-#check the sstatus for words in the BoW
+# check the sstatus for words in the BoW
 data['status_binary'] = data.status.str.contains(bag_of_words_bot, case=False, na=False)
 
-#check the number of public lists that the user is a part of
+# check the number of public lists that the user is a part of
 data['listed_count_binary'] = (data.listed_count > 20000) == False
 
-#Finalizing the feature set
+# Finalizing the feature set
 features = ['screen_name_binary', 'name_binary', 'description_binary', 'status_binary', 'verified', 'followers_count',
             'friends_count', 'statuses_count', 'listed_count_binary', 'bot']
 
@@ -50,13 +50,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 
 clf.fit(X_train, y_train)
 
-#predict the training dataset
+# predict the training dataset
 y_pred_train = clf.predict(X_train)
 
-#predict the test dataset
+# predict the test dataset
 y_pred_test = clf.predict(X_test)
 
-#Output classifier results
+# Output classifier results
 print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
 print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
 
