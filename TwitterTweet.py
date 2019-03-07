@@ -14,8 +14,14 @@ with open("tweets.txt") as fp:
         # get the target element dynamically - 12th Element of each line after splitting
         targetElem = sizeOfArray - 1
         # write to a new list and the label
-        my_list2.append([my_list[targetElem], "1"])
-
+        my_list3 = my_list[targetElem].strip().split("\'")
+        targetElem = len(my_list3) - 2
+        new_line = my_list3[targetElem]
+        print(new_line)
+        my_list2.append([new_line, "1"])
+        print(i)
+        if i == 99:
+            break
     # check if csv file is empty or not
     df = True
     if df:
