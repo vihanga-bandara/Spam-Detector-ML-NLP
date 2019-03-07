@@ -9,7 +9,7 @@ data = pd.read_csv('training_data_2_csv_UTF.csv')
 
 # breaking the dataset into spam and ham
 SpamUsers = data[data.bot == 1]
-NonSpamUsers = data[data.bot == 1]
+NonSpamUsers = data[data.bot == 0]
 
 # basic bag of words model
 # Maybe import the bag of words from a file that contins the words - this allows updating the model
