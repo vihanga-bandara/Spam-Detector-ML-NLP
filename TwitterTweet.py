@@ -18,7 +18,7 @@ with open("tweets.txt") as fp:
         targetElem = len(my_list3) - 2
         new_line = my_list3[targetElem]
         print(new_line)
-        my_list2.append([new_line, "1"])
+        my_list2.append([new_line, "spam"])
         print(i)
         if i == 99:
             break
