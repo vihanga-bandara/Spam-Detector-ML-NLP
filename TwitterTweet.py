@@ -62,3 +62,10 @@ with open("full-corpus.csv") as fp:
             writer = csv.writer(csvFile)
             writer.writerows(my_list2)
     csvFile.close()
+
+# Remove spacing and save to csv file
+# with open("SpamTweetsFinalDataset.csv") as fp:
+#     # create two arrays that store the split values
+#     my_list = list()
+#     for i, line in enumerate(fp):
+#         my_list = line.strip().split(",")
