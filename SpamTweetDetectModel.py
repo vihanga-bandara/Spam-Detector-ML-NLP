@@ -122,3 +122,23 @@ def find_features(tweet):
     return features
 
 # example
+# features = find_features(processed['Tweet'])
+# for key,value in features.items():
+#    if value == True:
+#        print (key)
+
+# find features for all tweets
+tweets = zip(processed, Y)
+
+# define a seed for reproducibility
+seed = 1
+np.random.seed = seed
+np.random.shuffle(tweets)
+
+# call find features function for each tweet
+featuresets = [(find_features(text), label) for (text, label) in tweets]
+
+# split training and testing data sets using sklearn
+from sklearn import model_selection
+
+training, testing = model_selection.train_test_split(featuresets, test_size=0.2, random_state=seed)
