@@ -109,8 +109,8 @@ all_words = nltk.FreqDist(all_words)
 print('Number of words: {}'.format(len(all_words)))
 print('Most Common words: {}'.format(all_words.most_common(500)))
 
-# use the 1500 most common words as features
-word_features = list(all_words.keys())[:50]
+# use the 250 most common words as features
+word_features = list(all_words.keys())[:250]
 
 
 #define a find features function
@@ -121,6 +121,7 @@ def find_features(tweet):
         features[word] = (word in words)
 
     return features
+
 
 # example
 features = find_features(processed[65])
@@ -251,9 +252,9 @@ print('####')
 from sklearn.ensemble import VotingClassifier
 
 # Defining the model that will be trained
-names = ['Decision Tree', 'Random Forest', 'Logistic Regression', 'SGD Classifier']
+names = ['Decision Tree', 'Random Forest', 'Logistic Regression']
 
-classifier = [DecisionTreeClassifier(), RandomForestClassifier(), LogisticRegression(), SGDClassifier()]
+classifier = [DecisionTreeClassifier(), RandomForestClassifier(), LogisticRegression()]
 
 models = zip(names, classifier)
 models_list = list(models)
@@ -276,7 +277,11 @@ prediction = nltk_ensemble.classify_many(text_features)
 # print a classification report and a confusion matrix
 print(classification_report(labels, prediction))
 
-pd.DataFrame(
-    confusion_matrix(labels, prediction),
-    index=[['actual', 'actual'], ['ham', 'spam']],
-    columns=[['predicted', 'predicted'], ['ham', 'spam']])
+# pd.DataFrame(
+#    confusion_matrix(labels, prediction),
+#    index=[['actual', 'actual'], ['ham', 'spam']],
+#    columns=[['predicted', 'predicted'], ['ham', 'spam']])
+
+test_tweet_value = input("enter sentence: ").strip()
+features_test = find_features(test_tweet_value)
+prediction_test = nltk_ensemble.classify(features_test)
