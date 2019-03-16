@@ -286,3 +286,13 @@ test_tweet_value = input("enter sentence: ")
 test_tweet_value = test_tweet_value.lower()
 features_test = find_features(test_tweet_value)
 prediction_test = nltk_ensemble.classify(features_test)
+
+import pickle
+
+# save wordfeatures using pickle
+filename = "wordfeatures.p"
+pickle.dump(word_features, open(filename, "wb"))
+
+# save model using pickle
+filename = 'SpamTweetDetectModel.sav'
+pickle.dump(nltk_ensemble, open(filename, 'wb'))
