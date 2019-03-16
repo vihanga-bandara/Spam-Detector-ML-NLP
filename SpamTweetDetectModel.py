@@ -276,12 +276,13 @@ prediction = nltk_ensemble.classify_many(text_features)
 
 # print a classification report and a confusion matrix
 print(classification_report(labels, prediction))
-
+new = text_features[1]
 # pd.DataFrame(
 #    confusion_matrix(labels, prediction),
 #    index=[['actual', 'actual'], ['ham', 'spam']],
 #    columns=[['predicted', 'predicted'], ['ham', 'spam']])
 
-test_tweet_value = input("enter sentence: ").strip()
+test_tweet_value = input("enter sentence: ")
+test_tweet_value = test_tweet_value.lower()
 features_test = find_features(test_tweet_value)
 prediction_test = nltk_ensemble.classify(features_test)
