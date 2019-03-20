@@ -13,7 +13,7 @@ NonSpamUsers = data[data.bot == 0]
 
 # basic bag of words model
 # Maybe import the bag of words from a file that contins the words - this allows updating the model
-bag_of_words_bot = r'bot|b0t|cannabis|tweet me|mishear|follow me|updates every|gorilla|yes_ofc|forget|expos|kill|bbb|truthe|fake|anony|free|virus|funky|RNA|jargon|nerd|swag|jack|chick|prison|paper|pokem|xx|freak|ffd|dunia|clone|genie|bbb|ffd|onlyman|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
+bag_of_words_bot = r'bot|b0t|cannabis|tweet me|mishear|follow me|updates every|gorilla|suspend|yes_ofc|forget|expos|kill|bbb|truthe|fake|anony|free|virus|funky|RNA|jargon|nerd|swag|jack|chick|prison|paper|pokem|xx|freak|ffd|dunia|clone|genie|bbb|ffd|onlyman|emoji|joke|troll|droop|free|every|wow|cheese|yeah|bio|magic|wizard|face'
 
 # Feature Engineering (some more relationships to be added)
 
@@ -75,22 +75,31 @@ predicted = model.predict(X_test)
 # Checking accuracy
 print("Random Forest Classifier Accuracy: {0}".format(accuracy_score(y_test, predicted)))
 
+import pickle
+
+# save bag-of-words using pickle
+filename = "bagofwords.p"
+pickle.dump(bag_of_words_bot, open(filename, "wb"))
+
+# save model using pickle
+filename = 'SpamUserDetectModel.sav'
+pickle.dump(model, open(filename, 'wb'))
 
 # Visualizing the Training set results
-from matplotlib.colors import ListedColormap
-
-X_set, y_set = X_train, y_train
-X1, X2 = np.meshgrid(np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
-                     np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01))
-
-plt.contourf(X1, X2, clf.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-             alpha=0.75, cmap=ListedColormap(('red', 'green')))
-plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(), X2.max())
-for i, j in enumerate(np.unique(y_set)):
-    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
-                c=ListedColormap(('red', 'green'))(i), label=j)
-
-plt.title('Decision Tree Classifier (Training Set)')
-plt.legend()
-plt.show()
+# from matplotlib.colors import ListedColormap
+#
+# X_set, y_set = X_train, y_train
+# X1, X2 = np.meshgrid(np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
+#                      np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01))
+#
+# plt.contourf(X1, X2, clf.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+#              alpha=0.75, cmap=ListedColormap(('red', 'green')))
+# plt.xlim(X1.min(), X1.max())
+# plt.ylim(X2.min(), X2.max())
+# for i, j in enumerate(np.unique(y_set)):
+#     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
+#                 c=ListedColormap(('red', 'green'))(i), label=j)
+#
+# plt.title('Decision Tree Classifier (Training Set)')
+# plt.legend()
+# plt.show()
