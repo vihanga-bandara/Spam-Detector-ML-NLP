@@ -1,8 +1,8 @@
 # Importing custom Twitter API class
-import TwitterAuthentication
+import TwitterAPI
 
 # create and initialise Twitter API object
-TwitterAPI = TwitterAuthentication.TwitterAuthentication()
+TwitterAPI = TwitterAPI.TwitterAuthentication()
 
 # authenticate
 api = TwitterAPI.authenticate()

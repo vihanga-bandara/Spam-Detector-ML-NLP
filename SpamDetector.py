@@ -2,11 +2,9 @@ import pandas as pd
 import numpy as np
 import nltk
 import pickle
-import TwitterAuthentication
+import TwitterAPI
 import re
 from nltk.tokenize import word_tokenize
-
-
 
 # load the SpamTweetDetectModel word_features from directory
 filename = "wordfeatures.p"
@@ -24,7 +22,6 @@ def preprocess(tweet):
 
     # replacing email addresses with 'emailaddr'
     processed = tweet.replace(r'^.+@[^\.].*\.[a-z]{2,}$', 'emailaddr')
-
 
     # replacing money symbol with 'moneysymb'
     processed = processed.replace(r'$', 'moneysymbol')
@@ -115,16 +112,65 @@ def find_features(tweet):
 # for now using a known spam account to retrieve tweet
 
 # create and initialise Twitter API object
-TwitterAPI = TwitterAuthentication.TwitterAuthentication()
+twitter = TwitterAPI.TwitterAPI()
 
 # authenitcate the twitter object before using API
-TwitterAPI.authenticate()
+twitter.authenticate()
 
 # retrieve random tweet - know spam tweet for now
-tweet = TwitterAPI.getRandomTweet("EmptyForNow")
+tweetObj = twitter.getTweet("EmptyForNow")
 
-tweet = preprocess(tweet.text)
+tweet = preprocess(tweetObj.text)
 
 features_test = find_features(tweet)
 prediction_test = nltk_ensemble.classify(features_test)
 print(prediction_test)
+
+# retrieve spam user account detail by using tweet handle
+# for now using a known spam account to retrieve the data
+
+# since api is already initialised and authenticated retrieve user object details
+twitterUser = twitter.findTweetUser(tweetObj)
+userObj = twitter.getUser(twitterUser)
+print(userObj)
+
+
+def convertUserDetails(userObj):
+    # load the SpamUserDetectModel bag-of-words-bot from directory
+    filename = "bagofwords.p"
+    bag_of_words_bot = pickle.load(open(filename, 'rb'))
+
+    # Feature Engineering (some more relationships to be added)
+
+    # check the screen name for words in the BoW
+    screen_name_binary = userObj.screen_name.str.contains(bag_of_words_bot, case=False, na=False)
+
+    # check the name for words in the BoW
+    name_binary = userObj.name.str.contains(bag_of_words_bot, case=False, na=False)
+
+    # check the description for words in the BoW
+    description_binary = userObj.description.str.contains(bag_of_words_bot, case=False, na=False)
+
+    # check the sstatus for words in the BoW
+    status_binary = userObj.status.str.contains(bag_of_words_bot, case=False, na=False)
+
+    # check the number of public lists that the user is a part of
+    listed_count_binary = (userObj.listed_count > 20000) == False
+
+    # Finalizing the feature set
+    features = ['screen_name_binary', 'name_binary', 'description_binary', 'status_binary', 'verified',
+                'followers_count',
+                'friends_count', 'statuses_count', 'listed_count_binary']
+
+    return features
+
+
+# load the SpamUserDetectModel from directory
+filename = "SpamUserDetectModel.sav"
+DecisionTreeClf = pickle.load(open(filename, 'rb'))
+
+# get the feature set from user obj
+features = convertUserDetails(userObj)
+
+# predict whether its a spam user or not
+DecisionTreeClf.predict(features)

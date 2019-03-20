@@ -48,13 +48,13 @@ clf = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=50, min_sampl
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
 
-clf.fit(X_train, y_train)
+DecisionTreeClf = clf.fit(X_train, y_train)
 
 # predict the training dataset
-y_pred_train = clf.predict(X_train)
+y_pred_train = DecisionTreeClf.predict(X_train)
 
 # predict the test dataset
-y_pred_test = clf.predict(X_test)
+y_pred_test = DecisionTreeClf.predict(X_test)
 
 # Output classifier results
 print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
@@ -83,7 +83,7 @@ pickle.dump(bag_of_words_bot, open(filename, "wb"))
 
 # save model using pickle
 filename = 'SpamUserDetectModel.sav'
-pickle.dump(model, open(filename, 'wb'))
+pickle.dump(DecisionTreeClf, open(filename, 'wb'))
 
 # Visualizing the Training set results
 # from matplotlib.colors import ListedColormap
