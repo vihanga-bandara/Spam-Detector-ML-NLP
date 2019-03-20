@@ -139,28 +139,31 @@ def convertUserDetails(userObj):
     # load the SpamUserDetectModel bag-of-words-bot from directory
     filename = "bagofwords.p"
     bag_of_words_bot = pickle.load(open(filename, 'rb'))
-
+    BoWList = bag_of_words_bot.split("|")
     # Feature Engineering (some more relationships to be added)
 
     # check the screen name for words in the BoW
-    screen_name_binary = userObj.screen_name.str.contains(bag_of_words_bot, case=False, na=False)
+    screen_name_binary = userObj.screen_name.__contains__(bag_of_words_bot, case=False, na=False)
 
     # check the name for words in the BoW
-    name_binary = userObj.name.str.contains(bag_of_words_bot, case=False, na=False)
+    name_binary = userObj.name in BoWList
 
     # check the description for words in the BoW
-    description_binary = userObj.description.str.contains(bag_of_words_bot, case=False, na=False)
+    description_binary = userObj.description.__contains__(bag_of_words_bot, case=False, na=False)
 
     # check the sstatus for words in the BoW
-    status_binary = userObj.status.str.contains(bag_of_words_bot, case=False, na=False)
+    status_binary = userObj.status.__contains__(bag_of_words_bot, case=False, na=False)
 
     # check the number of public lists that the user is a part of
     listed_count_binary = (userObj.listed_count > 20000) == False
 
+    # check whether account is verified or not
+
+
     # Finalizing the feature set
-    features = ['screen_name_binary', 'name_binary', 'description_binary', 'status_binary', 'verified',
+    features = [screen_name_binary, name_binary, description_binary, status_binary, 'verified',
                 'followers_count',
-                'friends_count', 'statuses_count', 'listed_count_binary']
+                'friends_count', 'statuses_count', listed_count_binary]
 
     return features
 
@@ -173,4 +176,5 @@ DecisionTreeClf = pickle.load(open(filename, 'rb'))
 features = convertUserDetails(userObj)
 
 # predict whether its a spam user or not
-DecisionTreeClf.predict(features)
+prediction = DecisionTreeClf.predict(features)
+print(prediction)
