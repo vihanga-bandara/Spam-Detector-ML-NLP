@@ -136,36 +136,44 @@ print(userObj)
 
 
 def convertUserDetails(userObj):
+    # create a dataframe
+    data = [
+        [userObj.screen_name, userObj.name, userObj.description, userObj.status, userObj.listed_count, userObj.verified,
+         userObj.followers_count, userObj.friends_count, userObj.statuses_count]]
+    data = pd.DataFrame(data, columns=['screen_name', 'name', 'description', 'status', 'listed_count', 'verified',
+                                       'followers_count', 'friends_count', 'statuses_count'])
+
     # load the SpamUserDetectModel bag-of-words-bot from directory
     filename = "bagofwords.p"
     bag_of_words_bot = pickle.load(open(filename, 'rb'))
-    BoWList = bag_of_words_bot.split("|")
+
     # Feature Engineering (some more relationships to be added)
 
     # check the screen name for words in the BoW
-    screen_name_binary = userObj.screen_name.__contains__(bag_of_words_bot, case=False, na=False)
+    data['screen_name_binary'] = data.screen_name.str.contains(bag_of_words_bot, case=False, na=False)
 
     # check the name for words in the BoW
-    name_binary = userObj.name in BoWList
+    data['name_binary'] = data.name.str.contains(bag_of_words_bot, case=False, na=False)
 
     # check the description for words in the BoW
-    description_binary = userObj.description.__contains__(bag_of_words_bot, case=False, na=False)
+    data['description_binary'] = data.description.str.contains(bag_of_words_bot, case=False, na=False)
 
     # check the sstatus for words in the BoW
-    status_binary = userObj.status.__contains__(bag_of_words_bot, case=False, na=False)
+    data['status_binary'] = data.status.str.contains(bag_of_words_bot, case=False, na=False)
 
     # check the number of public lists that the user is a part of
-    listed_count_binary = (userObj.listed_count > 20000) == False
+    data['listed_count_binary'] = (data.listed_count > 20000) == False
 
     # check whether account is verified or not
 
-
-    # Finalizing the feature set
-    features = [screen_name_binary, name_binary, description_binary, status_binary, 'verified',
+    # Finalizing the feature set without independent variable 'bot'
+    features = ['screen_name_binary', 'name_binary', 'description_binary', 'status_binary', 'verified',
                 'followers_count',
-                'friends_count', 'statuses_count', listed_count_binary]
+                'friends_count', 'statuses_count', 'listed_count_binary']
 
-    return features
+    # customize dataset according to feature
+    features_set = data[features]
+    return features_set
 
 
 # load the SpamUserDetectModel from directory

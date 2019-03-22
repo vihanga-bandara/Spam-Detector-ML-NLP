@@ -56,6 +56,9 @@ y_pred_train = DecisionTreeClf.predict(X_train)
 # predict the test dataset
 y_pred_test = DecisionTreeClf.predict(X_test)
 
+# score of the test dataset
+y_score_test = DecisionTreeClf.score(X_test, y_test)
+
 # Output classifier results
 print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
 print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
