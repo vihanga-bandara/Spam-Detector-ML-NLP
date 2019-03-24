@@ -184,5 +184,5 @@ DecisionTreeClf = pickle.load(open(filename, 'rb'))
 features = convertUserDetails(userObj)
 
 # predict whether its a spam user or not
-prediction = DecisionTreeClf.predict(features)
-print(prediction)
+SpamUserModelPrediction = DecisionTreeClf.predict(features)
+print(SpamUserModelPrediction)
