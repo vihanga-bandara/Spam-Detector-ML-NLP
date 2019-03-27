@@ -11,6 +11,7 @@ import nltk
 import sklearn
 import pandas
 import numpy
+import re
 
 print('Python: {}', format(sys.version))
 print('NLTK: {}', format(nltk.__version__))
@@ -92,6 +93,12 @@ processed = processed.apply(lambda x: ' '.join(term for term in x.split() if ter
 # using a Porter stemmer to remove word stems
 ps = nltk.PorterStemmer()
 processed = processed.apply(lambda x: ' '.join(ps.stem(term) for term in x.split()))
+
+# store as list of lists of words
+sentences_ted = []
+for sent_str in processed:
+    tokens = re.sub(r"[^a-z0-9]+", " ", sent_str.lower()).split()
+    sentences_ted.append(tokens)
 
 #creating bag of words model
 from nltk.tokenize import word_tokenize
@@ -277,16 +284,18 @@ prediction = nltk_ensemble.classify_many(text_features)
 # print a classification report and a confusion matrix
 print(classification_report(labels, prediction))
 new = text_features[1]
-# pd.DataFrame(
-#    confusion_matrix(labels, prediction),
-#    index=[['actual', 'actual'], ['ham', 'spam']],
-#    columns=[['predicted', 'predicted'], ['ham', 'spam']])
+confusion_matrix = pd.DataFrame(
+    confusion_matrix(labels, prediction),
+    index=[['actual', 'actual'], ['ham', 'spam']],
+    columns=[['predicted', 'predicted'], ['ham', 'spam']])
 
-test_tweet_value = input("enter sentence: ")
-test_tweet_value = test_tweet_value.lower()
-features_test = find_features(test_tweet_value)
-prediction_test = nltk_ensemble.classify(features_test)
-print(prediction_test)
+print(confusion_matrix)
+
+# test_tweet_value = input("enter sentence: ")
+# test_tweet_value = test_tweet_value.lower()
+# features_test = find_features(test_tweet_value)
+# prediction_test = nltk_ensemble.classify(features_test)
+# print(prediction_test)
 
 import pickle
 
@@ -297,3 +306,13 @@ pickle.dump(word_features, open(filename, "wb"))
 # save model using pickle
 filename = 'SpamTweetDetectModel.sav'
 pickle.dump(nltk_ensemble, open(filename, 'wb'))
+
+# implementation for word2vec advanced fasttext
+from gensim.models import Word2Vec
+
+model_ted = Word2Vec(sentences=sentences_ted, size=100, window=2, min_count=3, workers=4, sg=0)
+print(model_ted)
+
+words = list(model_ted.wv.vocab)
+
+print(model_ted.wv.most_similar('follower'))
