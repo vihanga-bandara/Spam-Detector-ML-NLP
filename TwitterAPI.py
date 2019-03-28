@@ -12,6 +12,7 @@ class TwitterAPI:
     def __init__(self):
         self._auth = tweepy.OAuthHandler(self._consumer_key, self._consumer_secret)
         self._auth.set_access_token(self._access_token, self._access_token_secret)
+        print('initialized twiiter api connection')
 
     def authenticate(self):
         api = tweepy.API(self._auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)

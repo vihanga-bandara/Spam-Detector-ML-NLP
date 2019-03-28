@@ -91,10 +91,11 @@ def preprocess(tweet):
     tokens = word_tokenize(processed)
     processed = [word for word in tokens if word not in stop_words]
     tweet = " ".join(processed)
-    #
-    # # using a Porter stemmer to remove word stems
+
+    # using a Porter stemmer to remove word stems
     # ps = nltk.PorterStemmer()
     # processed = processed.apply(lambda x: ' '.join(ps.stem(term) for term in x.split()))
+
     return tweet
 
 
