@@ -40,6 +40,7 @@ print(classes.value_counts())
 # convert the labels into binary values 
 # where 0 = ham and 1 = spam
 from sklearn.preprocessing import LabelEncoder
+
 labelEncoder = LabelEncoder()
 Y = labelEncoder.fit_transform(classes)
 print(classes[:10])
@@ -62,7 +63,7 @@ processed = processed.str.replace(
     r'(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?', 'webaddr')
 
 # replacing money symbol with 'moneysymb'  
-processed = processed.str.replace(r'$', 'moneysymbol') 
+processed = processed.str.replace(r'$', 'moneysymbol')
 
 # replacing normal numbers with numbers
 # some not working might need to manually remove
@@ -100,7 +101,7 @@ for sent_str in processed:
     tokens = re.sub(r"[^a-z0-9]+", " ", sent_str.lower()).split()
     sentences_ted.append(tokens)
 
-#creating bag of words model
+# creating bag of words model
 from nltk.tokenize import word_tokenize
 
 all_words = []
@@ -120,7 +121,7 @@ print('Most Common words: {}'.format(all_words.most_common(500)))
 word_features = list(all_words.keys())[:250]
 
 
-#define a find features function
+# define a find features function
 def find_features(tweet):
     words = word_tokenize(tweet)
     features = {}
