@@ -7,6 +7,9 @@ Created on Thu Mar 28 15:52:53 2019
 """
 import TwitterAPI
 import preprocessing
+from nltk.tokenize import sent_tokenize, word_tokenize
+import numpy as np
+import pandas as pd
 
 twitter = TwitterAPI.TwitterAPI()
 preprocessor = preprocessing.preprocessing()
@@ -14,10 +17,22 @@ preprocessor = preprocessing.preprocessing()
 twitter.authenticate()
 # retrieve random tweet - know spam tweet for now
 tweetObj = twitter.getTweet("EmptyForNow")
-tweet = preprocessor.preprocess(tweetObj.text)
+tweet = preprocessor.preprocess_tweet(tweetObj.text)
 # tokenize the words using the best tokenizer available
-# get each token and add it to a list 
+tweet_tokens = word_tokenize(tweet)
 
+# load the dataset   
+df = pd.read_csv('SpamTweetsFinalDataset.csv', header=None)
+
+# print general information about the dataset that is loaded
+print(df.info())
+print(df[1])
+
+# check the class balance ratio / distribution
+columnNames = list(df.head(0))
+spam_tweets = df.loc[df[1] == 'spam']
+spam_tweets = preprocessor.preprocess_spam_tweets(spam_tweets[0])
+print(spam_tweets)
 # get the spam only dataset and tokenize or use tfidf or fast text and get the most important words
 # tokenize those words and add it to a list
 
