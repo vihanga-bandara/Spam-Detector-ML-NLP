@@ -5,11 +5,12 @@ Created on Thu Mar 28 15:52:53 2019
 
 @author: vihanga123
 """
-import TwitterAPI
-import preprocessing
-from nltk.tokenize import sent_tokenize, word_tokenize
 import numpy as np
 import pandas as pd
+from nltk.tokenize import sent_tokenize, word_tokenize
+import TwitterAPI
+import preprocessing
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 twitter = TwitterAPI.TwitterAPI()
 preprocessor = preprocessing.preprocessing()
@@ -21,6 +22,8 @@ tweet = preprocessor.preprocess_tweet(tweetObj.text)
 # tokenize the words using the best tokenizer available
 tweet_tokens = word_tokenize(tweet)
 
+# get the spam only dataset and tokenize or use tfidf or fast text and get the most important words
+# tokenize those words and add it to a list
 # load the dataset   
 df = pd.read_csv('SpamTweetsFinalDataset.csv', header=None)
 
@@ -30,34 +33,47 @@ print(df[1])
 
 # check the class balance ratio / distribution
 columnNames = list(df.head(0))
+# using only the spam labelled data
 spam_tweets = df.loc[df[1] == 'spam']
 spam_tweets = preprocessor.preprocess_spam_tweets(spam_tweets[0])
-print(spam_tweets)
-# get the spam only dataset and tokenize or use tfidf or fast text and get the most important words
-# tokenize those words and add it to a list
-from sklearn.feature_extraction.text import CountVectorizer
 
-# list of text documents
-text = ["The quick brown fox jumped over the lazy dog."]
-# create the transform
-vectorizer = CountVectorizer()
-# tokenize and build vocab
-vectorizer.fit(text)
-# summarize
-print(vectorizer.vocabulary_)
-# encode document
-vector = vectorizer.transform(text)
-# summarize encoded vector
-print(vector.shape)
-print(type(vector))
-print(vector.toarray())
 
-print(vectorizer.vocabulary_)
+# dummy function to avoid preprocessing and tokenization in tfid
+def dummy_fun(doc):
+    return doc
 
-# encode another document
-text2 = ["doggos the"]
-vector = vectorizer.transform(text2)
-print(vector.toarray())
+
+# initialize TF-ID vectorizer
+tfidf = TfidfVectorizer(
+    analyzer='word',
+    tokenizer=dummy_fun,
+    preprocessor=dummy_fun,
+    token_pattern=None)
+
+tfidf_result = tfidf.fit_transform(spam_tweets)
+# print features using the document matrix
+print(tfidf.get_feature_names())
+
+
+# a function to
+def display_scores(vectorizer, tfidf_result):
+    # http://stackoverflow.com/questions/16078015/
+    scores = zip(vectorizer.get_feature_names(),
+                 np.asarray(tfidf_result.sum(axis=0)).ravel())
+    sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
+    spam_tokens = []
+    for item in sorted_scores:
+        print("{0:50} Score: {1}".format(item[0], item[1]))
+        if type(item[0]) == str:
+            spam_tokens.append(item[0])
+            print('adding spam token - {0}'.format(item[0]))
+
+    return spam_tokens
+
+
+spam_tokens = display_scores(tfidf, tfidf_result)
+
+
 # two functions are needed here. 
 # two functions are made that would take the retreived random tweet tokens[random_tweet_tokens] and tokenized spam words [spam_tokens] with higher weights
 
@@ -95,16 +111,42 @@ print(vector.toarray())
 # for now using a known spam account to retrieve the data
 
 # since api is already initialised and authenticated retrieve user object details
-twitterUser = twitter.findTweetUser(tweetObj)
-userObj = twitter.getUser(twitterUser)
-print(userObj)
+# twitterUser = twitter.findTweetUser(tweetObj)
+# userObj = twitter.getUser(twitterUser)
+# print(userObj)
+#
+# # implementation for word2vec advanced fasttext
+# from gensim.models import Word2Vec
+#
+# model_ted = Word2Vec(sentences=sentences_ted, size=100, window=2, min_count=3, workers=4, sg=0)
+# print(model_ted)
+#
+# words = list(model_ted.wv.vocab)
+#
+# print(model_ted.wv.most_similar('follower'))
 
-# implementation for word2vec advanced fasttext
-from gensim.models import Word2Vec
 
-model_ted = Word2Vec(sentences=sentences_ted, size=100, window=2, min_count=3, workers=4, sg=0)
-print(model_ted)
-
-words = list(model_ted.wv.vocab)
-
-print(model_ted.wv.most_similar('follower'))
+# Count Vectorizer Implementation
+# from sklearn.feature_extraction.text import CountVectorizer
+#
+# # list of text documents
+# text = ["The quick brown fox jumped over the lazy dog."]
+# # create the transform
+# vectorizer = CountVectorizer()
+# # tokenize and build vocab
+# vectorizer.fit(text)
+# # summarize
+# print(vectorizer.vocabulary_)
+# # encode document
+# vector = vectorizer.transform(text)
+# # summarize encoded vector
+# print(vector.shape)
+# print(type(vector))
+# print(vector.toarray())
+#
+# print(vectorizer.vocabulary_)
+#
+# # encode another document
+# text2 = ["doggos the"]
+# vector = vectorizer.transform(text2)
+# print(vector.toarray())
