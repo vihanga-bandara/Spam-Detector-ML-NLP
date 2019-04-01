@@ -90,19 +90,9 @@ class preprocessing:
         return tweet
 
     def preprocess_spam_tweets(self, spam_tweets):
-        from sklearn.preprocessing import LabelEncoder
-
-        labelEncoder = LabelEncoder()
-        Y = labelEncoder.fit_transform(classes)
-        print(classes[:10])
-        print(Y[:10])
-        # convert the class labels using onehotencoder
-        # from sklearn.preprocessing import OneHotEncoder
-        # binaryEncoder = OneHotEncoder()
-        # X = binaryEncoder.fit_transform(classes).toarray()
 
         # store the twitter data
-        tweets = df[0].str.strip()
+        tweets = spam_tweets.str.strip()
 
         # using regex to identify different combinations in the tweet
 
@@ -130,9 +120,35 @@ class preprocessing:
         processed = processed.str.replace(r'^s+|\s+?$', '')
 
         # try hashtagsss as well which can be a new feature
+        # remove hashtags for now
+        processed = processed.replace('#', '')
+
+        # removing @handle from tweets
+        # remove @handle mentioning names in the tweet
+        # processed = re.sub(r'@[A-Za-z0-9]+', '', processed, flags=re.MULTILINE)
 
         # change all letters to lowercase
         processed = processed.str.lower()
+
+        # # remove specific character from the tweet - Convert it to Array use first
+        # cleansed = False
+        # while not cleansed:
+        #     if '\n' in processed:
+        #         print("Removing next line from words")
+        #         processed = processed.replace("\n", " ")
+        #
+        #     elif "-&gt;" in processed:
+        #         print("Removing special characters from words")
+        #         processed = processed.replace("-&gt;", " ")
+        #
+        #     elif "&lt;-" in processed:
+        #         print("Removing special characters form words")
+        #         processed = processed.replace("&lt;-", " ")
+        #
+        #     else:
+        #         print("Formatting done")
+        #         cleansed = True
+        # processed = processed
 
         # remove stop words or useless meaningless words from the tweets
 
@@ -143,11 +159,13 @@ class preprocessing:
         processed = processed.apply(lambda x: ' '.join(term for term in x.split() if term not in stop_words))
 
         # using a Porter stemmer to remove word stems
-        ps = nltk.PorterStemmer()
-        processed = processed.apply(lambda x: ' '.join(ps.stem(term) for term in x.split()))
+        # ps = nltk.PorterStemmer()
+        # processed = processed.apply(lambda x: ' '.join(ps.stem(term) for term in x.split()))
 
         # store as list of lists of words
         sentences_ted = []
         for sent_str in processed:
             tokens = re.sub(r"[^a-z0-9]+", " ", sent_str.lower()).split()
             sentences_ted.append(tokens)
+
+        return sentences_ted

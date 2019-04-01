@@ -35,7 +35,29 @@ spam_tweets = preprocessor.preprocess_spam_tweets(spam_tweets[0])
 print(spam_tweets)
 # get the spam only dataset and tokenize or use tfidf or fast text and get the most important words
 # tokenize those words and add it to a list
+from sklearn.feature_extraction.text import CountVectorizer
 
+# list of text documents
+text = ["The quick brown fox jumped over the lazy dog."]
+# create the transform
+vectorizer = CountVectorizer()
+# tokenize and build vocab
+vectorizer.fit(text)
+# summarize
+print(vectorizer.vocabulary_)
+# encode document
+vector = vectorizer.transform(text)
+# summarize encoded vector
+print(vector.shape)
+print(type(vector))
+print(vector.toarray())
+
+print(vectorizer.vocabulary_)
+
+# encode another document
+text2 = ["doggos the"]
+vector = vectorizer.transform(text2)
+print(vector.toarray())
 # two functions are needed here. 
 # two functions are made that would take the retreived random tweet tokens[random_tweet_tokens] and tokenized spam words [spam_tokens] with higher weights
 
