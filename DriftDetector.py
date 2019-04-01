@@ -11,6 +11,7 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 import TwitterAPI
 import preprocessing
 from sklearn.feature_extraction.text import TfidfVectorizer
+import requests
 
 twitter = TwitterAPI.TwitterAPI()
 preprocessor = preprocessing.preprocessing()
@@ -72,10 +73,22 @@ def display_scores(vectorizer, tfidf_result):
 
 
 spam_tokens = display_scores(tfidf, tfidf_result)
+print(spam_tokens)
+print(tweet_tokens)
 
 
+def tweet_token_analogy_alg(tweet_tokens):
+    response = requests.get("https://twinword-word-associations-v1.p.rapidapi.com/associations/?entry=sound",
+                            headers={
+                                "X-RapidAPI-Key": "5557d82ac7msheb9fc00a6b39b02p1f5141jsn4a6fd56d88ce"
+                            }
+                            )
+    print(response)
+
+
+tweet_token_analogy_alg(tweet_tokens)
 # two functions are needed here. 
-# two functions are made that would take the retreived random tweet tokens[random_tweet_tokens] and tokenized spam words [spam_tokens] with higher weights
+# two functions are needed that would take the retreived random tweet tokens[random_tweet_tokens] and tokenized spam words [spam_tokens] with higher weights
 
 # function1  
 # It will call the vocab API and get for each [random_tweet_tokens] all similiar words 
