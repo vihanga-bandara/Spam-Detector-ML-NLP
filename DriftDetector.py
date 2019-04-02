@@ -13,6 +13,8 @@ import preprocessing
 from sklearn.feature_extraction.text import TfidfVectorizer
 import requests
 import json
+from pyjarowinkler import distance
+from datamuse import datamuse
 
 twitter = TwitterAPI.TwitterAPI()
 preprocessor = preprocessing.preprocessing()
@@ -78,6 +80,11 @@ print(spam_tokens)
 print(tweet_tokens)
 
 
+def calculate_score(sc, num_words):
+    score = (sc / num_words) * 100
+    return score
+
+
 def tweet_token_analogy_alg(tweet_tokens, spam_tokens):
     # function1
     # It will call the vocab API and get for each [random_tweet_tokens] all similiar words
@@ -86,8 +93,10 @@ def tweet_token_analogy_alg(tweet_tokens, spam_tokens):
     # then for each token that has a similarity will be noted and then it will be divided with the total number of words in the [random_tweet_tokens]
     # if this score is better than 0.2 we will consider it as spam
     # For each token get its associative words which have a score of above 70
+    # defining score for the tweet
+    tweet_score = 0
     for token in tweet_tokens:
-
+        # using twinword api get associative words
         # response = requests.get("https://twinword-word-associations-v1.p.rapidapi.com/associations/?entry=token",
         #                 headers={
         #                         "X-RapidAPI-Key": "5557d82ac7msheb9fc00a6b39b02p1f5141jsn4a6fd56d88ce"
@@ -97,42 +106,60 @@ def tweet_token_analogy_alg(tweet_tokens, spam_tokens):
         #
         # with open('response.json', 'w') as outfile:
         #     json.dump(response.text, outfile)
+        # filter it according to score
+
+        # # using datamuse api get related words
+        api = datamuse.Datamuse()
+        response2 = api.words(ml='dog', max=5)
+        print('Getting Related Analogies...')
+        # no need to check for score since we take only max 5
+        print(response2)
+
+        """if word does not have a synonym check the json response for a result code of 462, 
+        if so can try to correct spellings and get using datamuse api"""
 
         with open('response.json') as json_file:
             data = json.load(json_file)
 
+        # compare both the lists to identify duplicates and then remove them and get only the top 5 or 10 words
+
         # get associative words for each token
         similiar_tokens_json = json.loads(data)
         print(similiar_tokens_json)
-        similiar_tokens = list(similiar_tokens_json['associations_scored'])
+        print('Getting Associated Analogies...')
+        similiar_tokens = similiar_tokens_json['associations_scored']
+        found_similiar_bool = False
+        print('Searching for tokens...')
         for simtoken in similiar_tokens:
             for sptoken in spam_tokens:
+                print('Searching for similar word - {0} and spam token - {1}...'.format(simtoken, sptoken))
+                # word1, word2 = simtoken, sptoken
+                word1, word2 = "dog", "dog"
+                similarity = distance.get_jaro_distance(word1, word2, winkler=True, scaling=0.1)
+                print(similarity)
+                if similarity > 0.9:
+                    tweet_score += 1
+                    found_similiar_bool = True
+                    print('Found identical or matching token for  {0}'.format(token))
+                    break
+            if found_similiar_bool:
+                break
 
-        # words1 = sentence1.split(' ')
-        # words2 = sentence2.split(' ')
-        #
-        # # The meaning of the sentence can be interpreted as the average of its words
-        # sentence1_meaning = word2vec(words1[0])
-        # count = 1
-        # for w in words1[1:]:
-        #     sentence1_meaning = np.add(sentence1_meaning, word2vec(w))
-        #     count += 1
-        # sentence1_meaning /= count
-        #
-        # sentence2_meaning = word2vec(words2[0])
-        # count = 1
-        # for w in words2[1:]:
-        #     sentence2_meaning = np.add(sentence2_meaning, word2vec(w))
-        #     count += 1
-        # sentence2_meaning /= count
-        #
-        # # Similarity is the cosine between the vectors
-        # similarity = np.dot(sentence1_meaning, sentence2_meaning) / (
-        #         np.linalg.norm(sentence1_meaning) * np.linalg.norm(sentence2_meaning))
+            print('Searching for similar word - {0} and spam token - {1}...Not Found'.format(simtoken, sptoken))
+            # calculate score
+            score = calculate_score(tweet_score, len(tweet_tokens))
+            return score
 
 
-# run func1
-tweet_token_analogy_alg(tweet_tokens, spam_tokens)
+# run first drift check
+first_score = tweet_token_analogy_alg(tweet_tokens, spam_tokens)
+if first_score >= 30:
+    print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(first_score))
+    # classify as maybe spam and send it to admin panel
+else:
+    # run second drift check
+    second_score = tweet_token_analogy_alg(tweet_tokens, spam_tokens)
+
 # two functions are needed here. 
 # two functions are needed that would take the retreived random tweet tokens[random_tweet_tokens] and tokenized spam words [spam_tokens] with higher weights
 
