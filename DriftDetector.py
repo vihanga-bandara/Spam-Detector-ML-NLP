@@ -111,7 +111,7 @@ def tweet_token_analogy_alg(tweet_tokens, spam_tokens):
         # # using datamuse api get related words
         api = datamuse.Datamuse()
         response2 = api.words(ml='dog', max=5)
-        print('Getting Related Analogies...')
+        print('Getting related analogies for tweet token...')
         # no need to check for score since we take only max 5
         print(response2)
 
@@ -126,7 +126,7 @@ def tweet_token_analogy_alg(tweet_tokens, spam_tokens):
         # get associative words for each token
         similiar_tokens_json = json.loads(data)
         print(similiar_tokens_json)
-        print('Getting Associated Analogies...')
+        print('Getting associated analogies for tweet token...')
         similiar_tokens = similiar_tokens_json['associations_scored']
         found_similiar_bool = False
         print('Searching for tokens...')
@@ -151,7 +151,76 @@ def tweet_token_analogy_alg(tweet_tokens, spam_tokens):
             return score
 
 
+def spam_token_analogy_alg(tweet_tokens, spam_tokens):
+    # function2
+    # if the above method does not prove to be useful then it will come to this method
+    # it will the vocab API and get for each [spam_token] all similiar words
+    # for each similiar word it will compare with each [random_tweet_token]
+    # if one or more comes up positive it will add a counter and then we can decide to end it or not
+    # we will compare the spam token and the word further and if it is the same
+    # it will be taken as a spam tweet
+    # defining score for the tweet
+    tweet_score = 0
+    for token in spam_tokens:
+        # using twinword api get associative words
+        # response = requests.get("https://twinword-word-associations-v1.p.rapidapi.com/associations/?entry=token",
+        #                 headers={
+        #                         "X-RapidAPI-Key": "5557d82ac7msheb9fc00a6b39b02p1f5141jsn4a6fd56d88ce"
+        #                     }
+        #                     )
+        # print(response)
+        #
+        # with open('response.json', 'w') as outfile:
+        #     json.dump(response.text, outfile)
+        # filter it according to score
+
+        # # using datamuse api get related words
+        api = datamuse.Datamuse()
+        response2 = api.words(ml='dog', max=5)
+        print('Getting related analogies for spam token...')
+        # no need to check for score since we take only max 5
+        print(response2)
+
+        """if word does not have a synonym check the json response for a result code of 462, 
+        if so can try to correct spellings and get using datamuse api"""
+
+        with open('response.json') as json_file:
+            data = json.load(json_file)
+
+        # compare both the lists to identify duplicates and then remove them and get only the top 5 or 10 words
+
+        # get associative words for each token
+        similiar_spam_tokens_json = json.loads(data)
+        print(similiar_spam_tokens_json)
+        print('Getting associated analogies for spam token...')
+        similiar_spam_tokens = similiar_spam_tokens_json['associations_scored']
+        found_similiar_bool = False
+        print('Searching for tokens...')
+        for simtoken in similiar_spam_tokens:
+            for tweet_token in tweet_tokens:
+                print('Searching for similar word - {0} and spam token - {1}...'.format(simtoken, sptoken))
+                # word1, word2 = simtoken, tweet_token
+                word1, word2 = "dog", "dog"
+                similarity = distance.get_jaro_distance(word1, word2, winkler=True, scaling=0.1)
+                print(similarity)
+                if similarity > 0.9:
+                    tweet_score += 1
+                    found_similiar_bool = True
+                    print('Found identical or matching token for  {0}'.format(token))
+                    break
+            if found_similiar_bool:
+                break
+
+            print(
+                'Searching for similar spam word - {0} and tweet token - {1}...Not Found'.format(simtoken, tweet_token))
+            # calculate score
+            score = calculate_score(tweet_score, len(tweet_tokens))
+            return score
+
+
+
 # run first drift check
+first_score, second_score = 0, 0
 first_score = tweet_token_analogy_alg(tweet_tokens, spam_tokens)
 if first_score >= 30:
     print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(first_score))
@@ -160,17 +229,10 @@ else:
     # run second drift check
     second_score = tweet_token_analogy_alg(tweet_tokens, spam_tokens)
 
+if second_score >= 30:
+    print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(second_score))
 # two functions are needed here. 
 # two functions are needed that would take the retreived random tweet tokens[random_tweet_tokens] and tokenized spam words [spam_tokens] with higher weights
-
-
-# function2
-# if the above method does not prove to be useful then it will come to this method
-# it will the vocab API and get for each [spam_token] all similiar words
-# for each similiar word it will compare with each [random_tweet_token]
-# if one or more comes up positive it will add a counter and then we can decide to end it or not
-# we will compare the spam token and the word further and if it is the same
-# it will be taken as a spam tweet
 
 # both functions will finally send out if the tweet is spam or not. maybe a bool
 # if this doesnt work out. It will try to use our unsupervised model to check whether it is in the correct cluster. 
