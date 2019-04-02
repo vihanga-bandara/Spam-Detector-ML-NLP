@@ -12,6 +12,7 @@ import TwitterAPI
 import preprocessing
 from sklearn.feature_extraction.text import TfidfVectorizer
 import requests
+import json
 
 twitter = TwitterAPI.TwitterAPI()
 preprocessor = preprocessing.preprocessing()
@@ -77,25 +78,61 @@ print(spam_tokens)
 print(tweet_tokens)
 
 
-def tweet_token_analogy_alg(tweet_tokens):
-    response = requests.get("https://twinword-word-associations-v1.p.rapidapi.com/associations/?entry=sound",
-                            headers={
-                                "X-RapidAPI-Key": "5557d82ac7msheb9fc00a6b39b02p1f5141jsn4a6fd56d88ce"
-                            }
-                            )
-    print(response)
+def tweet_token_analogy_alg(tweet_tokens, spam_tokens):
+    # function1
+    # It will call the vocab API and get for each [random_tweet_tokens] all similiar words
+    # for each similiar word it will compare with each [spam_token]
+    # if one or more comes up positive it will add a counter and then we can decide to end it or not
+    # then for each token that has a similarity will be noted and then it will be divided with the total number of words in the [random_tweet_tokens]
+    # if this score is better than 0.2 we will consider it as spam
+    # For each token get its associative words which have a score of above 70
+    for token in tweet_tokens:
+
+        # response = requests.get("https://twinword-word-associations-v1.p.rapidapi.com/associations/?entry=token",
+        #                 headers={
+        #                         "X-RapidAPI-Key": "5557d82ac7msheb9fc00a6b39b02p1f5141jsn4a6fd56d88ce"
+        #                     }
+        #                     )
+        # print(response)
+        #
+        # with open('response.json', 'w') as outfile:
+        #     json.dump(response.text, outfile)
+
+        with open('response.json') as json_file:
+            data = json.load(json_file)
+
+        # get associative words for each token
+        similiar_tokens_json = json.load(data)
+        print(similiar_tokens_json)
+
+        words1 = sentence1.split(' ')
+        words2 = sentence2.split(' ')
+
+        # The meaning of the sentence can be interpreted as the average of its words
+        sentence1_meaning = word2vec(words1[0])
+        count = 1
+        for w in words1[1:]:
+            sentence1_meaning = np.add(sentence1_meaning, word2vec(w))
+            count += 1
+        sentence1_meaning /= count
+
+        sentence2_meaning = word2vec(words2[0])
+        count = 1
+        for w in words2[1:]:
+            sentence2_meaning = np.add(sentence2_meaning, word2vec(w))
+            count += 1
+        sentence2_meaning /= count
+
+        # Similarity is the cosine between the vectors
+        similarity = np.dot(sentence1_meaning, sentence2_meaning) / (
+                np.linalg.norm(sentence1_meaning) * np.linalg.norm(sentence2_meaning))
 
 
-tweet_token_analogy_alg(tweet_tokens)
+# run func1
+tweet_token_analogy_alg(tweet_tokens, spam_tokens)
 # two functions are needed here. 
 # two functions are needed that would take the retreived random tweet tokens[random_tweet_tokens] and tokenized spam words [spam_tokens] with higher weights
 
-# function1  
-# It will call the vocab API and get for each [random_tweet_tokens] all similiar words 
-# for each similiar word it will compare with each [spam_token] 
-# if one or more comes up positive it will add a counter and then we can decide to end it or not
-# then for each token that has a similarity will be noted and then it will be divided with the total number of words in the [random_tweet_tokens]
-# if this score is better than 0.2 we will consider it as spam 
 
 # function2
 # if the above method does not prove to be useful then it will come to this method
