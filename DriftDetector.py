@@ -102,30 +102,33 @@ def tweet_token_analogy_alg(tweet_tokens, spam_tokens):
             data = json.load(json_file)
 
         # get associative words for each token
-        similiar_tokens_json = json.load(data)
+        similiar_tokens_json = json.loads(data)
         print(similiar_tokens_json)
+        similiar_tokens = list(similiar_tokens_json['associations_scored'])
+        for simtoken in similiar_tokens:
+            for sptoken in spam_tokens:
 
-        words1 = sentence1.split(' ')
-        words2 = sentence2.split(' ')
-
-        # The meaning of the sentence can be interpreted as the average of its words
-        sentence1_meaning = word2vec(words1[0])
-        count = 1
-        for w in words1[1:]:
-            sentence1_meaning = np.add(sentence1_meaning, word2vec(w))
-            count += 1
-        sentence1_meaning /= count
-
-        sentence2_meaning = word2vec(words2[0])
-        count = 1
-        for w in words2[1:]:
-            sentence2_meaning = np.add(sentence2_meaning, word2vec(w))
-            count += 1
-        sentence2_meaning /= count
-
-        # Similarity is the cosine between the vectors
-        similarity = np.dot(sentence1_meaning, sentence2_meaning) / (
-                np.linalg.norm(sentence1_meaning) * np.linalg.norm(sentence2_meaning))
+        # words1 = sentence1.split(' ')
+        # words2 = sentence2.split(' ')
+        #
+        # # The meaning of the sentence can be interpreted as the average of its words
+        # sentence1_meaning = word2vec(words1[0])
+        # count = 1
+        # for w in words1[1:]:
+        #     sentence1_meaning = np.add(sentence1_meaning, word2vec(w))
+        #     count += 1
+        # sentence1_meaning /= count
+        #
+        # sentence2_meaning = word2vec(words2[0])
+        # count = 1
+        # for w in words2[1:]:
+        #     sentence2_meaning = np.add(sentence2_meaning, word2vec(w))
+        #     count += 1
+        # sentence2_meaning /= count
+        #
+        # # Similarity is the cosine between the vectors
+        # similarity = np.dot(sentence1_meaning, sentence2_meaning) / (
+        #         np.linalg.norm(sentence1_meaning) * np.linalg.norm(sentence2_meaning))
 
 
 # run func1
