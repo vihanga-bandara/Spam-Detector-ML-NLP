@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="Drift Algorithm for Tweet Model to identify spam tweets">
+    <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DriftDetector.py" beforeDir="false" afterPath="$PROJECT_DIR$/DriftDetector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpamTextClassifier-Unsupervised.py" beforeDir="false" afterPath="$PROJECT_DIR$/SpamTextClassifier-Unsupervised.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,11 +25,32 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DriftDetector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="150" column="43" lean-forward="true" selection-start-line="150" selection-start-column="43" selection-end-line="150" selection-end-column="43" />
+            <state relative-caret-position="270">
+              <caret line="285" lean-forward="true" selection-start-line="285" selection-end-line="285" />
               <folding>
                 <element signature="e#112#130#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SpamTextClassifier-Unsupervised.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+              <folding>
+                <element signature="e#200#218#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SpamDetector.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -45,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="315">
+              <caret line="308" column="48" lean-forward="true" selection-start-line="300" selection-end-line="308" selection-end-column="48" />
               <folding>
                 <element signature="e#113#123#0" expanded="true" />
               </folding>
@@ -134,10 +156,10 @@
         <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/SpamUserDetectModel.py" />
         <option value="$PROJECT_DIR$/SpamDetector.py" />
-        <option value="$PROJECT_DIR$/SpamTextClassifier-Unsupervised.py" />
         <option value="$PROJECT_DIR$/SpamTweetDetectModel.py" />
         <option value="$PROJECT_DIR$/ModelRetrainer.py" />
         <option value="$PROJECT_DIR$/preprocessing.py" />
+        <option value="$PROJECT_DIR$/SpamTextClassifier-Unsupervised.py" />
         <option value="$PROJECT_DIR$/DriftDetector.py" />
       </list>
     </option>
@@ -198,7 +220,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.DriftDetector">
+  <component name="RunManager" selected="Python.SpamTextClassifier-Unsupervised">
     <configuration name="Spam-Detection-Spot-Bot-ML" type="JupiterNotebook" factoryName="Jupyter Notebook">
       <module name="Spam-Detection-Spot-Bot-ML" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -261,6 +283,25 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="SpamTextClassifier-Unsupervised" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Spam-Detection-Spot-Bot-ML" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SpamTextClassifier-Unsupervised.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="SpamUserDetectModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spam-Detection-Spot-Bot-ML" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -275,28 +316,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SpamUserDetectModel.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TwitterTweet" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Spam-Detection-Spot-Bot-ML" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TwitterTweet.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -351,11 +370,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.SpamTextClassifier-Unsupervised" />
         <item itemvalue="Python.DriftDetector" />
         <item itemvalue="Python.SpamUserDetectModel" />
         <item itemvalue="Python.SpamDetector" />
         <item itemvalue="Python.app" />
-        <item itemvalue="Python.TwitterTweet" />
       </list>
     </recent_temporary>
   </component>
@@ -412,7 +431,7 @@
       <workItem from="1554057235966" duration="1011000" />
       <workItem from="1554090367205" duration="15110000" />
       <workItem from="1554179722697" duration="19040000" />
-      <workItem from="1554267543946" duration="6922000" />
+      <workItem from="1554267543946" duration="15218000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Spam User Detection Model">
       <created>1551735076162</created>
@@ -687,11 +706,25 @@
       <option name="project" value="LOCAL" />
       <updated>1554244798076</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Drift Algorithm for Tweet Model to identify spam tweets">
+      <created>1554290706093</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1554290706093</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Drift Algorithm for Tweet Model to identify spam tweets">
+      <created>1554298326561</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1554298326561</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="169506000" />
+    <option name="totallyTimeSpent" value="177802000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -712,16 +745,16 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32937366" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.6297731" visible="true" weight="0.38336933" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6292197" weight="0.21922246" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4997233" weight="0.32937366" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4991699" weight="0.32937366" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4969563" weight="0.32829374" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4964029" weight="0.32829374" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3702269" side_tool="true" visible="true" weight="0.38336933" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49584946" weight="0.14254859" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.80298835" weight="0.42548597" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.19811843" side_tool="true" visible="true" weight="0.42548597" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49529606" weight="0.14254859" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.80188155" visible="true" weight="0.42548597" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -929,11 +962,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>255</line>
-          <option name="timeStamp" value="105" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DriftDetector.py</url>
           <line>132</line>
           <option name="timeStamp" value="117" />
         </line-breakpoint>
@@ -959,27 +987,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>190</line>
+          <line>202</line>
           <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>188</line>
+          <line>200</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>221</line>
+          <line>266</line>
           <option name="timeStamp" value="125" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>222</line>
+          <line>267</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>224</line>
+          <line>269</line>
           <option name="timeStamp" value="127" />
         </line-breakpoint>
       </breakpoints>
@@ -1234,27 +1262,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SpamDetector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="78" column="47" selection-start-line="78" selection-start-column="47" selection-end-line="78" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ModelRetrainer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="22" selection-start-column="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SpamTextClassifier-Unsupervised.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
@@ -1310,16 +1321,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#113#123#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SpamUserDetectModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="855">
@@ -1370,10 +1371,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="308" column="48" lean-forward="true" selection-start-line="300" selection-end-line="308" selection-end-column="48" />
+          <folding>
+            <element signature="e#113#123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpamDetector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpamTextClassifier-Unsupervised.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#200#218#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DriftDetector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="150" column="43" lean-forward="true" selection-start-line="150" selection-start-column="43" selection-end-line="150" selection-end-column="43" />
+        <state relative-caret-position="270">
+          <caret line="285" lean-forward="true" selection-start-line="285" selection-end-line="285" />
           <folding>
             <element signature="e#112#130#0" expanded="true" />
           </folding>

@@ -6,38 +6,6 @@ Created on Mon Mar 25 19:10:03 2019
 @author: vihanga123
 """
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# spam user dataset unsupervised classification using k-means clustering
-
-data = pd.read_csv('training_data_2_csv_UTF.csv')
-
-data_numerical = data.select_dtypes(include=[np.number])
-
-# data_unsupervise_classification = data_numerical.drop(['id','bot', 'listed_count','favourites_count','statuses_count'], axis = 1)
-data_unsupervise_classification = data_numerical.drop(['bot', 'listed_count', 'favourites_count', 'statuses_count'],
-                                                      axis=1)
-
-from sklearn.cluster import KMeans
-
-wcss = []
-for i in range(1, 11):
-    kmeans = KMeans(n_clusters=i, init='k-means++', max_iter=300, n_init=10, random_state=0)
-    kmeans.fit(data_unsupervise_classification)
-    wcss.append(kmeans.inertia_)
-plt.plot(range(1, 11), wcss)
-plt.title('The Elbow Method')
-plt.xlabel('Number of clusters')
-plt.ylabel('WCSS')
-plt.show()
-
-y = data.iloc[:, -1]
-
-kmeans = KMeans(n_clusters=2, init='k-means++', max_iter=300, n_init=10, random_state=0)
-y_kmeans = kmeans.fit_predict(data_unsupervise_classification)
-
 # spam tweet dataset unsupervised classification using tf-idk and k-means clustering
 import numpy as np
 import pandas as pd
@@ -67,7 +35,16 @@ for i in range(true_k):
     for ind in order_centroids[i, :10]:
         print(terms[ind])
 
-print('Prediction')
-X = vectorizer.transform(['get free twitter followers'])
+import pickle
+
+# save vectorizer using pickle
+filename = "Unsupervised_Vectorizer_TFIDF.p"
+pickle.dump(vectorizer, open(filename, "wb"))
+
+# save unsupervised model using pickle
+filename = 'Unsupervised_KMeans_Model.sav'
+pickle.dump(model, open(filename, 'wb'))
+
+X = vectorizer.transform(['Free stuff only for the first 100 twitter followers'])
 predicted = model.predict(X)
 print(predicted)
