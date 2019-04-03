@@ -126,6 +126,7 @@ tweet = preprocess(tweetObj.text)
 features_test = find_features(tweet)
 prediction_test = nltk_ensemble.classify(features_test)
 tweet_model_score = nltk_ensemble.prob_classify(features_test)
+labels = nltk_ensemble.labels()
 
 print("Spam User Model Prediction = {0}".format(prediction_test))
 
@@ -189,4 +190,5 @@ features = convertUserDetails(userObj)
 # predict whether its a spam user or not
 SpamUserModelPrediction = DecisionTreeClf.predict(features)
 user_model_score = DecisionTreeClf.predict_proba(features)
+user_model_score = DecisionTreeClf.labels()
 print("Spam User Model Prediction = {0}".format(SpamUserModelPrediction))
