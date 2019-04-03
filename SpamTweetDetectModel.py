@@ -152,7 +152,7 @@ featuresets = [(find_features(text), label) for (text, label) in tweetsList]
 # split training and testing data sets using sklearn
 from sklearn import model_selection
 
-training, testing = model_selection.train_test_split(featuresets, test_size=0.2, random_state=seed)
+training, testing = model_selection.train_test_split(featuresets, test_size=0.4, random_state=seed)
 print('Training: {}'.format(len(training)))
 print('Testing: {}'.format(len(testing)))
 
@@ -267,7 +267,7 @@ classifier = [DecisionTreeClassifier(), RandomForestClassifier(), LogisticRegres
 models = zip(names, classifier)
 models_list = list(models)
 
-nltk_ensemble = SklearnClassifier(VotingClassifier(estimators=models_list, voting='hard', n_jobs=1))
+nltk_ensemble = SklearnClassifier(VotingClassifier(estimators=models_list, voting='soft', n_jobs=1))
 nltk_ensemble.train(training)
 accuracy_training = nltk.classify.accuracy(nltk_ensemble, training) * 100
 accuracy_testing = nltk.classify.accuracy(nltk_ensemble, testing) * 100
@@ -309,11 +309,11 @@ filename = 'SpamTweetDetectModel.sav'
 pickle.dump(nltk_ensemble, open(filename, 'wb'))
 
 # implementation for word2vec advanced fasttext
-from gensim.models import Word2Vec
-
-model_ted = Word2Vec(sentences=sentences_ted, size=100, window=2, min_count=3, workers=4, sg=0)
-print(model_ted)
-
-words = list(model_ted.wv.vocab)
-
-print(model_ted.wv.most_similar('follower'))
+# from gensim.models import Word2Vec
+#
+# model_ted = Word2Vec(sentences=sentences_ted, size=100, window=2, min_count=3, workers=4, sg=0)
+# print(model_ted)
+#
+# words = list(model_ted.wv.vocab)
+#
+# print(model_ted.wv.most_similar('follower'))
