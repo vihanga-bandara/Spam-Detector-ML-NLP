@@ -13,7 +13,7 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/predict')
+@app.route('/predict', methods=['GET', 'POST'])
 def predict():
     # load the SpamTweetDetectModel word_features from directory
     filename = "wordfeatures.p"

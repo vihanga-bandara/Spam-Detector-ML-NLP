@@ -19,7 +19,7 @@
 
 <div class="ml-container">
 
-    <form action="predict" method="POST">
+    <form action="" method="POST">
         <p>Retrieve Random Tweet</p>
         <input type="submit" class="btn-info" value="Retrieve">
         <br/>
@@ -33,7 +33,7 @@
 <br>
 <div class="ml-container">
 
-    <form action="{{ url_for('predict')}}" method="POST">
+    <form action="{{ url_for('predict') }}" method="post">
         <p>Enter your tweet here</p>
         <!-- <input type="text" name="comment"/> -->
         <textarea name="tweet" rows="4" cols="50"></textarea>
