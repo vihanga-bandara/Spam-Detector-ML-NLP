@@ -59,9 +59,8 @@ tfidf_result = tfidf.fit_transform(spam_tweets)
 print(tfidf.get_feature_names())
 
 
-# a function to
+# a function to get score of each feature
 def display_scores(vectorizer, tfidf_result):
-    # http://stackoverflow.com/questions/16078015/
     scores = zip(vectorizer.get_feature_names(),
                  np.asarray(tfidf_result.sum(axis=0)).ravel())
     sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)

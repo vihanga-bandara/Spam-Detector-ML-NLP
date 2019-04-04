@@ -118,6 +118,7 @@ def predict():
         features_test = find_features(tweet)
         prediction_test = nltk_ensemble.classify(features_test)
         print(prediction_test)
+
     return render_template('result.html', prediction=prediction_test)
 
 
