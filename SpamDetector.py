@@ -3,6 +3,9 @@ import numpy as np
 import nltk
 import pickle
 import TwitterAPI
+import Preprocessing
+import SpamFuzzyController
+import DriftDetector
 import re
 from nltk.tokenize import word_tokenize
 
@@ -190,5 +193,22 @@ features = convertUserDetails(userObj)
 # predict whether its a spam user or not
 SpamUserModelPrediction = DecisionTreeClf.predict(features)
 user_model_score = DecisionTreeClf.predict_proba(features)
-user_model_score = DecisionTreeClf.labels()
 print("Spam User Model Prediction = {0}".format(SpamUserModelPrediction))
+
+preprocessor = Preprocessing.Preprocessing()
+tweet = preprocessor.preprocess_tweet(tweetObj.text)
+tweet_tokens = word_tokenize(tweet)
+# send two model output proba through fuzzy logic controller to determine final output
+fuzzy_system = SpamFuzzyController.SpamFuzzyController()
+fuzzy_system.fuzzy_initialize()
+spam_score_fuzzy = fuzzy_system.fuzzy_predict(10, 10)
+print('Fuzzy Controller predicts {} of the user and twitter connection for spam activity'.format(spam_score_fuzzy))
+
+if spam_score_fuzzy > 50:
+    print("Show the Tweet along with the option of user manually reporting")
+else:
+    print("Sending the tweet to check for drift using drift detector")
+    # if tweet is not spam as defined by fuzzy logic
+    drift_detector = DriftDetector.DriftDetector()
+    drift_detector.predict(tweet_tokens)
+    print('done')
