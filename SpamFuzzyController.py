@@ -2,50 +2,52 @@ import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 
-# New Antecedent/Consequent objects hold universe variables and membership
 # Creating two fuzzy input variables and one output fuzzy variable
 tweet_model = ctrl.Antecedent(np.arange(0, 101, 1), 'Tweet Model')
 user_model = ctrl.Antecedent(np.arange(0, 101, 1), 'User Model')
 predict_spam = ctrl.Consequent(np.arange(0, 100, 1), 'Spam Prediction')
 
-# # Auto-membership function population is possible with .automf(3, 5, or 7)
-# quality.automf(3)
-# service.automf(3)
+# Creating memberships for tweet model - Input Variable
+tweet_model['not_spam'] = fuzz.trimf(tweet_model.universe, [0, 0, 51])
+tweet_model['maybe_spam'] = fuzz.trimf(tweet_model.universe, [0, 51, 101])
+tweet_model['definite_spam'] = fuzz.trimf(tweet_model.universe, [51, 101, 101])
 
-# using the automf to populate the fuzzy variables with terms
-tweet_spam_names = ['not_spam', 'maybe_spam', 'definite_spam']
-tweet_user_spam_names = ['not_spam', 'maybe_spam', 'definite_spam']
-model_output_names = ['not_spam', 'spam']
+# Creating memberships for user model - Input Variable
+user_model['not_spam'] = fuzz.trimf(user_model.universe, [0, 0, 51])
+user_model['maybe_spam'] = fuzz.trimf(user_model.universe, [0, 51, 101])
+user_model['definite_spam'] = fuzz.trimf(user_model.universe, [51, 101, 101])
 
-tweet_model.automf(names=tweet_spam_names)
-user_model.automf(names=tweet_user_spam_names)
-user_model.automf(names=model_output_names)
+# Creating memberships for tweet model - Output Variable
+predict_spam['not_spam'] = fuzz.trimf(predict_spam.universe, [-51, 0, 51])
+predict_spam['spam'] = fuzz.trimf(predict_spam.universe, [51, 101, 101])
 
-# Custom membership functions can be built interactively with a familiar,
-tip['low'] = fuzz.trimf(tip.universe, [0, 0, 13])
-tip['medium'] = fuzz.trimf(tip.universe, [0, 13, 25])
-tip['high'] = fuzz.trimf(tip.universe, [13, 25, 25])
+# view a graph showing the memberships of the variables initialized
+tweet_model.view()
+user_model.view()
+predict_spam.view()
 
-# You can see how these look with .view()
-tip['low'].view()
+# initiating rules for the spam fuzzy controller 3^2 probability therefore nine rules will be applied
+rule1 = ctrl.Rule(tweet_model['not_spam'] | user_model['not_spam'], predict_spam['not_spam'])
+rule2 = ctrl.Rule(tweet_model['not_spam'] | user_model['maybe_spam'], predict_spam['not_spam'])
+rule3 = ctrl.Rule(tweet_model['not_spam'] | user_model['definite_spam'], predict_spam['spam'])
 
-rule1 = ctrl.Rule(quality['poor'] | service['poor'], tip['low'])
-rule2 = ctrl.Rule(service['average'], tip['medium'])
-rule3 = ctrl.Rule(service['good'] | quality['good'], tip['high'])
+rule4 = ctrl.Rule(tweet_model['maybe_spam'] | user_model['not_spam'], predict_spam['not_spam'])
+rule5 = ctrl.Rule(tweet_model['maybe_spam'] | user_model['maybe_spam'], predict_spam['spam'])
+rule6 = ctrl.Rule(tweet_model['maybe_spam'] | user_model['definite_spam'], predict_spam['spam'])
 
-rule1.view()
+rule7 = ctrl.Rule(tweet_model['definite_spam'] | user_model['not_spam'], predict_spam['spam'])
+rule8 = ctrl.Rule(tweet_model['definite_spam'] | user_model['maybe_spam'], predict_spam['spam'])
+rule9 = ctrl.Rule(tweet_model['definite_spam'] | user_model['definite_spam'], predict_spam['spam'])
 
-tipping_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
+# Add the rules to a new ControlSystem
+predict_control = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9])
+spam_percentage = ctrl.ControlSystemSimulation(predict_control)
 
-tipping = ctrl.ControlSystemSimulation(tipping_ctrl)
-
-# Pass inputs to the ControlSystem using Antecedent labels with Pythonic API
-# Note: if you like passing many inputs all at once, use .inputs(dict_of_data)
-tipping.input['quality'] = 6.5
-tipping.input['service'] = 9.8
+spam_percentage.input['quality'] = 6.5
+spam_percentage.input['service'] = 9.8
 
 # Crunch the numbers
-tipping.compute()
+spam_percentage.compute()
 
-print(tipping.output['tip'])
-tip.view(sim=tipping)
+print(spam_percentage.output['predict_spam'])
+predict_spam.view(sim=spam_percentage)
