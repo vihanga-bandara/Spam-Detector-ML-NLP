@@ -3,7 +3,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 
 
-class preprocessing:
+class Preprocessing:
 
     def __init__(self):
         print('initialized preprocessor')
