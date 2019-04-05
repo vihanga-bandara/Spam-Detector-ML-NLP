@@ -183,7 +183,7 @@ class DriftDetector:
                         spam_token, tweet_token))
 
             if found_similiar_bool:
-                break
+                continue
             else:
                 print('No spam tokens found for tweet token {0}'.format(tweet_token))
 
@@ -272,7 +272,7 @@ class DriftDetector:
 
         if unsupervised_score == 1:
             print('This tweet might be spam therefore it will be sent for reporting.')
-        elif unsupervised_score == 0 & first_score < 30 & second_score < 30:
+        elif unsupervised_score == 0 and first_score < 30 and second_score < 30:
             print('This tweet is not spam but user can manually report it for spam')
 
         # else the tweet will be shown and it will have the ability to be reported manually

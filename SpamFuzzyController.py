@@ -81,9 +81,9 @@ class SpamFuzzyController:
         predict_spam['spam'] = fuzz.trimf(predict_spam.universe, [0, 101, 101])
 
         # view a graph showing the memberships of the variables initialized
-        tweet_model.view()
-        user_model.view()
-        predict_spam.view()
+        # tweet_model.view()
+        # user_model.view()
+        # predict_spam.view()
 
         # initiating rules for the spam fuzzy controller 3^2 probability therefore nine rules will be applied
         rule1 = ctrl.Rule(tweet_model['not_spam'] & user_model['not_spam'], predict_spam['not_spam'])
