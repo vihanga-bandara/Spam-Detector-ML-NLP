@@ -3,7 +3,7 @@ import numpy as np
 import nltk
 import pickle
 import TwitterAPI
-import Preprocessing
+import Preprocessor
 import SpamFuzzyController
 import DriftDetector
 import re
@@ -195,7 +195,7 @@ SpamUserModelPrediction = DecisionTreeClf.predict(features)
 user_model_score = DecisionTreeClf.predict_proba(features)
 print("Spam User Model Prediction = {0}".format(SpamUserModelPrediction))
 
-preprocessor = Preprocessing.Preprocessing()
+preprocessor = Preprocessor.Preprocessing()
 tweet = preprocessor.preprocess_tweet(tweetObj.text)
 tweet_tokens = word_tokenize(tweet)
 # send two model output proba through fuzzy logic controller to determine final output

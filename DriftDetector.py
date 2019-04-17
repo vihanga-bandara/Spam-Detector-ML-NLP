@@ -7,7 +7,7 @@ Created on Thu Mar 28 15:52:53 2019
 """
 import numpy as np
 import pandas as pd
-import Preprocessing
+import Preprocessor
 from sklearn.feature_extraction.text import TfidfVectorizer
 import requests
 import json
@@ -217,7 +217,7 @@ class DriftDetector:
 
     def predict(self, tweet_tokens):
 
-        preprocessor = Preprocessing.Preprocessing()
+        preprocessor = Preprocessor.Preprocessing()
 
         # tokenize those words and add it to a list
         # load the dataset
