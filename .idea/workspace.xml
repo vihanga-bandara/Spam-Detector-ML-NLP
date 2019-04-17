@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriftDetector.py" beforeDir="false" afterPath="$PROJECT_DIR$/DriftDetector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Preprocessor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpamDetector.py" beforeDir="false" afterPath="$PROJECT_DIR$/SpamDetector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpamTweetDetectModel.sav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpamTweetsFinalDataset.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpamUserDetectModel.sav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDo-ManualLabel" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tweets(Normal).csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tweets(Normal_from_full_corpus.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tweets(Spam).csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bagofwords.p" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/full-corpus.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spamtweets(socalled).txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data_4_students.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/training_data_2_csv_UTF.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/DriftDetector.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="298">
-              <caret line="241" column="35" lean-forward="true" selection-start-line="241" selection-start-column="35" selection-end-line="241" selection-end-column="35" />
+              <caret line="241" column="35" selection-start-line="241" selection-start-column="35" selection-end-line="241" selection-end-column="35" />
               <folding>
                 <element signature="e#112#130#0" expanded="true" />
               </folding>
@@ -61,7 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Preprocessor.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="308">
@@ -71,6 +80,11 @@
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/response.json">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -216,6 +230,12 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pickle/" />
+      <recent name="$PROJECT_DIR$/dataset/" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -451,14 +471,7 @@
       <workItem from="1554441733368" duration="5489000" />
       <workItem from="1554460498537" duration="23349000" />
       <workItem from="1554569602957" duration="599000" />
-      <workItem from="1555489443453" duration="193000" />
-    </task>
-    <task id="LOCAL-00011" summary="Code Refactor and added Twitter API support">
-      <created>1552497120471</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1552497120471</updated>
+      <workItem from="1555489443453" duration="525000" />
     </task>
     <task id="LOCAL-00012" summary="Tweet Classification model initial development">
       <created>1552517414491</created>
@@ -796,11 +809,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554502931210</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Renaming preprocessor class to suit OOP">
+      <created>1555489684551</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1555489684552</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220250000" />
+    <option name="totallyTimeSpent" value="220582000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -813,7 +833,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18206973" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -911,7 +930,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Tweet Prediction Model Initial Classification development" />
     <MESSAGE value="Using user input to predict spam using SpamTweetDetectModel" />
     <MESSAGE value="Tweet User Input For Classification using SpamTweetDetectModel" />
     <MESSAGE value="Feature saving model and word feature list for SpamTweetDetectModel" />
@@ -936,7 +954,8 @@
     <MESSAGE value="Renamed file and adding connections to spam detector and drift detector" />
     <MESSAGE value="Connecting SpamDetector with DriftDetector and SpamFuzzyController" />
     <MESSAGE value="Reformating SpamFuzzyController and connecting it to SpamDetector class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reformating SpamFuzzyController and connecting it to SpamDetector class" />
+    <MESSAGE value="Renaming preprocessor class to suit OOP" />
+    <option name="LAST_COMMIT_MESSAGE" value="Renaming preprocessor class to suit OOP" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1145,16 +1164,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Twitter-1KS-10KN-data/NormalData/followings.txt">
-      <provider selected="true" editor-type-id="LargeFileEditor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Twitter-1KS-10KN-data/MalData/ids.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14880">
-          <caret line="992" selection-start-line="992" selection-end-line="992" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Twitter-1KS-10KN-data/NormalData/ids.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149910">
@@ -1181,7 +1190,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/normaltweets.txt" />
-    <entry file="file://$PROJECT_DIR$/Tweets(Normal_from_full_corpus.csv">
+    <entry file="file://$PROJECT_DIR$/dataset/Tweets(Normal_from_full_corpus.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="68" selection-start-line="5" selection-start-column="68" selection-end-line="5" selection-end-column="68" />
@@ -1191,7 +1200,7 @@
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/full-corpus.csv">
+    <entry file="file://$PROJECT_DIR$/dataset/full-corpus.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="15" lean-forward="true" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
@@ -1211,7 +1220,6 @@
     <entry file="file://$PROJECT_DIR$/wordfeatures.p">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.ipynb" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/requests/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-128">
@@ -1350,10 +1358,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_data_4_students.csv">
+    <entry file="file://$PROJECT_DIR$/dataset/test_data_4_students.csv">
       <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/SpamTweetsFinalDataset.csv">
+    <entry file="file://$PROJECT_DIR$/dataset/SpamTweetsFinalDataset.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="675">
           <caret line="45" column="51" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
@@ -1387,7 +1395,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training_data_2_csv_UTF.csv">
+    <entry file="file://$PROJECT_DIR$/dataset/training_data_2_csv_UTF.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="1485">
           <caret line="99" column="10" selection-start-line="99" selection-start-column="10" selection-end-line="99" selection-end-column="10" />
@@ -1489,12 +1497,15 @@
     <entry file="file://$PROJECT_DIR$/DriftDetector.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
-          <caret line="241" column="35" lean-forward="true" selection-start-line="241" selection-start-column="35" selection-end-line="241" selection-end-column="35" />
+          <caret line="241" column="35" selection-start-line="241" selection-start-column="35" selection-end-line="241" selection-end-column="35" />
           <folding>
             <element signature="e#112#130#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.ipynb">
+      <provider selected="true" editor-type-id="jupyter-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Preprocessor.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1505,6 +1516,16 @@
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ToDo-ManualLabel">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="5" lean-forward="true" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/response.json">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
