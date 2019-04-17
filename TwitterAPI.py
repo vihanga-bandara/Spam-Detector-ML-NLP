@@ -1,5 +1,20 @@
 import tweepy
+from tweepy.streaming import StreamListener
+from tweepy import Stream
+import time
 
+
+class Listener(StreamListener):
+
+    def on_data(self, data):
+        print(data)
+        return True
+
+    def on_error(self, status):
+        print(status)
+
+    def disconnect(self):
+        self.__stream.disconnect()
 
 class TwitterAPI:
     _access_token = '250547225-fktvVk30HdHXnLgwhlHM5dBdv63YdrQBIuWjbjtV'
@@ -49,3 +64,16 @@ class TwitterAPI:
         # load file that contains ids of knows normal tweets
         tweetUser = tweetObj.user.screen_name
         return tweetUser
+
+    def streamUser(self, username):
+
+        # phrases = [“python”, “excel”, “pyxll”]
+        # listener = TwitterListener(phrases)
+
+        twitterStream = Stream(self._auth, Listener())
+        twitterStream.filter(follow=[username])
+
+        # listen for 60 seconds then stop
+        time.sleep(10)
+        twitterStream.disconnect()
+        print("Listener has disconnected")

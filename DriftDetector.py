@@ -260,6 +260,8 @@ class DriftDetector:
             print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(
                 first_score))
             # classify as maybe spam and send it to admin panel
+            # add tweet to new drifted tweets file
+
         else:
             # run second drift check
             second_score = self.spam_token_analogy_alg(tweet_tokens, spam_tokens)
