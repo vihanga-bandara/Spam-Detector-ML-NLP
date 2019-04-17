@@ -5,10 +5,11 @@ import time
 
 
 class Listener(StreamListener):
+    _status = None
 
-    def on_data(self, data):
-        print(data)
-        return True
+    def on_status(self, status):
+        print(status)
+        return status
 
     def on_error(self, status):
         print(status)
@@ -71,8 +72,8 @@ class TwitterAPI:
         # listener = TwitterListener(phrases)
 
         twitterStream = Stream(self._auth, Listener())
-        twitterStream.filter(follow=[username])
-
+        status = twitterStream.filter(follow=[username])
+        print(status)
         # listen for 60 seconds then stop
         time.sleep(10)
         twitterStream.disconnect()
