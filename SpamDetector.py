@@ -26,7 +26,8 @@ class SpamDetector:
             tweet_prediction_proba = tweet_classifier.get_proba_value()
 
             print("Tweet Spam Prediction = {0}".format(tweet_prediction_score))
-            print("Tweet Spam Probabilities = {0}".format(tweet_prediction_proba))
+            print("Tweet Spam Probabilities = spam({0}) ham({1})".format(tweet_prediction_proba[1],
+                                                                         tweet_prediction_proba[0]))
 
             """ User Classification """
 
@@ -39,14 +40,16 @@ class SpamDetector:
             user_prediction_proba = user_classifier.get_proba_value()
 
             print("User Spam Prediction = {0}".format(user_prediction_score))
-            print("User Spam Probabilities = {0}".format(user_prediction_proba))
+            print("User Spam Probabilities = spam({0}) ham({1})".format(user_prediction_proba[0],
+                                                                        user_prediction_proba[1]))
 
             """ Fuzzy Logic """
 
             # send two model output proba through fuzzy logic controller to determine final output
             fuzzy_system = SpamFuzzyController()
             fuzzy_system.fuzzy_initialize()
-            spam_score_fuzzy = fuzzy_system.fuzzy_predict(tweet_prediction_proba, user_prediction_proba)
+            spam_score_fuzzy = fuzzy_system.fuzzy_predict(tweet_prediction_proba[1] * 100,
+                                                          user_prediction_proba[0] * 100)
             print('Fuzzy Controller predicts {} of the user and twitter connection for spam activity'.format(
                 spam_score_fuzzy))
 
@@ -61,11 +64,10 @@ class SpamDetector:
                 # drift_detector.predict(tweet_obj)
                 # print('done')
 
-            self.information_array = self.get_info_prediction(user_prediction_score,
-                                                              tweet_prediction_score, spam_score_fuzzy)
+            self.information_array = self.info_prediction(user_prediction_score.min(), tweet_prediction_score,
+                                                          spam_score_fuzzy)
 
         if 'tweet_only' in locals() and tweet_only is not None:
-
             """ Tweet Classification """
             # initialize tweet classification
             tweet_classifier = TweetClassifier()
@@ -142,10 +144,7 @@ class SpamDetector:
         else:
             information_array['tweet_prediction'] = "ham"
 
-        if fuzzy_score is 1:
-            information_array['fuzzy_score'] = "spam"
-        else:
-            information_array['fuzzy_score'] = "ham"
+        information_array['fuzzy_score'] = fuzzy_score
 
         return information_array
 

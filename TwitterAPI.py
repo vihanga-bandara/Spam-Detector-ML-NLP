@@ -78,6 +78,7 @@ class TwitterAPI:
         # listener = TwitterListener(phrases)
 
         twitterStream = Stream(self._auth, Listener())
+        print("Listening to incoming tweets")
         twitterStream.filter(follow=[username])
         print(tweets[0].text)
         print("Listener has disconnected")

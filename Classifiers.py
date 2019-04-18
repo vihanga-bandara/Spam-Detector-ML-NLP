@@ -7,6 +7,7 @@ class Classifier(object):
     pickle = "pickle/"
     preprocessor = Preprocessor.Preprocessor()
     twitter_api = TwitterAPI.TwitterAPI()
+    twitter_api.authenticate()
 
     def __init__(self, prediction_type):
         self.prediction_type = prediction_type
@@ -55,7 +56,8 @@ class TweetClassifier(Classifier):
 
         # classify using model and get scores
         self._proba_score = nltk_ensemble_model.classify(features_tweet)
-        self._proba_value = nltk_ensemble_model.prob_classify(features_tweet)
+        proba_value = nltk_ensemble_model.prob_classify(features_tweet)
+        self._proba_value = proba_value._prob_dict
 
     def find_features(self, word_features, processed_tweet):
         features_tweet = self.preprocessor.find_features_tweet(word_features, processed_tweet)
@@ -94,7 +96,9 @@ class UserClassifier(Classifier):
 
         # classify and add score to classifier
         self._proba_score = decision_tree_model.predict(user_features)
-        self._proba_value = decision_tree_model.predict_proba(user_features)
+        proba_value = decision_tree_model.predict_proba(user_features)
+        prob_arr = [proba_value.min(), proba_value.max()]
+        self._proba_value = prob_arr
 
     def get_proba_value(self):
         return self._proba_value
@@ -104,7 +108,8 @@ class UserClassifier(Classifier):
 
     def find_tweet_user(self, tweet_obj):
         tweet_user = self.twitter_api.findTweetUser(tweet_obj)
-        return tweet_user
+        user_obj = self.twitter_api.getUser(tweet_user)
+        return user_obj
 
     def get_features_user(self, user_obj):
         user_features = self.preprocessor.preprocess_user(user_obj)

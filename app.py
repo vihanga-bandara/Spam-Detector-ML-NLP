@@ -3,7 +3,6 @@ import TweetListener as TweetListener
 from SpamDetector import SpamDetector
 from TweetListener import TweetListener
 
-
 app = Flask(__name__)
 
 
@@ -15,14 +14,18 @@ def home():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
-        print("hi")
-    return render_template('result.html', prediction="nope")
+        tweet_listen = TweetListener.TweetListener()
+        tweet = tweet_listen.stream_tweet()
+        spam_detector = SpamDetector()
+        spam_detector.main(None, tweet, None)
+        classification_report = spam_detector.get_prediction_report()
+    return render_template('result.html', prediction=classification_report)
 
 
 @app.route('/retrieve_classify', methods=['GET', 'POST'])
 def retrieve_classify():
     if request.method == 'POST':
-        tweet_listen = TweetListener.TweetListener()
+        tweet_listen = TweetListener()
         tweet_obj = tweet_listen.stream_tweet()
         spam_detector = SpamDetector()
         spam_detector.main(tweet_obj, None, None)

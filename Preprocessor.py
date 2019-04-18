@@ -182,7 +182,7 @@ class Preprocessor:
                                            'followers_count', 'friends_count', 'statuses_count'])
 
         # load the SpamUserDetectModel bag-of-words-bot from directory
-        filename = "bagofwords.p"
+        filename = "pickle/bagofwords.p"
         bag_of_words_bot = pickle.load(open(filename, 'rb'))
 
         # Feature Engineering (some more relationships to be added)
