@@ -17,6 +17,8 @@ from datamuse import datamuse
 
 
 class DriftDetector:
+    pickle = "pickle/"
+    dataset = "dataset/"
     preprocessor = Preprocessor()
 
     def __init__(self):
@@ -30,9 +32,16 @@ class DriftDetector:
         spam_tokens = []
         for item in sorted_scores:
             print("{0:50} Score: {1}".format(item[0], item[1]))
-            if type(item[0]) == str:
+            if type(item[0]) == str and item[1] > 1.8:
                 spam_tokens.append(item[0])
                 print('adding spam token - {0}'.format(item[0]))
+
+        ham_words = ['3', 'part', 'know', 'nikkis', 'beacon', 'advisory', 'banks', 'direct', 'guide', 'way', 'maverick',
+                     'feeling', 'pressure', 'probably', 'valued', 'seven', 'could', 'relief', 'website', 'effective',
+                     'taught', 'pack', 'oz', 'beholding', 'one', 'anyone', 'read', 'sassy', 'tea', 'seriously', 'list']
+        for word in list(spam_tokens):
+            if word in ham_words:
+                spam_tokens.remove(word)
 
         return spam_tokens
 
@@ -58,52 +67,59 @@ class DriftDetector:
             #                     }
             #                     )
             # print(response)
-            #
+
             # with open('response.json', 'w') as outfile:
             #     json.dump(response.text, outfile)
             # filter it according to score
 
             # # using datamuse api get related words
             api = datamuse.Datamuse()
-            response2 = api.words(ml='dog', max=5)
+            datamuse_response_similar = api.words(ml=token, max=5)
             print('Getting related analogies for tweet token...')
             # no need to check for score since we take only max 5
-            print(response2)
+            print(datamuse_response_similar)
             # contains related word from datamuse API
             datamuse_list = []
-            for response in response2:
+            for response in datamuse_response_similar:
                 datamuse_list.append(response['word'])
+                words.append(response['word'])
+
+            # using datamuse api get related terms
+            response2 = api.words(rel_syn=token, max=3)
+            print('Getting similar words for spam token...')
+            # no need to check for score since we take only max 5
+            print(response2)
+            for response in response2:
                 words.append(response['word'])
 
             """if word does not have a synonym check the json response for a result code of 462, 
             if so can try to correct spellings and get using datamuse api--TODO"""
 
-            with open('response.json') as json_file:
-                data = json.load(json_file)
+            # with open('response.json') as json_file:
+            #     data = json.load(json_file)
 
             # compare both the lists to identify duplicates and then remove them and get only the top 5 or 10 words
 
             # get associative words for each token
-            similiar_tokens_json = json.loads(data)
-            print(similiar_tokens_json)
-            print('Getting associated analogies for tweet token...')
-            twinword_dict = similiar_tokens_json['associations_scored']
+            # similiar_tokens_json = json.loads(data)
+            # print(similiar_tokens_json)
+            # print('Getting associated analogies for tweet token...')
+            # twinword_dict = similiar_tokens_json['associations_scored']
 
             # contains associative words from twinword API
-            twinword_list = []
-            # get tokens which are above 80 score from
-            for token_name, value in twinword_dict.items():
-                if value > 80:
-                    twinword_list.append(token_name)
-                    words.append(token_name)
+            # twinword_list = []
+            # # get tokens which are above 80 score from
+            # for token_name, value in twinword_dict.items():
+            #     if value > 80:
+            #         twinword_list.append(token_name)
+            #         words.append(token_name)
 
             found_similiar_bool = False
             print('Searching for tokens...')
             for simtoken in words:
                 for sptoken in spam_tokens:
                     print('Searching for similar word - {0} and spam token - {1}...'.format(simtoken, sptoken))
-                    # word1, word2 = simtoken, sptoken
-                    word1, word2 = "dog", "dog"
+                    word1, word2 = simtoken, sptoken
                     similarity = distance.get_jaro_distance(word1, word2, winkler=True, scaling=0.1)
                     print(similarity)
                     if similarity > 0.9:
@@ -118,7 +134,7 @@ class DriftDetector:
                 else:
                     print('Searching for spam tokens in similar word - {0}...Not Found'.format(simtoken))
 
-            if found_similiar_bool == False:
+            if found_similiar_bool is False:
                 print('No similar tokens that maps to spam token were found for tweet token - {0}'.format(token))
                 continue
 
@@ -143,7 +159,7 @@ class DriftDetector:
             for spam_token in spam_tokens:
                 # using datamuse api get related words
                 api = datamuse.Datamuse()
-                response1 = api.words(ml='dog', max=2)
+                response1 = api.words(ml=spam_token, max=5)
                 print('Getting related analogies for spam token...')
                 # no need to check for score since we take only max 5
                 print(response1)
@@ -151,7 +167,7 @@ class DriftDetector:
                     words.append(response['word'])
 
                 # using datamuse api get synonyms
-                response2 = api.words(rel_syn='dog', max=2)
+                response2 = api.words(rel_syn=spam_token, max=2)
                 print('Getting similar words for spam token...')
                 # no need to check for score since we take only max 5
                 print(response2)
@@ -164,8 +180,8 @@ class DriftDetector:
                 for similar_spam_token in words:
                     print('Searching for similar spam token - {0} and tweet token - {1}...'.format(similar_spam_token,
                                                                                                    tweet_token))
-                    # word1, word2 = simtoken, tweet_token
-                    word1, word2 = "dog", "dog"
+                    word1, word2 = similar_spam_token, tweet_token
+                    # word1, word2 = "dog", "dog"
                     similarity = distance.get_jaro_distance(word1, word2, winkler=True, scaling=0.1)
                     print(similarity)
                     if similarity > 0.9:
@@ -217,16 +233,20 @@ class DriftDetector:
         else:
             return 0
 
-    def predict(self, tweet_obj):
+    def predict(self, tweet_obj, check):
 
-        # preprocess tweet
-        processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
+        if check is 0 or check is 2:
+            # preprocess tweet
+            processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
+        else:
+            processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj)
 
         tweet_tokens = nltk.word_tokenize(processed_tweet)
 
         # tokenize those words and add it to a list
         # load the dataset
-        df = pd.read_csv('SpamTweetsFinalDataset.csv', header=None)
+        filename = self.dataset + 'SpamTweetsFinalDataset.csv'
+        df = pd.read_csv(filename, header=None)
 
         # print general information about the dataset that is loaded
         print(df.info())
@@ -260,8 +280,7 @@ class DriftDetector:
         # run first drift check
         first_score, second_score, unsupervised_score = 0, 0, 0
         first_score = self.tweet_token_analogy_alg(tweet_tokens, spam_tokens)
-        first_score = 20
-        if first_score >= 30:
+        if first_score >= 40:
             print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(
                 first_score))
             # classify as maybe spam and send it to admin panel

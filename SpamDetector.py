@@ -1,5 +1,8 @@
 from SpamFuzzyController import SpamFuzzyController
 from Classifiers import TweetClassifier, UserClassifier
+from DriftDetector import DriftDetector
+from TwitterAPI import TwitterAPI
+import pickle
 
 
 class SpamDetector:
@@ -12,7 +15,7 @@ class SpamDetector:
     def __init__(self):
         print("Spam Detector Framework Initialized")
 
-    def main(self, tweet_obj, tweet_id, tweet_only=None):
+    def main(self, tweet_obj, tweet_only, tweet_id=None):
         # check for availability of variable
         if 'tweet_obj' in locals() and tweet_obj is not None:
 
@@ -59,11 +62,11 @@ class SpamDetector:
 
             """ Drift Detection """
 
-            if tweet_prediction_score is not 1:
-                print("Checking Tweet for Drift Possibility")
-                # drift_detector = DriftDetector()
-                # drift_detector.predict(tweet_obj)
-                # print('done')
+            # if tweet_prediction_score is not 1:
+            #     print("Checking Tweet for Drift Possibility")
+            #     drift_detector = DriftDetector()
+            #     drift_detector.predict(tweet_obj)
+            #     print('done')
 
             self.information_array = self.info_prediction(user_prediction_score.min(), tweet_prediction_score,
                                                           spam_score_fuzzy, tweet_obj)
@@ -75,16 +78,23 @@ class SpamDetector:
             tweet_classifier = TweetClassifier()
 
             # classify tweet and get prediction
-            tweet_classifier.classify(tweet_obj, self.check)
+            tweet_classifier.classify(tweet_only, self.check)
             tweet_prediction_score = tweet_classifier.get_prediction_score()
             tweet_prediction_proba = tweet_classifier.get_proba_value()
 
             print("Tweet Spam Prediction = {0}".format(tweet_prediction_score))
-            print("Tweet Spam Probabilities = {0}".format(tweet_prediction_proba))
+            print("Tweet Spam Probabilities = spam({0}) ham({1})".format(tweet_prediction_proba[1],
+                                                                         tweet_prediction_proba[0]))
 
-            self.information_array['tweet_prediction'] = tweet_prediction_score
+            if tweet_prediction_score is not 1:
+                print("Checking Tweet for Drift Possibility")
+                drift_detector = DriftDetector()
+                drift_detector.predict(tweet_only, self.check)
+                print('done')
 
-        # if 'tweet_obj' in locals() and tweet_obj is not None:
+            self.information_array = self.info_prediction(tweet_prediction_score, tweet_only)
+
+        # if 'tweet_id' in locals() and tweet_id is not None:
         #
         #     """ Tweet Classification """
         #     # initialize tweet classification
@@ -136,17 +146,17 @@ class SpamDetector:
 
     def info_prediction(self, user_score, tweet_score, fuzzy_score, tweet_obj):
         information_array = dict()
-        if user_score is 1:
+        if user_score is 1 and user_score is not None:
             information_array['user_prediction'] = "spam"
         else:
             information_array['user_prediction'] = "ham"
 
-        if tweet_score is 1:
+        if tweet_score is 1 and tweet_score is not None:
             information_array['tweet_prediction'] = "spam"
         else:
             information_array['tweet_prediction'] = "ham"
-
-        information_array['fuzzy_score'] = fuzzy_score
+        if fuzzy_score is not None:
+            information_array['fuzzy_score'] = fuzzy_score
 
         if self.check is 0:
             information_array["tweet"] = tweet_obj.text
@@ -154,7 +164,6 @@ class SpamDetector:
             information_array["user_image"] = tweet_obj.user.profile_image_url
         else:
             information_array["tweet"] = tweet_obj
-
 
         return information_array
 
