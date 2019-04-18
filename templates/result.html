@@ -16,13 +16,13 @@
 
     </div>
 </header>
-<p style="color:blue;font-size:20;text-align: center;"><b>Results for Comment</b></p>
+<p style="color:blue;font-size:20px;text-align: center;"><b>Results for Comment</b></p>
 <div class="results">
 
 
     {% if prediction == 1%}
     <h2 style="color:red;">This tweet is Spam</h2>
-    {% elif prediction == 0%}
+    {% else prediction == 0%}
     <h2 style="color:blue;">This tweet is Not Spam</h2>
     {% endif %}
 

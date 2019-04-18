@@ -19,9 +19,9 @@
 
 <div class="ml-container">
 
-    <form action="" method="POST">
-        <p>Retrieve Random Tweet</p>
-        <input type="submit" class="btn-info" value="Retrieve">
+    <form action="{{ url_for('retrieve_classify') }}" method="post">
+        <p>Retrieve </p>
+        <input type="submit" class="btn-info" value="retrieve_classify_btn">
         <br/>
         <br/>
         <textarea name="tweet" rows="4" cols="50"></textarea>

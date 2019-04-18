@@ -1,7 +1,7 @@
 import TwitterAPI
 
 
-class TweetListener():
+class TweetListener:
     tweet = None
 
     def __init__(self):

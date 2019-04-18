@@ -212,3 +212,12 @@ class Preprocessing:
         # customize dataset according to feature
         features_set = data[features]
         return features_set
+
+    # define a find features function for a tweet
+    def find_features_tweet(self, word_features, tweet):
+        words = word_tokenize(tweet)
+        features = {}
+        for word in word_features:
+            features[word] = (word in words)
+
+        return features
