@@ -1,114 +1,136 @@
-import pandas as pd
-import numpy as np
-import nltk
+
 import pickle
-import TwitterAPI
-import Preprocessor
-import SpamFuzzyController
-import DriftDetector
-import re
+from Preprocessor import Preprocessor
+from SpamFuzzyController import SpamFuzzyController
+from DriftDetector import DriftDetector
 from nltk.tokenize import word_tokenize
+from Classifiers import TweetClassifier, UserClassifier
 
 
 class SpamDetector:
-    def load_models(self):
-        # load the SpamTweetDetectModel word_features from directory
-        pickle = "pickle/"
-        filename = pickle + "wordfeatures.p"
-        word_features = pickle.load(open(filename, 'rb'))
+    information_array = dict()
 
-        # load the SpamTweetDetectModel from directory
-        filename = pickle + "SpamTweetDetectModel.sav"
-        nltk_ensemble = pickle.load(open(filename, 'rb'))
+    def __init__(self):
+        print("Spam Detector Framework Initialized")
 
-    def main(self, tweet_obj, tweet_id, tweet_only):
+    def main(self, tweet_obj, tweet_id=None, tweet_only=None):
+        # check for availability of variable
+        if 'tweet_obj' in locals() and tweet_obj is not None:
+
+            """ Tweet Classification """
+            # initialize tweet classification
+            tweet_classifier = TweetClassifier()
+
+            # classify tweet and get prediction
+            tweet_classifier.classify(tweet_obj)
+            tweet_prediction_score = tweet_classifier.get_prediction_score()
+            tweet_prediction_proba = tweet_classifier.get_proba_value()
+
+            print("Tweet Spam Prediction = {0}".format(tweet_prediction_score))
+            print("Tweet Spam Probabilities = {0}".format(tweet_prediction_proba))
+
+            """ User Classification """
+
+            # initialize user classification
+            user_classifier = UserClassifier()
+
+            # classify user and get prediction
+            user_classifier.classify(tweet_obj)
+            user_prediction_score = user_classifier.get_prediction_score()
+            user_prediction_proba = user_classifier.get_proba_value()
+
+            print("User Spam Prediction = {0}".format(user_prediction_score))
+            print("User Spam Probabilities = {0}".format(user_prediction_proba))
+
+            """ Fuzzy Logic """
+
+            # send two model output proba through fuzzy logic controller to determine final output
+            fuzzy_system = SpamFuzzyController()
+            fuzzy_system.fuzzy_initialize()
+            spam_score_fuzzy = fuzzy_system.fuzzy_predict(tweet_prediction_proba, user_prediction_proba)
+            print('Fuzzy Controller predicts {} of the user and twitter connection for spam activity'.format(
+                spam_score_fuzzy))
+
+            """ Basic flow ends here, displays spam predictions from both models 
+                        and then the combined spam value using fuzzy logic       """
+
+            """ Drift Detection """
+
+            if tweet_prediction_score is not 1:
+                print("Checking Tweet for Drift Possibility")
+                # drift_detector = DriftDetector()
+                # drift_detector.predict(tweet_obj)
+                # print('done')
+
+            self.information_array = self.get_info_prediction(user_prediction_score,
+                                                              tweet_prediction_score, spam_score_fuzzy)
+
+        if 'tweet_only' in locals() and tweet_only is not None:
+
+            """ Tweet Classification """
+            # initialize tweet classification
+            tweet_classifier = TweetClassifier()
+
+            # classify tweet and get prediction
+            tweet_classifier.classify(tweet_obj)
+            tweet_prediction_score = tweet_classifier.get_prediction_score()
+            tweet_prediction_proba = tweet_classifier.get_proba_value()
+
+            print("Tweet Spam Prediction = {0}".format(tweet_prediction_score))
+            print("Tweet Spam Probabilities = {0}".format(tweet_prediction_proba))
+
+            """ User Classification """
+
+            # initialize user classification
+            user_classifier = UserClassifier()
+
+            # classify user and get prediction
+            user_classifier.classify(tweet_obj)
+            user_prediction_score = user_classifier.get_prediction_score()
+            user_prediction_proba = user_classifier.get_proba_value()
+
+            print("User Spam Prediction = {0}".format(user_prediction_score))
+            print("User Spam Probabilities = {0}".format(user_prediction_proba))
+
+            """ Fuzzy Logic """
+
+            # send two model output proba through fuzzy logic controller to determine final output
+            fuzzy_system = SpamFuzzyController()
+            fuzzy_system.fuzzy_initialize()
+            spam_score_fuzzy = fuzzy_system.fuzzy_predict(tweet_prediction_proba, user_prediction_proba)
+            print('Fuzzy Controller predicts {} of the user and twitter connection for spam activity'.format(
+                spam_score_fuzzy))
+
+            """ Basic flow ends here, displays spam predictions from both models 
+                        and then the combined spam value using fuzzy logic       """
+
+            """ Drift Detection """
+
+            if tweet_prediction_score is not 1:
+                print("Checking Tweet for Drift Possibility")
+                # drift_detector = DriftDetector()
+                # drift_detector.predict(tweet_obj)
+                # print('done')
+
+            self.information_array = self.get_info_prediction(user_prediction_score,
+                                                              tweet_prediction_score, spam_score_fuzzy)
+
+    def get_info_prediction(self, user_score, tweet_score, fuzzy_score):
+        information_array = dict()
+        if user_score is 1:
+            information_array['user_prediction'] = "spam"
+        else:
+            information_array['user_prediction'] = "ham"
+        if tweet_score is 1:
+            information_array['tweet_prediction'] = "spam"
+        else:
+            information_array['tweet_prediction'] = "ham"
+        if fuzzy_score is 1:
+            information_array['fuzzy_score'] = "spam"
+        else:
+            information_array['fuzzy_score'] = "ham"
+        return information_array
 
 
-tweet = preprocess(tweetObj.text)
-
-features_test = find_features(tweet)
-prediction_test = nltk_ensemble.classify(features_test)
-tweet_model_score = nltk_ensemble.prob_classify(features_test)
-labels = nltk_ensemble.labels()
-
-print("Spam User Model Prediction = {0}".format(prediction_test))
-
-# retrieve spam user account detail by using tweet handle
-# for now using a known spam account to retrieve the data
-
-# since api is already initialised and authenticated retrieve user object details
-twitterUser = twitter.findTweetUser(tweetObj)
-userObj = twitter.getUser(twitterUser)
-print(userObj)
-
-
-def convertUserDetails(userObj):
-    # create a dataframe
-    data = [
-        [userObj.screen_name, userObj.name, userObj.description, userObj.status, userObj.listed_count, userObj.verified,
-         userObj.followers_count, userObj.friends_count, userObj.statuses_count]]
-    data = pd.DataFrame(data, columns=['screen_name', 'name', 'description', 'status', 'listed_count', 'verified',
-                                       'followers_count', 'friends_count', 'statuses_count'])
-
-    # load the SpamUserDetectModel bag-of-words-bot from directory
-    filename = "bagofwords.p"
-    bag_of_words_bot = pickle.load(open(filename, 'rb'))
-
-    # Feature Engineering (some more relationships to be added)
-
-    # check the screen name for words in the BoW
-    data['screen_name_binary'] = data.screen_name.str.contains(bag_of_words_bot, case=False, na=False)
-
-    # check the name for words in the BoW
-    data['name_binary'] = data.name.str.contains(bag_of_words_bot, case=False, na=False)
-
-    # check the description for words in the BoW
-    data['description_binary'] = data.description.str.contains(bag_of_words_bot, case=False, na=False)
-
-    # check the sstatus for words in the BoW
-    data['status_binary'] = data.status.str.contains(bag_of_words_bot, case=False, na=False)
-
-    # check the number of public lists that the user is a part of
-    data['listed_count_binary'] = (data.listed_count > 20000) == False
-
-    # check whether account is verified or not
-
-    # Finalizing the feature set without independent variable 'bot'
-    features = ['screen_name_binary', 'name_binary', 'description_binary', 'status_binary', 'verified',
-                'followers_count',
-                'friends_count', 'statuses_count', 'listed_count_binary']
-
-    # customize dataset according to feature
-    features_set = data[features]
-    return features_set
-
-
-# load the SpamUserDetectModel from directory
-filename = "SpamUserDetectModel.sav"
-DecisionTreeClf = pickle.load(open(filename, 'rb'))
-
-# get the feature set from user obj
-features = convertUserDetails(userObj)
-
-# predict whether its a spam user or not
-SpamUserModelPrediction = DecisionTreeClf.predict(features)
-user_model_score = DecisionTreeClf.predict_proba(features)
-print("Spam User Model Prediction = {0}".format(SpamUserModelPrediction))
-
-preprocessor = Preprocessor.Preprocessing()
-tweet = preprocessor.preprocess_tweet(tweetObj.text)
-tweet_tokens = word_tokenize(tweet)
-# send two model output proba through fuzzy logic controller to determine final output
-fuzzy_system = SpamFuzzyController.SpamFuzzyController()
-fuzzy_system.fuzzy_initialize()
-spam_score_fuzzy = fuzzy_system.fuzzy_predict(10, 10)
-print('Fuzzy Controller predicts {} of the user and twitter connection for spam activity'.format(spam_score_fuzzy))
-
-if spam_score_fuzzy > 50:
-    print("Show the Tweet along with the option of user manually reporting")
-else:
-    print("Sending the tweet to check for drift using drift detector")
-    # if tweet is not spam as defined by fuzzy logic
-    drift_detector = DriftDetector.DriftDetector()
-    drift_detector.predict(tweet_tokens)
-    print('done')
+if __name__ == '__main__':
+    SpamDetector.main()

@@ -5,7 +5,7 @@ import pickle
 import pandas as pd
 
 
-class Preprocessing:
+class Preprocessor:
 
     def __init__(self):
         print('initialized preprocessor')
@@ -172,12 +172,12 @@ class Preprocessing:
 
         return sentences_ted
 
-    def preprocess_user(userObj):
-        # create a dataframe
+    def preprocess_user(self, user_obj):
+        # creating a data frame using pandas
         data = [
-            [userObj.screen_name, userObj.name, userObj.description, userObj.status, userObj.listed_count,
-             userObj.verified,
-             userObj.followers_count, userObj.friends_count, userObj.statuses_count]]
+            [user_obj.screen_name, user_obj.name, user_obj.description, user_obj.status, user_obj.listed_count,
+             user_obj.verified,
+             user_obj.followers_count, user_obj.friends_count, user_obj.statuses_count]]
         data = pd.DataFrame(data, columns=['screen_name', 'name', 'description', 'status', 'listed_count', 'verified',
                                            'followers_count', 'friends_count', 'statuses_count'])
 

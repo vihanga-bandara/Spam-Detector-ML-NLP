@@ -7,15 +7,17 @@ Created on Thu Mar 28 15:52:53 2019
 """
 import numpy as np
 import pandas as pd
-import Preprocessor
+from Preprocessor import Preprocessor
 from sklearn.feature_extraction.text import TfidfVectorizer
 import requests
 import json
+import nltk
 from pyjarowinkler import distance
 from datamuse import datamuse
 
 
 class DriftDetector:
+    preprocessor = Preprocessor()
 
     def __init__(self):
         print('Initializing Drift Detector')
@@ -215,9 +217,12 @@ class DriftDetector:
         else:
             return 0
 
-    def predict(self, tweet_tokens):
+    def predict(self, tweet_obj):
 
-        preprocessor = Preprocessor.Preprocessing()
+        # preprocess tweet
+        processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
+
+        tweet_tokens = nltk.word_tokenize(processed_tweet)
 
         # tokenize those words and add it to a list
         # load the dataset
@@ -229,7 +234,7 @@ class DriftDetector:
 
         # using only the spam labelled data
         spam_tweets = df.loc[df[1] == 'spam']
-        spam_tweets = preprocessor.preprocess_spam_tweets(spam_tweets[0])
+        spam_tweets = self.preprocessor.preprocess_spam_tweets(spam_tweets[0])
 
         # dummy function to avoid preprocessing and tokenization in tfid
         def dummy_fun(doc):
