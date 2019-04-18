@@ -11,15 +11,15 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/predict', methods=['GET', 'POST'])
-def predict():
-    if request.method == 'POST':
-        tweet_listen = TweetListener.TweetListener()
-        tweet = tweet_listen.stream_tweet()
-        spam_detector = SpamDetector()
-        spam_detector.main(None, tweet, None)
-        classification_report = spam_detector.get_prediction_report()
-    return render_template('result.html', prediction=classification_report)
+# @app.route('/predict', methods=['GET', 'POST'])
+# def predict():
+#     if request.method == 'POST':
+#         tweet_listen = TweetListener.TweetListener()
+#         tweet = tweet_listen.stream_tweet()
+#         spam_detector = SpamDetector()
+#         spam_detector.main(None, tweet, None)
+#         classification_report = spam_detector.get_prediction_report()
+#     return render_template('result.html', prediction=classification_report)
 
 
 @app.route('/retrieve_classify', methods=['GET', 'POST'])

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Spam Detection Framework</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -9,22 +9,29 @@
 <header>
     <div class="container">
         <div id="brandname">
-            ML App
+            Final Year Research
         </div>
-        s
-        <h2>Twitter Spam Detection</h2>
+        <h2>Twitter Spam Detection Framework</h2>
 
     </div>
 </header>
-<p style="color:blue;font-size:20px;text-align: center;"><b>Results for Comment</b></p>
+<p style="color:blue;font-size:20px;text-align: center;"><b>Classification Report</b></p>
 <div class="results">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                Tweet Analyzed : {{prediction['tweet']}} <br>
+                Tweeted By : {{prediction['user']}}<br>
+                Image URL : {{prediction['user_image']}}<br>
+            </div>
+            <div class="col">
+                Tweet Classification Result - {{prediction['user_prediction']}}<br>
+                User Classification Result - {{prediction['tweet_prediction']}}<br>
+                Fuzzy Single Ouput - {{prediction['fuzzy_score']}}<br>
 
-
-    {% if prediction == 1%}
-    <h2 style="color:red;">This tweet is Spam</h2>
-    {% else prediction == 0%}
-    <h2 style="color:blue;">This tweet is Not Spam</h2>
-    {% endif %}
+            </div>
+        </div>
+    </div>
 
 </div>
 
