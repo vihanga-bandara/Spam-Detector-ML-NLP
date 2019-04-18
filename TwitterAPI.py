@@ -3,19 +3,25 @@ from tweepy.streaming import StreamListener
 from tweepy import Stream
 import time
 
+tweets = []
+
 
 class Listener(StreamListener):
     _status = None
 
     def on_status(self, status):
-        print(status)
-        return status
+        tweets.append(status)
+        if len(tweets) == 1:
+            return False
+        else:
+            return True
 
     def on_error(self, status):
         print(status)
 
     def disconnect(self):
         self.__stream.disconnect()
+
 
 class TwitterAPI:
     _access_token = '250547225-fktvVk30HdHXnLgwhlHM5dBdv63YdrQBIuWjbjtV'
@@ -66,15 +72,14 @@ class TwitterAPI:
         tweetUser = tweetObj.user.screen_name
         return tweetUser
 
-    def streamUser(self, username):
+    def streamTweetFromUser(self, username):
 
         # phrases = [“python”, “excel”, “pyxll”]
         # listener = TwitterListener(phrases)
 
         twitterStream = Stream(self._auth, Listener())
-        status = twitterStream.filter(follow=[username])
-        print(status)
-        # listen for 60 seconds then stop
-        time.sleep(10)
-        twitterStream.disconnect()
+        twitterStream.filter(follow=[username])
+        print(tweets[0].text)
         print("Listener has disconnected")
+        tweet = tweets[0]
+        return tweet
