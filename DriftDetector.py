@@ -152,6 +152,8 @@ class DriftDetector:
         # initialize word list
         words = []
 
+        spam_tokens = spam_tokens[:-15 or None]
+
         # get datamuse words for each spam_token
         for tweet_token in tweet_tokens:
             # boolean to check if identical token is found
@@ -159,18 +161,17 @@ class DriftDetector:
             for spam_token in spam_tokens:
                 # using datamuse api get related words
                 api = datamuse.Datamuse()
-                response1 = api.words(ml=spam_token, max=5)
-                print('Getting related analogies for spam token...')
+                response1 = api.words(ml=spam_token, max=2)
+                # print('Getting related analogies for spam token...')
                 # no need to check for score since we take only max 5
-                print(response1)
+                # print(response1)
                 for response in response1:
                     words.append(response['word'])
-
                 # using datamuse api get synonyms
                 response2 = api.words(rel_syn=spam_token, max=2)
-                print('Getting similar words for spam token...')
+                # print('Getting similar words for spam token...')
                 # no need to check for score since we take only max 5
-                print(response2)
+                # print(response2)
                 for response in response2:
                     words.append(response['word'])
 
@@ -178,27 +179,27 @@ class DriftDetector:
 
                 print('Searching for tokens...')
                 for similar_spam_token in words:
-                    print('Searching for similar spam token - {0} and tweet token - {1}...'.format(similar_spam_token,
-                                                                                                   tweet_token))
+                    # print('Searching for similar spam token - {0} and tweet token - {1}...'.format(similar_spam_token,
+                    #                                                                                tweet_token))
                     word1, word2 = similar_spam_token, tweet_token
                     # word1, word2 = "dog", "dog"
                     similarity = distance.get_jaro_distance(word1, word2, winkler=True, scaling=0.1)
-                    print(similarity)
+                    # print(similarity)
                     if similarity > 0.9:
                         tweet_score += 1
                         found_similiar_bool = True
                         print(
                             'Found identical or matching similar spam token for  tweet token - {0}'.format(tweet_token))
                         break
-                    else:
-                        print(
-                            'Similar spam token {0} and tweet token {1}...No Match'.format(similar_spam_token,
-                                                                                           tweet_token))
+                    # else:
+                    # print(
+                    #     'Similar spam token {0} and tweet token {1}...No Match'.format(similar_spam_token,
+                    #                                                                    tweet_token))
                 if found_similiar_bool:
                     break
-                else:
-                    print('Searching for spam token {0} and its similar tokens in tweet token - {1}...Not Found'.format(
-                        spam_token, tweet_token))
+                # else:
+                # print('Searching for spam token {0} and its similar tokens in tweet token - {1}...Not Found'.format(
+                #     spam_token, tweet_token))
 
             if found_similiar_bool:
                 continue
@@ -217,11 +218,11 @@ class DriftDetector:
         import pickle
 
         # load tfidf vectorizer from directory
-        filename = "Unsupervised_Vectorizer_TFIDF.p"
+        filename = self.pickle + "Unsupervised_Vectorizer_TFIDF.p"
         vectorizer = pickle.load(open(filename, 'rb'))
 
         # load the Unsupervied KMeans Model from directory
-        filename = 'Unsupervised_KMeans_Model.sav'
+        filename = self.pickle + 'Unsupervised_KMeans_Model.sav'
         model = pickle.load(open(filename, 'rb'))
 
         X = vectorizer.transform(['get free twitter followers'])
@@ -290,7 +291,7 @@ class DriftDetector:
             # run second drift check
             second_score = self.spam_token_analogy_alg(tweet_tokens, spam_tokens)
 
-        if second_score >= 30:
+        if second_score >= 40:
             print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(
                 second_score))
         else:
