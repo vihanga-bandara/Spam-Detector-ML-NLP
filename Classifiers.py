@@ -36,13 +36,19 @@ class TweetClassifier(Classifier):
         word_features = pickle.load(open(filename, 'rb'))
         return word_features
 
-    def classify(self, tweet_obj):
+    def classify(self, tweet_obj, check):
         # load from pickle
         nltk_ensemble_model = self.load_model()
         word_features = self.load_word_features()
 
-        # preprocess tweet
-        processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
+        if check is 0:
+            # preprocess tweet
+            processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
+        elif check is 1:
+            processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj)
+        elif check is 2:
+            tweet_obj = self.twitter_api.getTweet(tweet_obj)
+            processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
 
         # find features
         features_tweet = self.find_features(word_features, processed_tweet)

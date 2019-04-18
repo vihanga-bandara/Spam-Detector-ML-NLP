@@ -15,7 +15,7 @@ def home():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
-
+        print("hi")
     return render_template('result.html', prediction="nope")
 
 
@@ -25,9 +25,10 @@ def retrieve_classify():
         tweet_listen = TweetListener.TweetListener()
         tweet_obj = tweet_listen.stream_tweet()
         spam_detector = SpamDetector()
-        spam_detector.main(tweet_obj)
+        spam_detector.main(tweet_obj, None, None)
+        classification_report = spam_detector.get_prediction_report()
 
-    return render_template('result.html', prediction="Predict")
+    return render_template('result.html', prediction=classification_report)
 
 
 if __name__ == '__main__':
