@@ -18,14 +18,14 @@ def predict():
         spam_detector = SpamDetector()
         spam_detector.main(None, tweet, None)
         classification_report = spam_detector.get_prediction_report()
-        return render_template('result.html', prediction=classification_report)
+        return render_template('result_tweet_only.html', prediction=classification_report)
 
 
 # @app.route('/retrieve_classify', methods=['GET', 'POST'])
 # def retrieve_classify():
 #     if request.method == 'POST':
-#         # tweet_listen = TweetListener()
-#         # tweet_obj = tweet_listen.stream_tweet()
+#         tweet_listen = TweetListener()
+#         tweet_obj = tweet_listen.stream_tweet()
 #         spam_detector = SpamDetector()
 #         spam_detector.main("checking for spam drift", None, None)
 #         classification_report = spam_detector.get_prediction_report()

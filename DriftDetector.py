@@ -20,7 +20,6 @@ import os
 
 
 class DriftDetector:
-
     pickle = "pickle/"
     dataset = "dataset/"
     data = "data/"
@@ -36,10 +35,10 @@ class DriftDetector:
         sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
         spam_tokens = []
         for item in sorted_scores:
-            print("{0:50} Score: {1}".format(item[0], item[1]))
+            # print("{0:50} Score: {1}".format(item[0], item[1]))
             if type(item[0]) == str and item[1] > 1.8:
                 spam_tokens.append(item[0])
-                print('adding spam token - {0}'.format(item[0]))
+                # print('adding spam token - {0}'.format(item[0]))
 
         ham_words = ['3', 'part', 'know', 'nikkis', 'beacon', 'advisory', 'banks', 'direct', 'guide', 'way', 'maverick',
                      'feeling', 'pressure', 'probably', 'valued', 'seven', 'could', 'relief', 'website', 'effective',
@@ -67,13 +66,14 @@ class DriftDetector:
 
         # initialize words list
         words = []
+        print('Searching for tokens...')
         for token in tweet_tokens:
             # using datamuse api get related words
             api = datamuse.Datamuse()
-            datamuse_response_similar = api.words(ml=token, max=5)
+            datamuse_response_similar = api.words(ml=token, max=2)
             print('Getting related analogies for tweet token...')
             # no need to check for score since we take only max 5
-            print(datamuse_response_similar)
+            # print(datamuse_response_similar)
             # contains related word from datamuse API
             datamuse_list = []
             for response in datamuse_response_similar:
@@ -81,10 +81,10 @@ class DriftDetector:
                 words.append(response['word'])
 
             # using datamuse api get related terms
-            response2 = api.words(rel_syn=token, max=3)
+            response2 = api.words(rel_syn=token, max=2)
             print('Getting similar words for spam token...')
             # no need to check for score since we take only max 5
-            print(response2)
+            # print(response2)
             for response in response2:
                 words.append(response['word'])
 
@@ -92,26 +92,29 @@ class DriftDetector:
             if so can try to correct spellings and get using datamuse api--TODO"""
 
             found_similiar_bool = False
-            print('Searching for tokens...')
+
             for simtoken in words:
                 for sptoken in spam_tokens:
-                    print('Searching for similar word - {0} and spam token - {1}...'.format(simtoken, sptoken))
+                    # print('Searching for similar word - {0} and spam token - {1}...'.format(simtoken, sptoken))
                     word1, word2 = simtoken, sptoken
                     similarity1 = distance.get_jaro_distance(word1, word2, winkler=True, scaling=0.1)
                     similarity2 = textdistance.jaro_winkler(word1, word2)
                     similarity = (similarity1 + similarity2) / 2
-                    print(similarity)
+                    # print(similarity)
                     if similarity > 0.94:
                         tweet_score += 1
                         found_similiar_bool = True
-                        print('Found identical or matching token for  {0}'.format(token))
+                        print(
+                            'Found identical or matching token for  {0} that relates with {1} '
+                            'and compared with a spam token => {2}'.format(
+                                token, simtoken, sptoken))
                         break
-                    else:
-                        print('similar word - {0} and spam token - {1}...No Match'.format(simtoken, sptoken))
+                    # else:
+                    #     print('similar word - {0} and spam token - {1}...No Match'.format(simtoken, sptoken))
                 if found_similiar_bool:
                     break
-                else:
-                    print('Searching for spam tokens in similar word - {0}...Not Found'.format(simtoken))
+                # else:
+                #     print('Searching for spam tokens in similar word - {0}...Not Found'.format(simtoken))
 
             if found_similiar_bool is False:
                 print('No similar tokens that maps to spam token were found for tweet token - {0}'.format(token))
@@ -138,6 +141,7 @@ class DriftDetector:
         # invoke local spam dictionary class
         spam_dict = SpamDictionary()
 
+        print('Searching for tokens...')
         # get datamuse words for each spam_token
         for tweet_token in tweet_tokens:
             # boolean to check if identical token is found
@@ -145,7 +149,7 @@ class DriftDetector:
             for spam_token in spam_tokens:
                 # use spam dictionary to get terms
                 words = spam_dict.get_words_per_spam_token(spam_token)
-                print('Searching for tokens...')
+
                 for similar_spam_token in words:
                     # print('Searching for similar spam token - {0} and tweet token - {1}...'.format(similar_spam_token,
                     #                                                                                tweet_token))
@@ -157,7 +161,9 @@ class DriftDetector:
                         tweet_score += 1
                         found_similiar_bool = True
                         print(
-                            'Found identical or matching similar spam token for  tweet token - {0}'.format(tweet_token))
+                            'Found identical or matching token for  {0} that relates with {1} '
+                            'and compared with a tweet token => {2}'.format(spam_token, similar_spam_token,
+                                                                            tweet_token))
                         break
                 if found_similiar_bool:
                     break
@@ -208,7 +214,7 @@ class DriftDetector:
         else:
             processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj)
             tweet = tweet_obj
-
+        print("Tweet after processing => is {0}".format(processed_tweet))
         tweet_tokens = nltk.word_tokenize(processed_tweet)
 
         # tokenize those words and add it to a list
@@ -217,8 +223,8 @@ class DriftDetector:
         df = pd.read_csv(filename, header=None)
 
         # print general information about the dataset that is loaded
-        print(df.info())
-        print(df[1])
+        # print(df.info())
+        # print(df[1])
 
         # using only the spam labelled data
         spam_tweets = df.loc[df[1] == 'spam']
@@ -236,8 +242,6 @@ class DriftDetector:
             token_pattern=None)
 
         tfidf_result = tfidf.fit_transform(spam_tweets)
-        # print features using the document matrix
-        print(tfidf.get_feature_names())
 
         """Get only the most important words top 50 scores maybe"""
 

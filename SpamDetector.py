@@ -91,7 +91,7 @@ class SpamDetector:
                 print("Checking Tweet for Drift Possibility")
                 drift_detector = DriftDetector()
                 start = timer()
-                drift_report = tweet_prediction_score = drift_detector.predict(tweet_only, self.check)
+                drift_report = drift_detector.predict(tweet_only, self.check)
                 # calculate elapsed time
                 end = timer()
                 print("Drift Algorithm executed in {0} seconds".format(end - start))

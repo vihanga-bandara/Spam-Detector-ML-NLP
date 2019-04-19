@@ -18,27 +18,20 @@
 <p style="color:blue;font-size:20px;text-align: center;"><b>Classification Report</b></p>
 <div class="results">
     <div class="container">
-        <!--        <div class="row">-->
-        <!--            <div class="col">-->
-        <!--                Tweet Analyzed : {{prediction['tweet']}} <br>-->
-        <!--                Tweeted By : {{prediction['user']}}<br>-->
-        <!--                Image URL : {{prediction['user_image']}}<br>-->
-        <!--            </div>-->
-        <!--            <div class="col">-->
-        <!--                Tweet Classification Result - {{prediction['tweet_prediction']}}<br>-->
-        <!--                User Classification Result - {{prediction['user_prediction']}}<br>-->
-        <!--                Fuzzy Single Ouput - {{prediction['fuzzy_score']}}<br>-->
-
-        <!--            </div>-->
-        <!--        </div>-->
-        <div>
+        <div class="row">
             <div class="col">
                 Tweet Analyzed : {{prediction['tweet']}} <br>
+                Tweeted By : {{prediction['user']}}<br>
+                Image URL : {{prediction['user_image']}}<br>
             </div>
             <div class="col">
-                Tweet Classification Result - {{prediction['user_prediction']}}<br>
+                Tweet Classification Result - {{prediction['tweet_prediction']}}<br>
+                User Classification Result - {{prediction['user_prediction']}}<br>
+                Fuzzy Single Ouput - {{prediction['fuzzy_score']}}<br>
+
             </div>
         </div>
+
     </div>
 
 </div>
