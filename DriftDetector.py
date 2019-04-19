@@ -16,11 +16,14 @@ from datamuse import datamuse
 import pickle
 import textdistance
 from timeit import default_timer as timer
+import os
 
 
 class DriftDetector:
+
     pickle = "pickle/"
     dataset = "dataset/"
+    data = "data/"
     preprocessor = Preprocessor()
 
     def __init__(self):
@@ -197,12 +200,14 @@ class DriftDetector:
             return 0
 
     def predict(self, tweet_obj, check):
-
+        tweet = ""
         if check is 0 or check is 2:
             # preprocess tweet
             processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
+            tweet = tweet_obj.text
         else:
             processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj)
+            tweet = tweet_obj
 
         tweet_tokens = nltk.word_tokenize(processed_tweet)
 
@@ -241,45 +246,67 @@ class DriftDetector:
         print(tweet_tokens)
 
         # run first drift check
-        first_score, second_score, unsupervised_score = 0, 0, 0
-        first_score = self.tweet_token_analogy_alg(tweet_tokens, spam_tokens)
-        if first_score >= 40:
-            print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(
-                first_score))
-            # classify as maybe spam and send it to admin panel
-            # add tweet to new drifted tweets file
+        drift_report = dict()
+        drift_check = True
+        first_score, second_score, unsupervised_score, final_score = 0, 0, 0, 0
+        while drift_check:
+            first_score = self.tweet_token_analogy_alg(tweet_tokens, spam_tokens)
+            if first_score >= 40:
+                print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(
+                    first_score))
+                # add tweet to new drifted tweets file
+                self.write_drifted_tweet(tweet)
+                drift_report["spam_status"] = "Positive"
+                drift_report["spam_score"] = first_score
+                drift_report["tweet"] = tweet
+                break
+            else:
+                # run second drift check
+                second_score = self.spam_token_analogy_alg(tweet_tokens, spam_tokens)
 
+            if second_score >= 40:
+                print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(
+                    second_score))
+                # add tweet to new drifted tweets file
+                self.write_drifted_tweet(tweet)
+                drift_report["spam_status"] = "Positive"
+                drift_report["spam_score"] = second_score
+                drift_report["tweet"] = tweet
+                break
+            elif second_score < 40 and first_score < 40:
+                drift_report["spam_status"] = "Negative"
+                drift_report["spam_score"] = 0
+                drift_report["tweet"] = tweet
+                break
+            # else:
+            #     unsupervised_score = self.kmeans_unsupervised_predict(processed_tweet)
+            #
+            # if unsupervised_score == 1:
+            #     print('This tweet might be spam therefore it will be sent for reporting.')
+            #     drift_check = False
+            #     break
+            # elif unsupervised_score == 0 and first_score < 30 and second_score < 30:
+            #     print('This tweet is not spam but user can manually report it for spam')
+            #     drift_check = False
+            #     break
+
+        return drift_report
+
+    def write_drifted_tweet(self, tweet):
+        exists = os.path.isfile('/data/drifted_tweets.p')
+        drifted_tweets = []
+        if exists:
+            # load drifted tweets from file using pickle
+            # load the spam tokens
+            filename = self.data + "drifted_tweets.p"
+            drifted_tweets = pickle.load(open(filename, 'rb'))
+            # add to a list and append the new tweet
+            drifted_tweets.append(tweet)
+            # save drifted tweets to file using pickle
+            filename = self.data + "drifted_tweets.p"
+            pickle.dump(drifted_tweets, open(filename, "wb"))
         else:
-            # run second drift check
-            second_score = self.spam_token_analogy_alg(tweet_tokens, spam_tokens)
-
-        if second_score >= 40:
-            print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(
-                second_score))
-        else:
-            unsupervised_score = self.kmeans_unsupervised_predict(processed_tweet)
-
-        if unsupervised_score == 1:
-            print('This tweet might be spam therefore it will be sent for reporting.')
-        elif unsupervised_score == 0 and first_score < 30 and second_score < 30:
-            print('This tweet is not spam but user can manually report it for spam')
-
-        # else the tweet will be shown and it will have the ability to be reported manually
-        # and then labelled accordingly by the admin
-
-        # if it does work out and if the tweet is recognised as spam using either
-        # function 1 or function 2 or unsupervised model
-        # we wont retrain it until the admin see it and manually verifies that it is
-        # spam or not. This is done to ensure accuracy in the model
-        # and to reduce false positives
-
-        # manually reported tweets will have the ability to be checked by
-        # user and then manually labelled. When the detector accuracy reduces by 80%
-        # it will take all the reported tweets that are labelled spam and then add it to dataset and retrained
-
-        # have an option where you could give tweets randomly and allow users
-        # label them. If it contains tweets which arent really spam now.
-        # if many people report it as not spam. Those data will be removed from the
-        # dataset to make the retraining faster and efficient
-
-        # and make the model accuracy higher and precise
+            drifted_tweets.append(tweet)
+            # save drifted tweets to file using pickle
+            filename = self.data + "drifted_tweets.p"
+            pickle.dump(drifted_tweets, open(filename, "wb"))
