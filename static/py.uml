@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>Python</ID>
+  <OriginalElement>#/home/vihanga123/PycharmProjects/Spam-Detection-Spot-Bot-ML/Classifiers.py</OriginalElement>
+  <nodes>
+    <node x="0.0" y="1028.0">Classifiers.TweetClassifier</node>
+    <node x="1240.0" y="651.0">DriftDetector.DriftDetector</node>
+    <node x="2618.0" y="723.0">TweetListener.TweetListener</node>
+    <node x="829.0" y="711.0">SpamFuzzyController.SpamFuzzyController</node>
+    <node x="1704.0" y="711.5">Preprocessor.Preprocessor</node>
+    <node x="508.0" y="591.0">TwitterAPI.TwitterAPI</node>
+    <node x="253.0" y="699.0">Classifiers.Classifier</node>
+    <node x="414.0" y="1028.0">Classifiers.UserClassifier</node>
+    <node x="2088.0" y="675.0">SpamDetector.SpamDetector</node>
+    <node x="1316.0" y="0.0">object</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Preprocessor.Preprocessor" target="object">
+      <point x="0.0" y="-73.0" />
+      <point x="1886.0" y="571.0" />
+      <point x="1503.7142857142858" y="571.0" />
+      <point x="41.71428571428578" y="265.5" />
+    </edge>
+    <edge source="Classifiers.Classifier" target="object">
+      <point x="0.0" y="-85.5" />
+      <point x="370.5" y="551.0" />
+      <point x="1336.857142857143" y="551.0" />
+      <point x="-125.14285714285711" y="265.5" />
+    </edge>
+    <edge source="SpamDetector.SpamDetector" target="object">
+      <point x="0.0" y="-109.5" />
+      <point x="2343.0" y="561.0" />
+      <point x="1545.4285714285716" y="561.0" />
+      <point x="83.42857142857156" y="265.5" />
+    </edge>
+    <edge source="TweetListener.TweetListener" target="object">
+      <point x="0.0" y="-61.5" />
+      <point x="2727.5" y="551.0" />
+      <point x="1587.142857142857" y="551.0" />
+      <point x="125.14285714285711" y="265.5" />
+    </edge>
+    <edge source="SpamFuzzyController.SpamFuzzyController" target="object">
+      <point x="0.0" y="-73.5" />
+      <point x="1024.5" y="571.0" />
+      <point x="1420.2857142857142" y="571.0" />
+      <point x="-41.71428571428578" y="265.5" />
+    </edge>
+    <edge source="DriftDetector.DriftDetector" target="object">
+      <point x="0.0" y="-133.5" />
+      <point x="0.0" y="265.5" />
+    </edge>
+    <edge source="TwitterAPI.TwitterAPI" target="object">
+      <point x="0.0" y="-193.5" />
+      <point x="658.5" y="561.0" />
+      <point x="1378.5714285714287" y="561.0" />
+      <point x="-83.42857142857133" y="265.5" />
+    </edge>
+    <edge source="Classifiers.TweetClassifier" target="Classifiers.Classifier">
+      <point x="0.0" y="-145.5" />
+      <point x="197.0" y="1003.0" />
+      <point x="311.75" y="1003.0" />
+      <point x="-58.75" y="85.5" />
+    </edge>
+    <edge source="Classifiers.UserClassifier" target="Classifiers.Classifier">
+      <point x="0.0" y="-145.5" />
+      <point x="544.0" y="1003.0" />
+      <point x="429.25" y="1003.0" />
+      <point x="58.75" y="85.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4787154592979836" x="1418.5" y="659.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+  </Categories>
+</Diagram>
+
