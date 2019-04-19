@@ -15,6 +15,7 @@ from pyjarowinkler import distance
 from datamuse import datamuse
 import pickle
 import textdistance
+from timeit import default_timer as timer
 
 
 class DriftDetector:
@@ -57,25 +58,14 @@ class DriftDetector:
             for each tweet token and then will compare it with each spam token using jaro-winkler algorithm.
             If it has a matching counterpart that particular tweet token will be given a score. After the whole process is
             completed, average weighted score will be calculated and then returned"""
+        start = timer()
 
         tweet_score = 0
 
         # initialize words list
         words = []
         for token in tweet_tokens:
-            # using twinword api get associative words
-            # response = requests.get("https://twinword-word-associations-v1.p.rapidapi.com/associations/?entry=token",
-            #                 headers={
-            #                         "X-RapidAPI-Key": "5557d82ac7msheb9fc00a6b39b02p1f5141jsn4a6fd56d88ce"
-            #                     }
-            #                     )
-            # print(response)
-
-            # with open('response.json', 'w') as outfile:
-            #     json.dump(response.text, outfile)
-            # filter it according to score
-
-            # # using datamuse api get related words
+            # using datamuse api get related words
             api = datamuse.Datamuse()
             datamuse_response_similar = api.words(ml=token, max=5)
             print('Getting related analogies for tweet token...')
@@ -97,25 +87,6 @@ class DriftDetector:
 
             """if word does not have a synonym check the json response for a result code of 462, 
             if so can try to correct spellings and get using datamuse api--TODO"""
-
-            # with open('response.json') as json_file:
-            #     data = json.load(json_file)
-
-            # compare both the lists to identify duplicates and then remove them and get only the top 5 or 10 words
-
-            # get associative words for each token
-            # similiar_tokens_json = json.loads(data)
-            # print(similiar_tokens_json)
-            # print('Getting associated analogies for tweet token...')
-            # twinword_dict = similiar_tokens_json['associations_scored']
-
-            # contains associative words from twinword API
-            # twinword_list = []
-            # # get tokens which are above 80 score from
-            # for token_name, value in twinword_dict.items():
-            #     if value > 80:
-            #         twinword_list.append(token_name)
-            #         words.append(token_name)
 
             found_similiar_bool = False
             print('Searching for tokens...')
@@ -145,6 +116,11 @@ class DriftDetector:
 
         # calculate average weighted score
         score = self.calculate_score(tweet_score, len(tweet_tokens))
+
+        # calculate elapsed time
+        end = timer()
+        print("Took {0} seconds for execution tweet_token_analogy_alg".format(end - start))
+
         return score
 
     def spam_token_analogy_alg(self, tweet_tokens, spam_tokens):
@@ -152,7 +128,7 @@ class DriftDetector:
             for each spam token and then will compare it with each tweet token using jaro-winkler algorithm.
             If it has a matching counterpart that particular tweet token will be given a score. After the whole process is
             completed, average weighted score will be calculated and then returned"""
-
+        start = timer()
         # initialize score
         tweet_score = 0
 
@@ -190,9 +166,13 @@ class DriftDetector:
 
         # calculate score
         score = self.calculate_score(tweet_score, len(tweet_tokens))
+
+        # calculate elapsed time
+        end = timer()
+        print("Took {0} seconds for execution spam_token_analogy_alg".format(end - start))
         return score
 
-    def kmeans_unsupervised_predict(self, tweet):
+    def kmeans_unsupervised_predict(self, processed_tweet):
         """ Final check to see if the tweet has spam intent using unsupervised model
             to check if it is in the correct cluster, will return 0 if not spam and will
             return 1 if it is spam"""
@@ -200,14 +180,14 @@ class DriftDetector:
         import pickle
 
         # load tfidf vectorizer from directory
-        filename = self.pickle + "Unsupervised_Vectorizer_TFIDF.p"
+        filename = "pickle/Unsupervised_Vectorizer_TFIDF.p"
         vectorizer = pickle.load(open(filename, 'rb'))
 
         # load the Unsupervied KMeans Model from directory
-        filename = self.pickle + 'Unsupervised_KMeans_Model.sav'
+        filename = 'pickle/Unsupervised_KMeans_Model.sav'
         model = pickle.load(open(filename, 'rb'))
 
-        X = vectorizer.transform(['get free twitter followers'])
+        X = vectorizer.transform([processed_tweet])
         predicted = model.predict(X)
         print(predicted)
 
@@ -277,7 +257,7 @@ class DriftDetector:
             print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(
                 second_score))
         else:
-            unsupervised_score = self.kmeans_unsupervised_predict(tweet_tokens)
+            unsupervised_score = self.kmeans_unsupervised_predict(processed_tweet)
 
         if unsupervised_score == 1:
             print('This tweet might be spam therefore it will be sent for reporting.')

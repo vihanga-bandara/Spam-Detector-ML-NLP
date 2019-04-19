@@ -1,6 +1,7 @@
 from SpamFuzzyController import SpamFuzzyController
 from Classifiers import TweetClassifier, UserClassifier
 from DriftDetector import DriftDetector
+from Preprocessor import Preprocessor
 from TwitterAPI import TwitterAPI
 import pickle
 
@@ -92,7 +93,7 @@ class SpamDetector:
                 drift_detector.predict(tweet_only, self.check)
                 print('done')
 
-            self.information_array = self.info_prediction(tweet_prediction_score, tweet_only)
+            self.information_array = self.info_prediction(None, tweet_prediction_score, None, tweet_only)
 
         # if 'tweet_id' in locals() and tweet_id is not None:
         #
@@ -146,24 +147,27 @@ class SpamDetector:
 
     def info_prediction(self, user_score, tweet_score, fuzzy_score, tweet_obj):
         information_array = dict()
-        if user_score is 1 and user_score is not None:
+        if user_score is not None and user_score == 1:
             information_array['user_prediction'] = "spam"
-        else:
+        elif user_score is not None and user_score == 0:
             information_array['user_prediction'] = "ham"
 
-        if tweet_score is 1 and tweet_score is not None:
+        if tweet_score is not None and tweet_score == 1:
             information_array['tweet_prediction'] = "spam"
-        else:
+        elif tweet_score is not None and tweet_score == 0:
             information_array['tweet_prediction'] = "ham"
+
         if fuzzy_score is not None:
             information_array['fuzzy_score'] = fuzzy_score
 
-        if self.check is 0:
+        if self.check == 0:
             information_array["tweet"] = tweet_obj.text
             information_array["user"] = tweet_obj.user.screen_name
             information_array["user_image"] = tweet_obj.user.profile_image_url
-        else:
-            information_array["tweet"] = tweet_obj
+        elif self.check == 1:
+            preprocessor = Preprocessor()
+            processed_tweet = preprocessor.preprocess_tweet(tweet_obj)
+            information_array["tweet"] = processed_tweet
 
         return information_array
 

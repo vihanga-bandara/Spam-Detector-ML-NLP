@@ -81,7 +81,11 @@ class SpamDictionary:
 
     def get_words_per_spam_token(self, token):
         spam_dictionary = self.get_list()
-        related_terms_list = spam_dictionary[token]
+        if token in spam_dictionary:
+            related_terms_list = spam_dictionary[token]
+        else:
+            related_terms_list = []
+
         return related_terms_list
 
 
