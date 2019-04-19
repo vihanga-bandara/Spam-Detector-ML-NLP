@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="Adding Drifted Spam Tweets for Review">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset/SpamTweetsFinalDataset.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/SpamTweetsFinalDataset.csv" afterDir="false" />
-    </list>
+    <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +35,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dataset/SpamTweetsFinalDataset.csv">
           <provider selected="true" editor-type-id="csv-text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="39" lean-forward="true" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+            <state relative-caret-position="30">
+              <caret line="161" column="92" selection-start-line="161" selection-start-column="92" selection-end-line="161" selection-end-column="92" />
             </state>
           </provider>
           <provider editor-type-id="csv-table-editor">
@@ -422,14 +419,7 @@
       <workItem from="1555620468034" duration="129000" />
       <workItem from="1555620618794" duration="133000" />
       <workItem from="1555620774476" duration="4253000" />
-      <workItem from="1555648029009" duration="33575000" />
-    </task>
-    <task id="LOCAL-00031" summary="Word2Vec Check for Retraining purposes Tweet Model">
-      <created>1553895208250</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1553895208250</updated>
+      <workItem from="1555648029009" duration="33662000" />
     </task>
     <task id="LOCAL-00032" summary="Word2Vec Check for Retraining purposes Tweet Model">
       <created>1554067342560</created>
@@ -767,11 +757,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555678973985</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Adding new spam tweets to the dataset">
+      <created>1555684936990</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1555684936991</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="323342000" />
+    <option name="totallyTimeSpent" value="323429000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -883,7 +880,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Retrieving Twitter User Data to Predict using SpamUserDetectModel" />
     <MESSAGE value="Developing Predicition For Twitter Spam User Predict Model" />
     <MESSAGE value="Adding BoW Model and Spam User Detect Model - Pickle Files to git" />
     <MESSAGE value="Adding Flask Web Application Support and Finishing integartion of Spam User Model to Twitter API" />
@@ -908,7 +904,8 @@
     <MESSAGE value="Drift Detector Algorithm Testing" />
     <MESSAGE value="Adding Spam Dictionary to optimize performance of the drift algorithm" />
     <MESSAGE value="Adding Drifted Spam Tweets for Review" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Drifted Spam Tweets for Review" />
+    <MESSAGE value="Adding new spam tweets to the dataset" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding new spam tweets to the dataset" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1294,8 +1291,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dataset/SpamTweetsFinalDataset.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="39" lean-forward="true" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+        <state relative-caret-position="30">
+          <caret line="161" column="92" selection-start-line="161" selection-start-column="92" selection-end-line="161" selection-end-column="92" />
         </state>
       </provider>
       <provider editor-type-id="csv-table-editor">
