@@ -89,11 +89,11 @@ if __name__ == '__main__':
     spam_dict = SpamDictionary()
 
     """ get online words and save them in a pickle file """
-    # spam_dict.retrieve_save(0)
+    spam_dict.retrieve_save(0)
 
     """ get words per spam token """
 
-    token = "free"
-    spam_list = spam_dict.get_words_per_spam_token(token)
-    print(spam_list)
-    exit(0)
+    # token = "free"
+    # spam_list = spam_dict.get_words_per_spam_token(token)
+    # print(spam_list)
+    # exit(0)

@@ -8,11 +8,13 @@ Created on Thu Mar 28 15:52:53 2019
 import numpy as np
 import pandas as pd
 from Preprocessor import Preprocessor
+from SpamDictionary import SpamDictionary
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 from pyjarowinkler import distance
 from datamuse import datamuse
 import pickle
+import textdistance
 
 
 class DriftDetector:
@@ -44,7 +46,6 @@ class DriftDetector:
         # save spam tokens using pickle
         filename = "dataset/spam_tokens.p"
         pickle.dump(spam_tokens, open(filename, "wb"))
-
         return spam_tokens
 
     def calculate_score(self, sc, num_words):
@@ -122,9 +123,11 @@ class DriftDetector:
                 for sptoken in spam_tokens:
                     print('Searching for similar word - {0} and spam token - {1}...'.format(simtoken, sptoken))
                     word1, word2 = simtoken, sptoken
-                    similarity = distance.get_jaro_distance(word1, word2, winkler=True, scaling=0.1)
+                    similarity1 = distance.get_jaro_distance(word1, word2, winkler=True, scaling=0.1)
+                    similarity2 = textdistance.jaro_winkler(word1, word2)
+                    similarity = (similarity1 + similarity2) / 2
                     print(similarity)
-                    if similarity > 0.9:
+                    if similarity > 0.94:
                         tweet_score += 1
                         found_similiar_bool = True
                         print('Found identical or matching token for  {0}'.format(token))
@@ -146,62 +149,39 @@ class DriftDetector:
 
     def spam_token_analogy_alg(self, tweet_tokens, spam_tokens):
         """ This function will retrieve all similar and related words from datamuse API
-                for each spam token and then will compare it with each tweet token using jaro-winkler algorithm.
-                If it has a matching counterpart that particular tweet token will be given a score. After the whole process is
-                completed, average weighted score will be calculated and then returned"""
+            for each spam token and then will compare it with each tweet token using jaro-winkler algorithm.
+            If it has a matching counterpart that particular tweet token will be given a score. After the whole process is
+            completed, average weighted score will be calculated and then returned"""
 
+        # initialize score
         tweet_score = 0
-        # initialize word list
-        words = []
 
-        spam_tokens = spam_tokens[:-15 or None]
+        # invoke local spam dictionary class
+        spam_dict = SpamDictionary()
 
         # get datamuse words for each spam_token
         for tweet_token in tweet_tokens:
             # boolean to check if identical token is found
             found_similiar_bool = False
             for spam_token in spam_tokens:
-                # using datamuse api get related words
-                api = datamuse.Datamuse()
-                response1 = api.words(ml=spam_token, max=2)
-                # print('Getting related analogies for spam token...')
-                # no need to check for score since we take only max 5
-                # print(response1)
-                for response in response1:
-                    words.append(response['word'])
-                # using datamuse api get synonyms
-                response2 = api.words(rel_syn=spam_token, max=2)
-                # print('Getting similar words for spam token...')
-                # no need to check for score since we take only max 5
-                # print(response2)
-                for response in response2:
-                    words.append(response['word'])
-
-                # compare both the lists to identify duplicates and then remove them and get only the top 5 or 10 words
-
+                # use spam dictionary to get terms
+                words = spam_dict.get_words_per_spam_token(spam_token)
                 print('Searching for tokens...')
                 for similar_spam_token in words:
                     # print('Searching for similar spam token - {0} and tweet token - {1}...'.format(similar_spam_token,
                     #                                                                                tweet_token))
                     word1, word2 = similar_spam_token, tweet_token
-                    # word1, word2 = "dog", "dog"
-                    similarity = distance.get_jaro_distance(word1, word2, winkler=True, scaling=0.1)
-                    # print(similarity)
+                    similarity1 = distance.get_jaro_distance(word1, word2, winkler=True, scaling=0.1)
+                    similarity2 = textdistance.jaro_winkler(word1, word2)
+                    similarity = (similarity1 + similarity2) / 2
                     if similarity > 0.9:
                         tweet_score += 1
                         found_similiar_bool = True
                         print(
                             'Found identical or matching similar spam token for  tweet token - {0}'.format(tweet_token))
                         break
-                    # else:
-                    # print(
-                    #     'Similar spam token {0} and tweet token {1}...No Match'.format(similar_spam_token,
-                    #                                                                    tweet_token))
                 if found_similiar_bool:
                     break
-                # else:
-                # print('Searching for spam token {0} and its similar tokens in tweet token - {1}...Not Found'.format(
-                #     spam_token, tweet_token))
 
             if found_similiar_bool:
                 continue
