@@ -24,11 +24,12 @@ import numpy as np
 import nltk
 
 # load the dataset   
-df = pd.read_csv('SpamTweetsFinalDataset.csv', header=None)
+df = pd.read_csv('dataset/SpamTweetsFinalDataset.csv', header=None)
+
 
 # print general information about the dataset that is loaded
-print(df.info())
-print(df.head())
+# print(df.info())
+# print(df.head())
 
 # check the class balance ratio / distribution
 columnNames = list(df.head(0))
@@ -115,7 +116,7 @@ all_words = nltk.FreqDist(all_words)
 
 # print the total number of words and the 15 most common words
 print('Number of words: {}'.format(len(all_words)))
-print('Most Common words: {}'.format(all_words.most_common(500)))
+print('Most Common words: {}'.format(all_words.most_common(40)))
 
 # use the 250 most common words as features
 word_features = list(all_words.keys())[:250]
@@ -317,3 +318,4 @@ pickle.dump(nltk_ensemble, open(filename, 'wb'))
 # words = list(model_ted.wv.vocab)
 #
 # print(model_ted.wv.most_similar('follower'))
+

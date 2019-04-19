@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 11 02:48:29 2019
+
+@author: vihanga123
+"""
+
+import sys
+import nltk
+import sklearn
+import pandas
+import numpy
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble.forest import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.pipeline import Pipeline
+import re
+
+print('Python: {}', format(sys.version))
+print('NLTK: {}', format(nltk.__version__))
+print('Scikit-learn: {}', format(sklearn.__version__))
+print('Pandas: {}', format(pandas.__version__))
+print('Numpy: {}', format(numpy.__version__))
+
+import pandas as pd
+import numpy as np
+import nltk
+
+# load the dataset
+df = pd.read_csv('dataset/SpamTweetsFinalDataset.csv', header=None)
+
+# print general information about the dataset that is loaded
+print(df.info())
+print(df.head())
+
+# check the class balance ratio / distribution
+columnNames = list(df.head(0))
+classes = df[columnNames[1]].str.strip()
+
+# pre-processing the data before classification
+
+# convert the labels into binary values
+# where 0 = ham and 1 = spam
+from sklearn.preprocessing import LabelEncoder
+
+labelEncoder = LabelEncoder()
+df[1] = labelEncoder.fit_transform(df[1])
+
+# store the twitter data
+tweets = df[0].str.strip()
+
+# using regex to identify different combinations in the tweet
+
+# replacing email addresses with 'emailaddr'
+processed = tweets.str.replace(r'^.+@[^\.].*\.[a-z]{2,}$', 'emailaddr')
+
+# replacing links / web addresses with 'webaddr'
+processed = processed.str.replace(
+    r'(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?', 'webaddr')
+
+# replacing money symbol with 'moneysymb'
+processed = processed.str.replace(r'$', 'moneysymbol')
+
+# replacing normal numbers with numbers
+# some not working might need to manually remove
+processed = processed.str.replace(r'^(\+|-)?\d+$', 'numbr')
+
+# remove punctuation
+processed = processed.str.replace(r'[^\w\d\s]', ' ')
+
+# replaces whitespaces between terms with single space
+processed = processed.str.replace(r'\s+', ' ')
+
+# removing leading and trailing whitespaces
+processed = processed.str.replace(r'^s+|\s+?$', '')
+
+# try hashtagsss as well which can be a new feature
+
+# change all letters to lowercase
+processed = processed.str.lower()
+
+# remove stop words or useless meaningless words from the tweets
+
+from nltk.corpus import stopwords
+
+stop_words = set(stopwords.words('english'))
+
+processed = processed.apply(lambda x: ' '.join(term for term in x.split() if term not in stop_words))
+
+# using a Porter stemmer to remove word stems
+ps = nltk.PorterStemmer()
+processed = processed.apply(lambda x: ' '.join(ps.stem(term) for term in x.split()))
+
+df[0] = processed
+
+X = df[0]
+y = df[1]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+
+pipeline = Pipeline(
+    [('vectorizer', CountVectorizer()),
+     ('tfidf', TfidfTransformer()),
+     ('classifier', RandomForestClassifier())])
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(pipeline, X_train, y_train, scoring='accuracy', cv=5, n_jobs=-1)
+
+mean = scores.mean()
+std = scores.std()
+print(mean)
+print(std)
+
+print(pipeline.get_params())
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+
+input = ["get free money"]
+train_score = pipeline.fit(X_train, y_train)
+print(train_score)
+test_score = pipeline.score(X_test, y_test)
+print(test_score)
+score = pipeline.predict(input)
+print(score)
+# print(classification_report(labels, prediction))
+# new = text_features[1]
+# confusion_matrix = pd.DataFrame(
+#     confusion_matrix(labels, prediction),
+#     index=[['actual', 'actual'], ['ham', 'spam']],
+#     columns=[['predicted', 'predicted'], ['ham', 'spam']])
+
+print(confusion_matrix)

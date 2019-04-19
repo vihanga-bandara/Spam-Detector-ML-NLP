@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="" />
+    <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/TestModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Preprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Preprocessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpamTweetDetectModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/SpamTweetDetectModel.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,15 +37,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dataset/SpamTweetsFinalDataset.csv">
-          <provider selected="true" editor-type-id="csv-text-editor">
-            <state relative-caret-position="30">
-              <caret line="161" column="92" selection-start-line="161" selection-start-column="92" selection-end-line="161" selection-end-column="92" />
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="162" column="37" lean-forward="true" selection-start-line="162" selection-start-column="37" selection-end-line="162" selection-end-column="37" />
+              <folding>
+                <element signature="e#113#123#0" expanded="true" />
+              </folding>
             </state>
           </provider>
-          <provider editor-type-id="csv-table-editor">
-            <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TestModel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="121" column="26" lean-forward="true" selection-start-line="121" selection-start-column="26" selection-end-line="121" selection-end-column="26" />
+              <folding>
+                <element signature="e#113#123#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Preprocessor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="148">
+              <caret line="91" column="51" lean-forward="true" selection-start-line="91" selection-start-column="51" selection-end-line="91" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SpamUserDetectModel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1118" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classifiers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-669">
+              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
@@ -51,8 +99,8 @@
       <list>
         <option value="Jupyter Notebook" />
         <option value="CSS File" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -93,7 +141,6 @@
         <option value="$PROJECT_DIR$/SpamUserDetectModel.py" />
         <option value="$PROJECT_DIR$/ModelRetrainer.py" />
         <option value="$PROJECT_DIR$/SpamTextClassifier-Unsupervised.py" />
-        <option value="$PROJECT_DIR$/SpamTweetDetectModel.py" />
         <option value="$PROJECT_DIR$/SpamTweetsFinalDataset.csv" />
         <option value="$PROJECT_DIR$/preprocessing.py" />
         <option value="$PROJECT_DIR$/SpamFuzzyController.py" />
@@ -101,7 +148,6 @@
         <option value="$PROJECT_DIR$/TweetListener.py" />
         <option value="$PROJECT_DIR$/UserClassifier.py" />
         <option value="$PROJECT_DIR$/TweetClassifier.py" />
-        <option value="$PROJECT_DIR$/Preprocessor.py" />
         <option value="$PROJECT_DIR$/TwitterAPI.py" />
         <option value="$PROJECT_DIR$/Classifiers.py" />
         <option value="$PROJECT_DIR$/templates/home.html" />
@@ -113,6 +159,9 @@
         <option value="$PROJECT_DIR$/SpamDetector.py" />
         <option value="$PROJECT_DIR$/templates/result_tweet_only.html" />
         <option value="$PROJECT_DIR$/dataset/SpamTweetsFinalDataset.csv" />
+        <option value="$PROJECT_DIR$/Preprocessor.py" />
+        <option value="$PROJECT_DIR$/SpamTweetDetectModel.py" />
+        <option value="$PROJECT_DIR$/TestModel.py" />
       </list>
     </option>
   </component>
@@ -135,21 +184,6 @@
             <path>
               <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
               <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
-              <item name="dataset" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
-              <item name="SPAM" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -188,7 +222,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.app">
+  <component name="RunManager" selected="Python.SpamTweetDetectModel">
     <configuration name="Spam-Detection-Spot-Bot-ML" type="JupiterNotebook" factoryName="Jupyter Notebook">
       <module name="Spam-Detection-Spot-Bot-ML" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -248,20 +282,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="TwitterAPI" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="SpamTweetDetectModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spam-Detection-Spot-Bot-ML" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TwitterAPI.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SpamTweetDetectModel.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -338,11 +369,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.SpamTweetDetectModel" />
         <item itemvalue="Python.app" />
         <item itemvalue="Python.SpamDictionary" />
         <item itemvalue="Python.SpamDetector" />
         <item itemvalue="Python.listen" />
-        <item itemvalue="Python.TwitterAPI" />
       </list>
     </recent_temporary>
   </component>
@@ -419,14 +450,7 @@
       <workItem from="1555620468034" duration="129000" />
       <workItem from="1555620618794" duration="133000" />
       <workItem from="1555620774476" duration="4253000" />
-      <workItem from="1555648029009" duration="33662000" />
-    </task>
-    <task id="LOCAL-00032" summary="Word2Vec Check for Retraining purposes Tweet Model">
-      <created>1554067342560</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1554067342560</updated>
+      <workItem from="1555648029009" duration="48003000" />
     </task>
     <task id="LOCAL-00033" summary="Drift Algorithm for Tweet Model to identify spam tweets">
       <created>1554125849034</created>
@@ -764,11 +788,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555684936991</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Adding page for tweet only results">
+      <created>1555685057511</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1555685057511</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="323429000" />
+    <option name="totallyTimeSpent" value="337770000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -783,26 +814,26 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.82159626" visible="true" weight="0.10459325" />
-      <window_info id="Structure" order="1" sideWeight="0.17840375" side_tool="true" visible="true" weight="0.10459325" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.82448035" visible="true" weight="0.19922523" />
+      <window_info id="Structure" order="1" sideWeight="0.17551963" side_tool="true" visible="true" weight="0.19922523" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4991699" weight="0.32937366" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32937366" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7802988" visible="true" weight="0.5399568" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7802988" weight="0.5399568" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4991699" weight="0.32937366" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49308246" weight="0.32829374" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.21970116" side_tool="true" visible="true" weight="0.5399568" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.12672938" side_tool="true" visible="true" weight="0.5323974" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.48865524" weight="0.4276458" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.87603766" weight="0.54319656" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.87327063" visible="true" weight="0.5323974" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="SciView" order="3" sideWeight="0.49830508" visible="true" weight="0.021582734" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.49830508" visible="true" weight="0.352518" />
       <window_info anchor="right" id="R Packages" order="4" weight="0.32982844" />
       <window_info anchor="right" id="R Graphics" order="5" weight="0.32982844" />
       <window_info anchor="right" id="Database" order="6" weight="0.32982844" />
@@ -880,7 +911,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Developing Predicition For Twitter Spam User Predict Model" />
     <MESSAGE value="Adding BoW Model and Spam User Detect Model - Pickle Files to git" />
     <MESSAGE value="Adding Flask Web Application Support and Finishing integartion of Spam User Model to Twitter API" />
     <MESSAGE value="Algorithm for retraining using Drift Detector" />
@@ -905,7 +935,8 @@
     <MESSAGE value="Adding Spam Dictionary to optimize performance of the drift algorithm" />
     <MESSAGE value="Adding Drifted Spam Tweets for Review" />
     <MESSAGE value="Adding new spam tweets to the dataset" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding new spam tweets to the dataset" />
+    <MESSAGE value="Adding page for tweet only results" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding page for tweet only results" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1083,39 +1114,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SPAM/72.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="42" lean-forward="true" selection-start-column="42" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SPAM/73.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="78" selection-start-column="78" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SPAM/74.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SPAM/76.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SPAM/78.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SPAM/79.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SPAM/86.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/SPAM/88.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1291,12 +1289,72 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dataset/SpamTweetsFinalDataset.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="30">
-          <caret line="161" column="92" selection-start-line="161" selection-start-column="92" selection-end-line="161" selection-end-column="92" />
+        <state relative-caret-position="282">
+          <caret line="842" column="7" selection-start-line="842" selection-start-column="7" selection-end-line="842" selection-end-column="7" />
         </state>
       </provider>
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Preprocessor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="91" column="51" lean-forward="true" selection-start-line="91" selection-start-column="51" selection-end-line="91" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset/Tweets(Normal).csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="-735">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset/full-corpus.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="-450" />
+      </provider>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpamUserDetectModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1118" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classifiers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-669">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="162" column="37" lean-forward="true" selection-start-line="162" selection-start-column="37" selection-end-line="162" selection-end-column="37" />
+          <folding>
+            <element signature="e#113#123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="121" column="26" lean-forward="true" selection-start-line="121" selection-start-column="26" selection-end-line="121" selection-end-column="26" />
+          <folding>
+            <element signature="e#113#123#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
