@@ -173,3 +173,4 @@ class SpamDetector:
 
 if __name__ == '__main__':
     SpamDetector.main()
+    exit(0)
