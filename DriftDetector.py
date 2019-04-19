@@ -9,11 +9,10 @@ import numpy as np
 import pandas as pd
 from Preprocessor import Preprocessor
 from sklearn.feature_extraction.text import TfidfVectorizer
-import requests
-import json
 import nltk
 from pyjarowinkler import distance
 from datamuse import datamuse
+import pickle
 
 
 class DriftDetector:
@@ -42,6 +41,9 @@ class DriftDetector:
         for word in list(spam_tokens):
             if word in ham_words:
                 spam_tokens.remove(word)
+        # save spam tokens using pickle
+        filename = "dataset/spam_tokens.p"
+        pickle.dump(spam_tokens, open(filename, "wb"))
 
         return spam_tokens
 
