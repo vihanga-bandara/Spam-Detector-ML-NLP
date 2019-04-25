@@ -1,56 +1,30 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Mar 11 02:48:29 2019
-
-@author: vihanga123
-"""
-
-import sys
+import pandas as pd
+import numpy as np
 import nltk
-import sklearn
-import pandas
-import numpy
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble.forest import RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
-import re
-
-print('Python: {}', format(sys.version))
-print('NLTK: {}', format(nltk.__version__))
-print('Scikit-learn: {}', format(sklearn.__version__))
-print('Pandas: {}', format(pandas.__version__))
-print('Numpy: {}', format(numpy.__version__))
-
-import pandas as pd
-import numpy as np
-import nltk
 
 # load the dataset
-df = pd.read_csv('dataset/NewSpamDataTesting.csv', header=None)
+df = pd.read_csv('dataset/twitter-spam/train.csv')
 
-# print general information about the dataset that is loaded
-print(df.info())
-print(df.head())
+new_df = df[['Tweet', 'Type']].copy()
 
-# check the class balance ratio / distribution
-columnNames = list(df.head(0))
-classes = df[columnNames[1]].str.strip()
-
-# pre-processing the data before classification
-
-# convert the labels into binary values
-# where 0 = ham and 1 = spam
 from sklearn.preprocessing import LabelEncoder
 
 labelEncoder = LabelEncoder()
-df[1] = labelEncoder.fit_transform(df[1])
 
+new_df['Type'] = labelEncoder.fit_transform(new_df['Type'])
+
+new_df.info()
+
+spam_tweets = new_df[new_df.Type == 1]
+non_spam_tweets = new_df[new_df.Type == 0]
 # store the twitter data
-tweets = df[0].str.strip()
+tweets = new_df['Tweet'].str.strip()
 
 # using regex to identify different combinations in the tweet
 
@@ -94,21 +68,12 @@ processed = processed.apply(lambda x: ' '.join(term for term in x.split() if ter
 ps = nltk.PorterStemmer()
 processed = processed.apply(lambda x: ' '.join(ps.stem(term) for term in x.split()))
 
-df[0] = processed
+df['Tweet'] = processed
 
-X = df[0]
-y = df[1]
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors.classification import KNeighborsClassifier
-from sklearn.ensemble.forest import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.linear_model.stochastic_gradient import SGDClassifier
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm.classes import OneClassSVM
-from sklearn.ensemble.voting_classifier import VotingClassifier
+X = df['Tweet']
+y = df['Type']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4)
 
 pipeline = Pipeline(
     [('vectorizer', CountVectorizer()),
@@ -134,12 +99,27 @@ input = ["get free money"]
 train_score = pipeline.fit(X_train, y_train)
 print(train_score)
 y_pred = pipeline.predict(X_test)
-print(np.mean(y_pred == y_test))
+np.mean(y_pred == y_test)
 score = pipeline.predict(input)
 print(score)
 print(classification_report(y_test, y_pred))
-confusion_matrix = pd.DataFrame(
-    confusion_matrix(y_test, y_pred),
-    index=[['actual', 'actual '], ['ham', 'spam']],
-    columns=[['predicted', 'predicted'], ['ham', 'spam']])
-print(confusion_matrix)
+
+spam_tweets = spam_tweets['Tweet']
+non_spam_tweets = non_spam_tweets['Tweet']
+
+tweets = list()
+tweets = non_spam_tweets
+my_list = list()
+for tweet in spam_tweets:
+    print(tweet)
+    my_list.append(tweet)
+import csv
+
+
+def write_to_csv(list):
+    with open('dataset/new_dataset_non_spam.csv', 'w') as csvfile:
+        for domain in list:
+            csvfile.write(domain + '\n')
+
+
+write_to_csv(my_list)
