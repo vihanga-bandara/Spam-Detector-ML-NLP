@@ -84,3 +84,10 @@ class TwitterAPI:
         print("Listener has disconnected")
         tweet = tweets[0]
         return tweet
+
+
+if __name__ == '__main__':
+    twitter_api = TwitterAPI()
+    twitter_api.authenticate()
+    report = twitter_api.getTweet("1254635")
+    exit(0)

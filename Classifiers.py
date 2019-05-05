@@ -114,3 +114,12 @@ class UserClassifier(Classifier):
     def get_features_user(self, user_obj):
         user_features = self.preprocessor.preprocess_user(user_obj)
         return user_features
+
+
+if __name__ == '__main__':
+    classifier = TweetClassifier()
+    classifier.classify("check this out now", 1)
+    getprobval = classifier.get_proba_value()
+    getprobscore = classifier.get_prediction_score()
+    getpredtype = classifier.get_prediction_type()
+    exit(0)

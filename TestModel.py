@@ -142,4 +142,45 @@ confusion_matrix = pd.DataFrame(
     confusion_matrix(y_test, y_pred),
     index=[['actual', 'actual '], ['ham', 'spam']],
     columns=[['predicted', 'predicted'], ['ham', 'spam']])
+# print(confusion_matrix)
+
+cm = confusion_matrix(y_test, y_pred)
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+from pylab import savefig
+
+ax = plt.subplot()
+svm = sns.heatmap(cm, annot=True, ax=ax, fmt='g', cmap='Greens')
+# labels, title and ticks
+ax.set_xlabel('Predicted labels')
+ax.set_ylabel('True labels')
+ax.set_title('Confusion Matrix')
+ax.xaxis.set_ticklabels(['ham', 'spam']);
+ax.yaxis.set_ticklabels(['ham', 'spam']);
+figure = svm.get_figure()
+figure.savefig('images/confusion_matrix.png', dpi=400)
+plt.close()
+# predict probabilities
+probs = pipeline.predict_proba(X_test)
+# keep probabilities for the positive outcome only
+probs = probs[:, 1]
+# calculate AUC
+auc = roc_auc_score(y_test, probs)
+print('AUC: %.3f' % auc)
+# calculate roc curve
+fpr, tpr, thresholds = roc_curve(y_test, probs)
+# plot no skill
+pyplot.plot([0, 1], [0, 1], linestyle='--')
+# plot the roc curve for the model
+pyplot.plot(fpr, tpr, marker='.')
+# show the plot
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver operating characteristic')
+
+pyplot.savefig('images/roc_curve.png', dpi=400)
+pyplot.show()
+pyplot.close()
 print(confusion_matrix)
+

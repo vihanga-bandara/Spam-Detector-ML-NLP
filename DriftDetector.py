@@ -314,3 +314,9 @@ class DriftDetector:
             # save drifted tweets to file using pickle
             filename = self.data + "drifted_tweets.p"
             pickle.dump(drifted_tweets, open(filename, "wb"))
+
+
+if __name__ == '__main__':
+    drift_detector = DriftDetector()
+    report = drift_detector.predict("Vihanga Bandara, nice to meet you", 1)
+    exit(0)

@@ -228,3 +228,9 @@ class Preprocessor:
             features[word] = (word in words)
 
         return features
+
+
+if __name__ == '__main__':
+    preprocessor = Preprocessor()
+    processed_tweet = preprocessor.preprocess_tweet("Free Washed Khaki Short Pleat Classic Fit: Dockers Men #Win #Free")
+    exit(0)
