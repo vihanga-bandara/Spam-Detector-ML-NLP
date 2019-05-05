@@ -7,8 +7,6 @@ import seaborn
 # importing spam user training dataset
 data = pd.read_csv('dataset/training_data_2_csv_UTF.csv')
 
-data_test = pd.read_csv('dataset/test_data_4_students.csv')
-
 # breaking the dataset into spam and ham
 SpamUsers = data[data.bot == 1]
 NonSpamUsers = data[data.bot == 0]
@@ -49,23 +47,19 @@ def preprocess(data):
 
 train_features = preprocess(data)
 
-X_train = data[train_features].iloc[:, :-1]
-y_train = data[train_features].iloc[:, -1]
+X = data[train_features].iloc[:, :-1]
+y = data[train_features].iloc[:, -1]
 
-test_features = preprocess(data)
 
-X_test = data[test_features].iloc[:, :-1]
-y_test = data[test_features].iloc[:, -1]
 
 # Training on DecisionTreeClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, roc_curve, auc
 from sklearn.model_selection import train_test_split
 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
 
 clf = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=50, min_samples_split=10)
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
 
 DecisionTreeClf = clf.fit(X_train, y_train)
 
@@ -82,26 +76,13 @@ y_score_test = DecisionTreeClf.score(X_test, y_test)
 print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
 print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
 
-# Training Random Forest Classifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
-
-clf = RandomForestClassifier(min_samples_split=50, min_samples_leaf=200)
-
-# Training on decision tree classifier
-model = clf.fit(X_train, y_train)
-
-# Predicting on test data
-predicted = model.predict(X_test)
-
-# Checking accuracy
-print("Random Forest Classifier Accuracy: {0}".format(accuracy_score(y_test, predicted)))
 
 import pickle
 
-# save bag-of-words using pickle
-filename = "bagofwords.p"
-pickle.dump(bag_of_words_bot, open(filename, "wb"))
+#
+# # save bag-of-words using pickle
+# filename = "bagofwords.p"
+# pickle.dump(bag_of_words_bot, open(filename, "wb"))
 
 # save model using pickle
 filename = 'SpamUserDetectModel.sav'
@@ -157,7 +138,7 @@ figure = svm.get_figure()
 figure.savefig('images/confusion_matrix_user.png', dpi=400)
 plt.close()
 # predict probabilities
-probs = model.predict_proba(X_test)
+probs = clf.predict_proba(X_test)
 # keep probabilities for the positive outcome only
 probs = probs[:, 1]
 # calculate AUC
@@ -180,3 +161,25 @@ pyplot.close()
 print(confusion_matrix)
 
 print(classification_report(y_test, y_pred_test))
+
+from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import f1_score
+from sklearn.metrics import auc
+from sklearn.metrics import average_precision_score
+
+precision, recall, thresholds = precision_recall_curve(y_test, probs)
+# calculate F1 score
+f1 = f1_score(y_test, y_pred_test)
+# calculate precision-recall AUC
+auc = auc(recall, precision)
+# calculate average precision score
+ap = average_precision_score(y_test, probs)
+print('f1=%.3f auc=%.3f ap=%.3f' % (f1, auc, ap))
+# plot no skill
+pyplot.plot([0, 1], [0.5, 0.5], linestyle='--')
+# plot the precision-recall curve for the model
+pyplot.plot(recall, precision, marker='.')
+# show the plot
+pyplot.savefig('images/pr_curve.png', dpi=400)
+pyplot.show()
+pyplot.close()
