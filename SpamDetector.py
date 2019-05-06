@@ -45,8 +45,8 @@ class SpamDetector:
             user_prediction_proba = user_classifier.get_proba_value()
 
             print("User Spam Prediction = {0}".format(user_prediction_score))
-            print("User Spam Probabilities = spam({0}) ham({1})".format(user_prediction_proba[0],
-                                                                        user_prediction_proba[1]))
+            print("User Spam Probabilities = spam({0}) ham({1})".format(user_prediction_proba[1],
+                                                                        user_prediction_proba[0]))
 
             """ Fuzzy Logic """
 
@@ -54,7 +54,7 @@ class SpamDetector:
             fuzzy_system = SpamFuzzyController()
             fuzzy_system.fuzzy_initialize()
             spam_score_fuzzy = fuzzy_system.fuzzy_predict(tweet_prediction_proba[1] * 100,
-                                                          user_prediction_proba[0] * 100)
+                                                          user_prediction_proba[1] * 100)
             print('Fuzzy Controller predicts {} of the user and twitter connection for spam activity'.format(
                 spam_score_fuzzy))
 
@@ -152,7 +152,7 @@ class SpamDetector:
         #     self.information_array = self.get_info_prediction(user_prediction_score,
         #                                                       tweet_prediction_score, spam_score_fuzzy)
 
-    def info_prediction(self, user_score, tweet_score, fuzzy_score, tweet_obj, drift_report):
+    def info_prediction(self, user_score, tweet_score, fuzzy_score, tweet_obj, drift_report=None):
         information_array = dict()
         if user_score is not None and user_score == 1:
             information_array['user_prediction'] = "spam"
@@ -187,5 +187,10 @@ class SpamDetector:
 
 
 if __name__ == '__main__':
-    SpamDetector.main()
+    twitter_api = TwitterAPI()
+    twitter_api.authenticate()
+    spamdet = SpamDetector()
+    tweetObj = twitter_api.getTweet("1125183305265991681")
+    spamdet.main(tweetObj, None, None)
+    classification_report = spamdet.get_prediction_report()
     exit(0)

@@ -113,3 +113,10 @@ class SpamFuzzyController:
         print(spam_percentage.output['Spam_Prediction'])
         final_spam_score = spam_percentage.output['Spam_Prediction']
         return final_spam_score
+
+
+if __name__ == '__main__':
+    spamfuz = SpamFuzzyController()
+    spamfuz.fuzzy_initialize()
+    spam_score_fuzzy = spamfuz.fuzzy_predict(98.2, 71.2)
+    exit(0)

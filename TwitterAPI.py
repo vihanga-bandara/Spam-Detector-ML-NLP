@@ -43,7 +43,7 @@ class TwitterAPI:
 
     def getTweet(self, tweetId):
         # hardcoded tweetId for now
-        tweetId = 1107192300692660224
+        # tweetId = 1107192300692660224
         tweet = self._api.get_status(id=tweetId)
         print(tweet.text)
         return tweet
@@ -89,5 +89,5 @@ class TwitterAPI:
 if __name__ == '__main__':
     twitter_api = TwitterAPI()
     twitter_api.authenticate()
-    report = twitter_api.getTweet("1254635")
+    tweetObj = twitter_api.getTweet("1125183305265991681")
     exit(0)
