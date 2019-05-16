@@ -3,6 +3,7 @@
 <head>
     <title>Spam Detection Framework Home</title>
     <!-- <link rel="stylesheet" type="text/css" href="../static/css/styles.css"> -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -21,13 +22,14 @@
 
     <form action="#" method="post">
         <p>Retrieve </p>
-        <input type="submit" class="btn-info" value="retrieve_classify_btn">
+        <input type="submit" class="btn-info" value="retrieve_classify_btn" onclick="$('#loading').show();">
         <br/>
         <br/>
         <textarea name="tweet" rows="4" cols="50"></textarea>
         <br/>
 
     </form>
+
 
 </div>
 <br>
@@ -39,9 +41,11 @@
         <textarea name="tweet" rows="4" cols="50"></textarea>
         <br/>
 
-        <input type="submit" class="btn-info" value="Classify Tweet">
+        <input type="submit" class="btn-info" value="Classify Tweet" onclick="$('#loading').show();">
 
     </form>
+
+    <div id="loading" style="display:none;"><img src="../static/images/loader.gif" alt=""/>Loading!</div>
 
 </div>
 
