@@ -301,7 +301,6 @@ class DriftDetector:
         drifted_tweets = []
         if exists:
             # load drifted tweets from file using pickle
-            # load the spam tokens
             filename = self.data + "drifted_tweets.p"
             drifted_tweets = pickle.load(open(filename, 'rb'))
             # add to a list and append the new tweet
