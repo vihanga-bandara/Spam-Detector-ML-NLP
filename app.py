@@ -1,36 +1,41 @@
-from flask import Flask, render_template, url_for, request
-import TweetListener as TweetListener
-from SpamDetector import SpamDetector
-from TweetListener import TweetListener
-
+from flask import Flask, render_template
 app = Flask(__name__)
 
+posts = [
+    {
+        'author': 'Corey Schafer',
+        'title': 'Blog Post 1',
+        'content': 'First post content',
+        'date_posted': 'April 20, 2018'
+    },
+    {
+        'author': 'Jane Doe',
+        'title': 'Blog Post 2',
+        'content': 'Second post content',
+        'date_posted': 'April 19, 2018'
+    }
+]
 
-@app.route('/')
+
+@app.route("/")
+@app.route("/home")
 def home():
-    return render_template('home.html')
+    return render_template('home_landing.html', posts=posts)
 
 
-@app.route('/predict', methods=['GET', 'POST'])
-def predict():
-    if request.method == 'POST':
-        tweet = request.form['tweet']
-        spam_detector = SpamDetector()
-        spam_detector.main(None, tweet, None)
-        classification_report = spam_detector.get_prediction_report()
-        return render_template('result_tweet_only.html', prediction=classification_report)
+@app.route("/review")
+def about():
+    return render_template('review.html')
 
 
-# @app.route('/retrieve_classify', methods=['GET', 'POST'])
-# def retrieve_classify():
-#     if request.method == 'POST':
-#         tweet_listen = TweetListener()
-#         tweet_obj = tweet_listen.stream_tweet()
-#         spam_detector = SpamDetector()
-#         spam_detector.main("checking for spam drift", None, None)
-#         classification_report = spam_detector.get_prediction_report()
-#
-#     return render_template('result.html', prediction=classification_report)
+@app.route("/classify")
+def about():
+    return render_template('full_detection.html')
+
+
+@app.route("/classify-tweet")
+def about():
+    return render_template('tweet_detection.html')
 
 
 if __name__ == '__main__':
