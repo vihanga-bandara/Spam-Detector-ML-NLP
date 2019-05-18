@@ -1,9 +1,28 @@
 {% extends "header.html" %}
 {% block content %}
-<h1> Home Landing Page</h1>
-{% for post in posts %}
-<h1>{{ post.title }}</h1>
-<p>{{ post.author }} on {{ post.date_posted }}</p>
-<p>{{ post.content }}</p>
-{% endfor %}
+<div class="row no-gutters height-cust">
+    <div class="col-md-4 offset-md-4 landing-wrap align-self-center">
+        <div class="row no-gutters">
+            <div class="col-md-12">
+                <div class="wrap-inside">
+                    <div class="col-md-12 text-center">
+                        <div class="form-group">
+                            <label id="twitterlbl" for="twitterid">Enter Twitter handle</label>
+                            <input type="text" class="form-control" id="twitterid">
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <button class="btn btn-primary btn-landing" id="twitteridbtn" type="submit"
+                                onclick="$('#loading').show(); $('#twitterlbl').hide(); $('#twitterid').hide(); $('#twitteridbtn').hide();">
+                            Listen and Detect
+                        </button>
+                    </div>
+                    <div id="loading" style="display:none;"><img
+                            src="{{ url_for('static', filename = 'images/loader.gif') }}" alt="Loading"/>
+                        <p style="text-align: center">Loading!</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

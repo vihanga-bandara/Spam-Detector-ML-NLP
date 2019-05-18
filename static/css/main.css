@@ -1,0 +1,355 @@
+
+.nav-cust {
+    background-color: #212121 !important;
+    color: white;
+}
+
+.nav-cust .nav-link {
+    color: white !important;
+}
+
+.nav-cust .navbar-brand {
+    color: white !important;
+}
+
+/*Dashboard styles*/
+
+.dash-wrap {
+    margin-top: 6%;
+    padding: 0 30px !important;
+    margin-bottom: 10%;
+}
+
+.box-wrap {
+    padding: 3px !important;
+}
+
+.box {
+    background-color: #e0e0e0;
+    padding: 80px 0;
+}
+
+.fiz-score .box {
+    background-color: #f44336;
+    color: #ffffff;
+}
+
+.title {
+    font-family: 'Anton', sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.percent {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 40px;
+}
+
+.box p {
+    margin-bottom: 0;
+}
+
+.make-green {
+    background-color: green !important;
+}
+
+.mar-side {
+    margin: 0 -3px;
+}
+
+/*Dashboard styles*/
+
+/*Tweet details*/
+
+.tweet {
+    -webkit-box-shadow: 0px 0px 16px 0px rgba(186, 186, 186, 1);
+    -moz-box-shadow: 0px 0px 16px 0px rgba(186, 186, 186, 1);
+    box-shadow: 0px 0px 16px 0px rgba(186, 186, 186, 1);
+    padding: 10px !important;
+    margin: 30px 0 20px 0;
+    border-radius: 12px;
+}
+
+.user-details {
+    margin: 10px 0 20px 0;
+}
+
+.tweet h5 {
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.tweet p {
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 500;
+    text-align: center;
+}
+
+.add-pad {
+    padding: 0 10px !important;
+}
+
+.cust-btn {
+    width: 100%;
+    text-align: left;
+    background-color: #e0e0e0;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #e0e0e0;;
+    font-weight: 600;
+}
+
+.mar-sec {
+    margin: 0 -10px;
+}
+
+.cust-btn {
+    padding: 11px 10px !important;
+}
+
+/*Tweet details*/
+
+/*Landing page styling*/
+
+.input-landing {
+    height: 38px;
+}
+
+.btn-landing {
+    padding: 10px 20px !important;
+    font-size: 22px;
+}
+
+.landing-wrap label {
+    /*margin-bottom: 2px;*/
+    font-weight: 600;
+    font-size: 25px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.landing-wrap input {
+    background-color: #ebebeb;
+    height: 55px;
+    font-size: 18px;
+}
+
+.landing-wrap input:focus {
+    background-color: #ebebeb;
+}
+
+.height-cust {
+    height: calc(100vh - 63px);
+}
+
+.wrap-inside {
+    /*border: 1px solid red;*/
+    padding: 50px !important;
+    -webkit-box-shadow: 0px 0px 80px 0px rgba(207, 207, 207, 1);
+    -moz-box-shadow: 0px 0px 80px 0px rgba(207, 207, 207, 1);
+    box-shadow: 0px 0px 80px 0px rgba(207, 207, 207, 1);
+    border-radius: 12px;
+}
+
+/*Landing page styling*/
+
+/*Check box styling*/
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 1.95em;
+    cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.25em;
+    height: 1.25em;
+    border: 2px solid #ccc;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+}
+
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    content: '\2713\0020';
+    position: absolute;
+    top: .15em;
+    left: .22em;
+    font-size: 1.3em;
+    line-height: 0.8;
+    color: #09ad7e;
+    transition: all .2s;
+    font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+}
+
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+}
+
+[type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+}
+
+[type="checkbox"]:disabled + label {
+    color: #aaa;
+}
+
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+    border: 2px dotted blue;
+}
+
+/* hover style just for information */
+label:hover:before {
+    border: 2px solid #4778d9 !important;
+}
+
+/* Useless styles, just for demo design */
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 1.95em;
+    cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -8px;
+    width: 2.25em;
+    height: 2.25em;
+    border: 2px solid #ccc;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+}
+
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    content: '\2713\0020';
+    position: absolute;
+    top: -2px;
+    left: 4px;
+    font-size: 2.3em;
+    line-height: 0.8;
+    color: #09ad7e;
+    transition: all .2s;
+    font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+}
+
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+}
+
+[type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+}
+
+[type="checkbox"]:disabled + label {
+    color: #aaa;
+}
+
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+    border: 2px dotted blue;
+}
+
+/* hover style just for information */
+label:hover:before {
+    border: 2px solid #4778d9 !important;
+}
+
+.card {
+    margin: 10px 0;
+}
+
+.tweet-main {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+}
+
+.card-body {
+    -webkit-box-shadow: 0px 0px 80px 0px rgba(235, 235, 235, 1);
+    -moz-box-shadow: 0px 0px 80px 0px rgba(235, 235, 235, 1);
+    box-shadow: 0px 0px 80px 0px rgba(235, 235, 235, 1);
+}
+
+.mar-both {
+    margin: 10px;
+}
+
+.btn-review:first-child {
+    padding: 6px 40px !important;
+}
+
+/*header icon*/
+
+.icon {
+    background: url('/static/images/logo_transparent.png');
+    height: 16px;
+    width: 16px;
+    display: block;
+    /* Other styles here */
+}
