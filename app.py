@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 app = Flask(__name__)
 
 posts = [
@@ -29,12 +29,12 @@ def about():
 
 
 @app.route("/classify")
-def about():
+def classify():
     return render_template('full_detection.html')
 
 
 @app.route("/classify-tweet")
-def about():
+def classify_tweet():
     return render_template('tweet_detection.html')
 
 

@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Spam Detection Framework</title>
-</head>
-<body>
+{% extends "header.html" %}
+{% block content %}
 <h1> Home Landing Page</h1>
-</body>
-</html>
+{% for post in posts %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.author }} on {{ post.date_posted }}</p>
+<p>{{ post.content }}</p>
+{% endfor %}
+{% endblock content %}
