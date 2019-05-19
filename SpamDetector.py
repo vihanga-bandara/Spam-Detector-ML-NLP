@@ -19,11 +19,13 @@ class SpamDetector:
     def main(self, tweet_obj, functionality_check):
         """ checks
         if check = 1 >>> full detection with custom created user (listened tweet object is sent)
-        if check = 2 >>> full detection with normal user (normal tweet object)
-        if check = 3 >>> tweet detection only (only tweet detection model will be used)"""
+                                                OR
+                         full detection with normal user (normal tweet object is sent)
+
+        if check = 2 >>> tweet detection only (only tweet detection model will be used, tweet is sent)"""
 
         # check for availability of variable
-        if 'tweet_obj' in locals() and tweet_obj is not None and (functionality_check is 1 or functionality_check is 2):
+        if 'tweet_obj' in locals() and tweet_obj is not None and functionality_check is 1:
 
             """ Full detection with custom created user
                 Functionality - Tweet Classification, User Classification, Drift Detection"""
@@ -89,7 +91,7 @@ class SpamDetector:
             self.information_array = self.info_prediction(user_prediction_score.min(), tweet_prediction_score,
                                                           spam_score_fuzzy, tweet_obj)
 
-        if 'tweet_obj' in locals() and tweet_obj is not None and functionality_check is 3:
+        if 'tweet_obj' in locals() and tweet_obj is not None and functionality_check is 2:
             """ Tweet Classification """
             self.check = 1
             # initialize tweet classification

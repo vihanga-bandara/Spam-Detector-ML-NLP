@@ -41,21 +41,13 @@ def review():
             # check if custom user or normal user or invalid user
             if isinstance(tweet_obj, str):
                 # invalid user
-                if tweet_obj == "User not found":
-                    flash(f'Handle entered is not a valid user', 'danger')
-                    return redirect(url_for('home'))
-                # normal user
-                elif tweet_obj == "User found":
-
-                    spam_detector = SpamDetector()
-                    spam_detector.main("checking for spam drift", user_handle.lower(), None)
-                    classification_report = spam_detector.get_prediction_report()
-                    return render_template('review.html', prediction=classification_report)
+                flash(f'Handle entered is not a valid user', 'danger')
+                return redirect(url_for('home'))
 
             elif isinstance(tweet_obj, object):
-                # custom user - spam or non spam user
+                # custom user or normal user
                 spam_detector = SpamDetector()
-                spam_detector.main("checking for spam drift", None, None)
+                spam_detector.main(tweet_obj, 1)
                 classification_report = spam_detector.get_prediction_report()
                 return render_template('review.html', prediction=classification_report)
 

@@ -63,12 +63,13 @@ class TwitterAPI:
         # response = requests.post(url)
         user_exist = True
         try:
-            tweetUser = self._api.get_user(handle)
+            tweet_user_object = self._api.get_user(handle)
         except tweepy.TweepError as e:
             if e.api_code is 50:
                 user_exist = False
+                tweet_user_object = None
 
-        return user_exist
+        return user_exist, tweet_user_object
 
     def getTweetList(self, tweetLevel):
         if tweetLevel == 0:
@@ -108,7 +109,6 @@ class TwitterAPI:
 
     def get_latest_tweet(self, handle):
         tweet_object = self._api.user_timeline(screen_name=handle.lower(), count=1)[0]
-        print(tweet_object.text)
         return tweet_object
 
 
