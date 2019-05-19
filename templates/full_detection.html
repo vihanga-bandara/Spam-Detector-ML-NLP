@@ -7,19 +7,20 @@
                 <div class="col-md-4 box-wrap">
                     <div class="box text-center">
                         <p class="title">Tweet score</p>
-                        <p class="percent">98%</p>
+                        <p class="percent">{{prediction['tweet_prediction']}}</p>
+
                     </div>
                 </div>
                 <div class="col-md-4 box-wrap fiz-score">
                     <div class="box text-center">
                         <p class="title">Final Fizzy Score</p>
-                        <p class="percent">62%</p>
+                        <p class="percent">{{prediction['fuzzy_score']}}</p>
                     </div>
                 </div>
                 <div class="col-md-4 box-wrap">
                     <div class="box text-center">
                         <p class="title">User score</p>
-                        <p class="percent">71 %</p>
+                        <p class="percent">{{prediction['user_prediction']}}</p>
                     </div>
                 </div>
                 <div class="col-md-6 box-wrap">
@@ -40,8 +41,7 @@
                     <div class="row no-gutters">
                         <div class="col-md-12 tweet">
                             <h5>Tweet</h5>
-                            <p>Auto followers free no spam! http:// http://poin.pixub.com (ada limit untuk
-                                menghindari suspended) #OPENFOLLOW #JFB</p>
+                            <p>{{prediction['tweet']}}</p>
                         </div>
                     </div>
                 </div>
@@ -50,13 +50,13 @@
                         <div class="col-md-6 add-pad">
                             <div class="tweet user-details">
                                 <h5>Username</h5>
-                                <p>@pakaya</p>
+                                <p>@{{prediction['user']}}</p>
                             </div>
                         </div>
                         <div class="col-md-6 add-pad">
                             <div class="tweet user-details">
                                 <h5>User URL</h5>
-                                <p>www.twitter.com/banda_bouy</p>
+                                <p>{{prediction['user_image']}}</p>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                     </p>
                     <div class="collapse" id="collapseExample">
                         <div class="card card-body">
-                            <img src="test.jpg" alt="word bleh image">
+                            <img src="test.jpg" alt="This contains the word cloud of the tweet">
                         </div>
                     </div>
                 </div>
