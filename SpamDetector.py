@@ -165,10 +165,13 @@ class SpamDetector:
             information_array['tweet_prediction'] = "ham"
 
         if user_percentage is not None:
-            information_array['user_percentage'] = int(round(user_percentage))
+            information_array['user_percentage'] = int(round(user_percentage * 100))
 
         if tweet_percentage is not None:
-            information_array['tweet_percentage'] = int(round(tweet_percentage))
+            tweet_percent = int(round(tweet_percentage * 100))
+            if tweet_percent >= 99:
+                tweet_percent = 98
+            information_array['tweet_percentage'] = tweet_percent
 
         if fuzzy_score is not None:
             information_array['fuzzy_score'] = fuzzy_score

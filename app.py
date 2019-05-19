@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, flash, redirect
 from TweetListener import TweetListener
 from SpamDetector import SpamDetector
-from TwitterAPI import TwitterAPI
+from Retrainer import Retrainer
 
 app = Flask(__name__)
 
@@ -29,8 +29,8 @@ def home():
     return render_template('home_landing.html', posts=posts)
 
 
-@app.route('/review', methods=['GET', 'POST'])
-def review():
+@app.route('/classify', methods=['GET', 'POST'])
+def classify():
     if request.method == 'POST':
         if request.method == 'POST':
             # initialize Tweet Listener
@@ -52,9 +52,11 @@ def review():
                 return render_template('full_detection.html', prediction=classification_report)
 
 
-@app.route("/classify")
-def classify():
-    return render_template('full_detection.html')
+@app.route("/review")
+def review():
+    retrain = Retrainer()
+    drifted_tweets = retrain.get_drifted_tweets()
+    return render_template('review.html', drifted=drifted_tweets)
 
 
 @app.route("/classify_tweet")

@@ -5,21 +5,23 @@
         <div class="dash-wrap">
             <div class="row no-gutters">
                 <div class="col-md-12">
+                    {% count = 1 %}
+                    {% for drift in drifted %}
                     <div class="card">
                         <div class="card-body">
                             <div class="row no-gutters">
-                                <div class="col-md-10"><p class="tweet-main">This is some text within a card
-                                    body.</p></div>
+                                <div class="col-md-10"><p class="tweet-main">{{ drift }}</p></div>
                                 <div class="col-md-2">
                                     <p class="text-right">
-                                        <input type="checkbox" id="test1" checked="checked"/>
-                                        <label for="test1"></label>
+                                        <input type="checkbox" id="test{{ count }}" name="test{{count}}"/>
+                                        <label for="test{{ count }}"></label>
                                     </p>
                                 </div>
                             </div>
 
                         </div>
                     </div>
+                    {% endfor%}
                     <div class="card">
                         <div class="card-body">
                             <div class="row no-gutters">
@@ -29,21 +31,6 @@
                                     <p class="text-right">
                                         <input type="checkbox" id="test2" checked="checked"/>
                                         <label for="test2"></label>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row no-gutters">
-                                <div class="col-md-10"><p class="tweet-main">This is some text within a card
-                                    body.</p></div>
-                                <div class="col-md-2">
-                                    <p class="text-right">
-                                        <input type="checkbox" id="test3" checked="checked"/>
-                                        <label for="test3"></label>
                                     </p>
                                 </div>
                             </div>
