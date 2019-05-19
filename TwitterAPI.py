@@ -93,9 +93,10 @@ class TwitterAPI:
         # phrases = [“python”, “excel”, “pyxll”]
         # listener = TwitterListener(phrases)
 
-        twitterStream = Stream(self._auth, Listener())
+        twitter_stream = Stream(self._auth, Listener())
         print("Listening to incoming tweets")
-        twitterStream.filter(follow=[username])
+        user_object = self.getUser(username)
+        twitter_stream.filter(follow=[str(user_object.id)])
         print(tweets[0].text)
         print("Listener has disconnected")
         tweet = tweets[0]
@@ -114,6 +115,6 @@ class TwitterAPI:
 if __name__ == '__main__':
     twitter_api = TwitterAPI()
     twitter_api.authenticate()
-    twitter_api.check_user("hapumalbbb")
-
+    user = twitter_api.getUser("hapumalb")
+    print(user.id)
     exit(0)

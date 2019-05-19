@@ -14,7 +14,7 @@ class TweetListener:
         twitter_api.authenticate()
         # fake spam account @HapumalB
         if twitter_api.check_user(handle):
-            if handle.lower() is 'hapumalb':
+            if handle.lower() == 'hapumalb':
                 tweet_object = twitter_api.streamTweetFromUser(handle.lower())
                 self.tweet = tweet_object.text
                 return tweet_object
