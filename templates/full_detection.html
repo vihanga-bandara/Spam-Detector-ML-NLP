@@ -7,6 +7,7 @@
                 <div class="col-md-4 box-wrap">
                     <div class="box text-center">
                         <p class="title">Tweet score</p>
+                        <p class="percent">{{prediction['tweet_percentage']}}</p>
                         <p class="percent">{{prediction['tweet_prediction']}}</p>
 
                     </div>
@@ -14,12 +15,13 @@
                 <div class="col-md-4 box-wrap fiz-score">
                     <div class="box text-center">
                         <p class="title">Final Fizzy Score</p>
-                        <p class="percent">{{prediction['fuzzy_score']}}</p>
+                        <p class="percent">{{prediction['fuzzy_score']}}%</p>
                     </div>
                 </div>
                 <div class="col-md-4 box-wrap">
                     <div class="box text-center">
                         <p class="title">User score</p>
+                        <p class="percent">{{prediction['user_percentage']}}</p>
                         <p class="percent">{{prediction['user_prediction']}}</p>
                     </div>
                 </div>

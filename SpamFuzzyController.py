@@ -112,7 +112,7 @@ class SpamFuzzyController:
 
         print(spam_percentage.output['Spam_Prediction'])
         final_spam_score = spam_percentage.output['Spam_Prediction']
-        return final_spam_score
+        return int(round(final_spam_score))
 
 
 if __name__ == '__main__':

@@ -49,7 +49,7 @@ def review():
                 spam_detector = SpamDetector()
                 spam_detector.main(tweet_obj, 1)
                 classification_report = spam_detector.get_prediction_report()
-                return render_template('review.html', prediction=classification_report)
+                return render_template('full_detection.html', prediction=classification_report)
 
 
 @app.route("/classify")

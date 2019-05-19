@@ -78,7 +78,8 @@ class SpamDetector:
 
             # drift_report = self.drift_detection(tweet_prediction_score, tweet_obj)
 
-            self.information_array = self.info_prediction(user_prediction_score.min(), tweet_prediction_score,
+            self.information_array = self.info_prediction(user_prediction_score.min(), user_prediction_proba[1],
+                                                          tweet_prediction_score, tweet_prediction_proba[1],
                                                           spam_score_fuzzy, tweet_obj, None)
 
         if 'tweet_obj' in locals() and tweet_obj is not None and functionality_check is 2:
@@ -97,7 +98,8 @@ class SpamDetector:
                                                                          tweet_prediction_proba[0]))
             drift_report = self.drift_detection(tweet_prediction_score, tweet_obj)
 
-            self.information_array = self.info_prediction(None, tweet_prediction_score, None, tweet_obj, drift_report)
+            self.information_array = self.info_prediction(None, tweet_prediction_score, tweet_prediction_proba[1],
+                                                          None, None, tweet_obj, drift_report)
 
         # if 'tweet_id' in locals() and tweet_id is not None:
         #
@@ -149,7 +151,8 @@ class SpamDetector:
         #     self.information_array = self.get_info_prediction(user_prediction_score,
         #                                                       tweet_prediction_score, spam_score_fuzzy)
 
-    def info_prediction(self, user_score, tweet_score, fuzzy_score, tweet_obj, drift_report):
+    def info_prediction(self, user_score, user_percentage, tweet_score, tweet_percentage, fuzzy_score, tweet_obj,
+                        drift_report):
         information_array = dict()
         if user_score is not None and user_score == 1:
             information_array['user_prediction'] = "spam"
@@ -160,6 +163,12 @@ class SpamDetector:
             information_array['tweet_prediction'] = "spam"
         elif tweet_score is not None and tweet_score == 0:
             information_array['tweet_prediction'] = "ham"
+
+        if user_percentage is not None:
+            information_array['user_percentage'] = int(round(user_percentage))
+
+        if tweet_percentage is not None:
+            information_array['tweet_percentage'] = int(round(tweet_percentage))
 
         if fuzzy_score is not None:
             information_array['fuzzy_score'] = fuzzy_score
