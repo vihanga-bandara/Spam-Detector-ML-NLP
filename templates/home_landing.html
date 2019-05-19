@@ -5,21 +5,33 @@
         <div class="row no-gutters">
             <div class="col-md-12">
                 <div class="wrap-inside">
-                    <div class="col-md-12 text-center">
-                        <div class="form-group">
-                            <label id="twitterlbl" for="twitterid">Enter Twitter handle</label>
-                            <input type="text" class="form-control" id="twitterid">
+                    <form method="post" action="{{ url_for('review') }}">
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <label id="twitterlbl" for="twitterid">Enter Twitter handle</label>
+                                <input type="text" class="form-control" id="twitterid" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 text-center">
-                        <button class="btn btn-primary btn-landing" id="twitteridbtn" type="submit"
-                                onclick="$('#loading').show(); $('#twitterlbl').hide(); $('#twitterid').hide(); $('#twitteridbtn').hide();">
-                            Listen and Detect
-                        </button>
-                    </div>
-                    <div id="loading" style="display:none;"><img
-                            src="{{ url_for('static', filename = 'images/loader.gif') }}" alt="Loading"/>
-                        <p style="text-align: center">Loading!</p></div>
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-primary btn-landing" id="twitteridbtn" type="submit"
+                                    onclick="$('#loading').show(); $('#twitterlbl').hide(); $('#twitterid').hide(); $('#twitteridbtn').hide();">
+                                Listen and Detect
+                            </button>
+                        </div>
+                        <div id="loading" style="display:none;"><img
+                                src="{{ url_for('static', filename = 'images/loader.gif') }}" alt="Loading"/>
+                            <p style="text-align: center">Loading!</p>
+                        </div>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages%}
+                        {% for category, message in messages %}
+                        <div class="alert alert-{{category}}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </form>
                 </div>
             </div>
         </div>

@@ -2,6 +2,8 @@ import tweepy
 from tweepy.streaming import StreamListener
 from tweepy import Stream
 import time
+import requests
+import json
 
 tweets = []
 
@@ -30,11 +32,12 @@ class TwitterAPI:
     _consumer_secret = 'K8pAy6MTLtMB5R5WSklrR0lqudb75zFkjfHWtscHqj7YYixsRr'
     _auth = None
     _api = None
+    _rate_limit = None
 
     def __init__(self):
         self._auth = tweepy.OAuthHandler(self._consumer_key, self._consumer_secret)
         self._auth.set_access_token(self._access_token, self._access_token_secret)
-        print('initialized twiiter api connection')
+        print('initialized twitter api connection')
 
     def authenticate(self):
         api = tweepy.API(self._auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
@@ -53,6 +56,18 @@ class TwitterAPI:
         tweetUser = self._api.get_user(tweetUserName)
         print(tweetUser)
         return tweetUser
+
+    def check_user(self, handle):
+        # url = "https://twitter.com/users/username_available?username={0}".format(handle)
+        # response = requests.post(url)
+        user_exist = True
+        try:
+            tweetUser = self._api.get_user(handle)
+        except tweepy.TweepError as e:
+            if e.api_code is 50:
+                user_exist = False
+
+        return user_exist
 
     def getTweetList(self, tweetLevel):
         if tweetLevel == 0:
@@ -85,9 +100,14 @@ class TwitterAPI:
         tweet = tweets[0]
         return tweet
 
+    def rate_limit(self):
+        self._rate_limit = self._api.rate_limit_status()
+        return self._rate_limit
+
 
 if __name__ == '__main__':
     twitter_api = TwitterAPI()
     twitter_api.authenticate()
-    tweetObj = twitter_api.getTweet("1125183305265991681")
+    twitter_api.check_user("hapumalbbb")
+
     exit(0)

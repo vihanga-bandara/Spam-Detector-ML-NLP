@@ -9,10 +9,16 @@ class TweetListener:
         twitter_api.authenticate()
         print('initialized tweet listener')
 
-    def stream_tweet(self):
+    def stream_tweet(self, handle):
         twitter_api = TwitterAPI.TwitterAPI()
         twitter_api.authenticate()
         # fake spam account @HapumalB
-        tweet_object = twitter_api.streamTweetFromUser('1105567862419324936')
-        self.tweet = tweet_object.text
-        return tweet_object
+        if twitter_api.check_user(handle):
+            if handle.lower() is 'hapumalb':
+                tweet_object = twitter_api.streamTweetFromUser(handle.lower())
+                self.tweet = tweet_object.text
+                return tweet_object
+            else:
+                return "User found"
+        else:
+            return "User not found"
