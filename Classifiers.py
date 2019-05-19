@@ -42,8 +42,8 @@ class TweetClassifier(Classifier):
         nltk_ensemble_model = self.load_model()
         word_features = self.load_word_features()
 
+        # preprocess tweet
         if check is 0:
-            # preprocess tweet
             processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
         elif check is 1:
             processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj)

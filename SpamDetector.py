@@ -16,12 +16,29 @@ class SpamDetector:
     def __init__(self):
         print("Spam Detector Framework Initialized")
 
-    def main(self, tweet_obj, tweet_only, tweet_id=None):
+    def main(self, tweet_obj, functionality_check):
+        """ checks
+        if check = 1 >>> full detection with custom created user (listened tweet object is sent)
+        if check = 2 >>> full detection with normal user (normal tweet object)
+        if check = 3 >>> tweet detection only (only tweet detection model will be used)"""
+
         # check for availability of variable
-        if 'tweet_obj' in locals() and tweet_obj is not None:
+        if 'tweet_obj' in locals() and tweet_obj is not None and (functionality_check is 1 or functionality_check is 2):
+
+            """ Full detection with custom created user
+                Functionality - Tweet Classification, User Classification, Drift Detection"""
 
             """ Tweet Classification """
-            self.check = 0
+
+            # functionality check is 2 meaning normal user - fetch user object and send for classification
+
+            """check = 0 means full object , check = 1 means tweet text, check = 2 means tweetid"""
+
+            if functionality_check is 2:
+                self.check = 2
+            else:
+                self.check = 0
+
             # initialize tweet classification
             tweet_classifier = TweetClassifier()
 
@@ -72,14 +89,14 @@ class SpamDetector:
             self.information_array = self.info_prediction(user_prediction_score.min(), tweet_prediction_score,
                                                           spam_score_fuzzy, tweet_obj)
 
-        if 'tweet_only' in locals() and tweet_only is not None:
+        if 'tweet_obj' in locals() and tweet_obj is not None and functionality_check is 3:
             """ Tweet Classification """
             self.check = 1
             # initialize tweet classification
             tweet_classifier = TweetClassifier()
 
             # classify tweet and get prediction
-            tweet_classifier.classify(tweet_only, self.check)
+            tweet_classifier.classify(tweet_obj, self.check)
             tweet_prediction_score = tweet_classifier.get_prediction_score()
             tweet_prediction_proba = tweet_classifier.get_proba_value()
 
@@ -91,7 +108,7 @@ class SpamDetector:
                 print("Checking Tweet for Drift Possibility")
                 drift_detector = DriftDetector()
                 start = timer()
-                drift_report = drift_detector.predict(tweet_only, self.check)
+                drift_report = drift_detector.predict(tweet_obj, self.check)
                 # calculate elapsed time
                 end = timer()
                 print("Drift Algorithm executed in {0} seconds".format(end - start))
@@ -100,7 +117,7 @@ class SpamDetector:
             if drift_report["spam_status"] == "Positive":
                 tweet_prediction_score = drift_report["spam_score"]
 
-            self.information_array = self.info_prediction(None, tweet_prediction_score, None, tweet_only, drift_report)
+            self.information_array = self.info_prediction(None, tweet_prediction_score, None, tweet_obj, drift_report)
 
         # if 'tweet_id' in locals() and tweet_id is not None:
         #

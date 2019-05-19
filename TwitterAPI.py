@@ -45,9 +45,10 @@ class TwitterAPI:
         return api
 
     def getTweet(self, tweetId):
-        # hardcoded tweetId for now
-        # tweetId = 1107192300692660224
-        tweet = self._api.get_status(id=tweetId)
+        if isinstance(tweetId, int):
+            tweet = self._api.get_status(id=tweetId)
+        else:
+            tweet = self._api.get_status(screen_name=tweetId)
         print(tweet.text)
         return tweet
 
@@ -103,6 +104,11 @@ class TwitterAPI:
     def rate_limit(self):
         self._rate_limit = self._api.rate_limit_status()
         return self._rate_limit
+
+    def get_latest_tweet(self, handle):
+        tweet_object = self._api.user_timeline(screen_name=handle.lower(), count=1)[0]
+        print(tweet_object.text)
+        return tweet_object
 
 
 if __name__ == '__main__':

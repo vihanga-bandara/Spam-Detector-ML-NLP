@@ -1,6 +1,7 @@
-from flask import Flask, render_template, url_for, request, flash
+from flask import Flask, render_template, url_for, request, flash, redirect
 from TweetListener import TweetListener
 from SpamDetector import SpamDetector
+from TwitterAPI import TwitterAPI
 
 app = Flask(__name__)
 
@@ -37,12 +38,24 @@ def review():
             tweet_obj = tweet_listen.stream_tweet(user_handle)
             # check if custom user or normal user or invalid user
             if isinstance(tweet_obj, str):
+                # invalid user
                 if tweet_obj is "User not found":
+                    flash(f'Handle entered is not a valid user', 'danger')
+                    return redirect(url_for('home'))
+                # normal user
+                elif tweet_obj is "User found":
 
-            spam_detector = SpamDetector()
-            spam_detector.main("checking for spam drift", None, None)
-            classification_report = spam_detector.get_prediction_report()
-        return render_template('review.html', prediction=classification_report)
+                    spam_detector = SpamDetector()
+                    spam_detector.main("checking for spam drift", user_handle.lower(), None)
+                    classification_report = spam_detector.get_prediction_report()
+                    return render_template('review.html', prediction=classification_report)
+
+            elif isinstance(tweet_obj, object):
+                # custom user - spam or non spam user
+                spam_detector = SpamDetector()
+                spam_detector.main("checking for spam drift", None, None)
+                classification_report = spam_detector.get_prediction_report()
+                return render_template('review.html', prediction=classification_report)
 
 
 @app.route("/classify")
