@@ -212,9 +212,6 @@ class SpamDetector:
             end = timer()
             print("Drift Algorithm executed in {0} seconds".format(end - start))
 
-        # if drift report is positive then use that prediction score for output
-        if drift_report["spam_status"] == "Positive":
-            tweet_prediction_score = drift_report["spam_score"]
         return drift_report
 
 

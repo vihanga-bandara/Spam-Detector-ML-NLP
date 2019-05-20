@@ -70,11 +70,17 @@ class DriftDetector:
         words = []
         print('Searching for tokens...')
         for token in tweet_tokens:
-            # using datamuse api get related words
-            correct_token = self.spell.correction(token)
+            # correction of word
+            token = self.spell.correction(token)
 
+            # clear word list
+            words.clear()
+
+            # append own word
+            words.append(token)
+            # using datamuse api get related words
             api = datamuse.Datamuse()
-            datamuse_response_similar = api.words(ml=correct_token, max=2)
+            datamuse_response_similar = api.words(ml=token, max=2)
             print('Getting related analogies for tweet token...')
             # no need to check for score since we take only max 5
             # print(datamuse_response_similar)
@@ -148,6 +154,8 @@ class DriftDetector:
         print('Searching for tokens...')
         # get datamuse words for each spam_token
         for tweet_token in tweet_tokens:
+            # correction of word
+            tweet_token = self.spell.correction(tweet_token)
             # boolean to check if identical token is found
             found_similiar_bool = False
             for spam_token in spam_tokens:
@@ -301,7 +309,7 @@ class DriftDetector:
         return drift_report
 
     def write_drifted_tweet(self, tweet):
-        exists = os.path.isfile('/data/drifted_tweets.p')
+        exists = os.path.isfile('./data/drifted_tweets.p')
         drifted_tweets = []
         if exists:
             # load drifted tweets from file using pickle
@@ -320,20 +328,8 @@ class DriftDetector:
 
 
 if __name__ == '__main__':
-    # drift_detector = DriftDetector()
-    # report = drift_detector.predict("Obtain complimentary coin, check it out now", 1)
-    spell = SpellChecker()
-    misspelled = spell.unknown(['telephne', 'dog', 'battry'])
-    if len(misspelled) == 1:
-        correction = spell.correction(misspelled[0])
-
-    elif len(misspelled) > 1:
-        for word in misspelled:
-            # Get the one `most likely` answer
-            print(spell.correction(word))
-
-            # Get a list of `likely` options
-            print(spell.candidates(word))
-
-
+    drift_detector = DriftDetector()
+    report = drift_detector.predict("Here is a small gift for you #gifts", 1)
+    # spell = SpellChecker()
+    # token = spell.correction('complimentari')
     exit(0)
