@@ -71,10 +71,10 @@ class DriftDetector:
         print('Searching for tokens...')
         for token in tweet_tokens:
             # using datamuse api get related words
-            misspelled = self.spell.unknown([token])
+            correct_token = self.spell.correction(token)
 
             api = datamuse.Datamuse()
-            datamuse_response_similar = api.words(ml=token, max=2)
+            datamuse_response_similar = api.words(ml=correct_token, max=2)
             print('Getting related analogies for tweet token...')
             # no need to check for score since we take only max 5
             # print(datamuse_response_similar)
