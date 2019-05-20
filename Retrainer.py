@@ -19,8 +19,8 @@ class Retrainer:
     def get_drifted_tweets(self):
         return self.drifted_tweets_list
 
-    def retrain_tweet_classifier(self):
-
-    def get_retrain_score(self):
-
-    def load_tweets_dataset(self):
+    # def retrain_tweet_classifier(self):
+    #
+    # def get_retrain_score(self):
+    #
+    # def load_tweets_dataset(self):

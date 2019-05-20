@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-md-4 box-wrap fiz-score">
                     <div class="box text-center">
-                        <p class="title">Final Fizzy Score</p>
+                        <p class="title">Final Fuzzy Score</p>
                         <p class="percent">{{prediction['fuzzy_score']}}%</p>
                     </div>
                 </div>
@@ -28,13 +28,13 @@
                 <div class="col-md-6 box-wrap">
                     <div class="box text-center">
                         <p class="title">Drifted</p>
-                        <p class="percent">NO</p>
+                        <p class="percent">{{prediction['spam_status']}}</p>
                     </div>
                 </div>
                 <div class="col-md-6 box-wrap">
                     <div class="box text-center">
                         <p class="title">Drifted score</p>
-                        <p class="percent">N/A</p>
+                        <p class="percent">{{prediction['spam_score']}}</p>
                     </div>
                 </div>
             </div>

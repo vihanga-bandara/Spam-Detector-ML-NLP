@@ -7,26 +7,11 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '4551a264s45df5scs541'
 
-posts = [
-    {
-        'author': 'Corey Schafer',
-        'title': 'Blog Post 1',
-        'content': 'First post content',
-        'date_posted': 'April 20, 2018'
-    },
-    {
-        'author': 'Jane Doe',
-        'title': 'Blog Post 2',
-        'content': 'Second post content',
-        'date_posted': 'April 19, 2018'
-    }
-]
-
 
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home_landing.html', posts=posts)
+    return render_template('home_landing.html')
 
 
 @app.route('/classify', methods=['GET', 'POST'])

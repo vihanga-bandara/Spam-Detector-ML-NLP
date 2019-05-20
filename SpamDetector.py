@@ -75,12 +75,15 @@ class SpamDetector:
                         and then the combined spam value using fuzzy logic       """
 
             """ Drift Detection """
-
-            # drift_report = self.drift_detection(tweet_prediction_score, tweet_obj)
+            drift_report = dict()
+            if tweet_prediction_score != 1:
+                drift_report = self.drift_detection(tweet_prediction_score, tweet_obj)
+            else:
+                drift_report = None
 
             self.information_array = self.info_prediction(user_prediction_score.min(), user_prediction_proba[1],
                                                           tweet_prediction_score, tweet_prediction_proba[1],
-                                                          spam_score_fuzzy, tweet_obj, None)
+                                                          spam_score_fuzzy, tweet_obj, drift_report)
 
         if 'tweet_obj' in locals() and tweet_obj is not None and functionality_check is 2:
             """ Tweet Classification """
@@ -179,6 +182,10 @@ class SpamDetector:
         if drift_report is not None and len(drift_report) > 0:
             information_array["spam_status"] = drift_report["spam_status"]
             information_array["spam_score"] = drift_report["spam_score"]
+
+        if drift_report is None:
+            information_array["spam_status"] = 'Negative'
+            information_array["spam_score"] = 'N/A'
 
         if self.check == 0:
             information_array["tweet"] = tweet_obj.text

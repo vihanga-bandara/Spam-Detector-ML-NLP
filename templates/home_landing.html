@@ -14,12 +14,12 @@
                         </div>
                         <div class="col-md-12 text-center">
                             <button class="btn btn-primary btn-landing" id="twitteridbtn" type="submit"
-                                    onclick="$('#loading').show(); $('#twitterlbl').hide(); $('#twitterid').hide(); $('#twitteridbtn').hide();">
+                                    onclick="onclick_event()">
                                 Listen and Detect
                             </button>
                             <div id="loading" style="display:none;"><img
                                     src="{{ url_for('static', filename = 'images/loader.gif') }}" alt="Loading"/>
-                                <p style="text-align: center">Loading!</p>
+                                <p style="text-align: center" id="loader_detail">Loading!</p>
                             </div>
                         </div>
                         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -35,6 +35,67 @@
                 </div>
             </div>
         </div>
+        <script>
+            function onclick_event() {
+                $('#loading').show();
+                $('#twitterlbl').hide();
+                $('#twitterid').hide();
+                $('#twitteridbtn').hide();
+
+                setTimeout(function () {
+                    // Do something after 1 second
+                    document.getElementById('loader_detail').innerHTML = "Checking Twitter Handle";
+                }, 500);
+                setTimeout(function () {
+                    // Do something after 1 second
+                    document.getElementById('loader_detail').innerHTML = "Listening";
+                }, 1000);
+            }
+
+
+            // $(window).load(function () {
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Collecting data !!";
+            //     }, 500);
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Data collected. :)";
+            //     }, 1000);
+            // });
+            // function change_text(){
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Collecting data !!";
+            //     }, 500);
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Data collected. :)";
+            //     }, 1000);
+            //
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Setting up the view for you...";
+            //     }, 1400);
+            //
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Almost done...";
+            //     }, 1900);
+            // }
+        </script>
+
+        <script>
+            $(window).load(function () {
+                setTimeout(function () {
+                    $("loader_detail").html("Collecting data");
+                }, 500);
+                setTimeout(function () {
+                    $("loader_detail").html("Almost done...");
+                }, 1000);
+            });
+        </script>
     </div>
 </div>
 {% endblock content %}
+

@@ -17,6 +17,7 @@ import pickle
 import textdistance
 from timeit import default_timer as timer
 import os
+from spellchecker import SpellChecker
 
 
 class DriftDetector:
@@ -24,6 +25,7 @@ class DriftDetector:
     dataset = "dataset/"
     data = "data/"
     preprocessor = Preprocessor()
+    spell = SpellChecker()
 
     def __init__(self):
         print('Initializing Drift Detector')
@@ -69,6 +71,8 @@ class DriftDetector:
         print('Searching for tokens...')
         for token in tweet_tokens:
             # using datamuse api get related words
+            misspelled = self.spell.unknown([token])
+
             api = datamuse.Datamuse()
             datamuse_response_similar = api.words(ml=token, max=2)
             print('Getting related analogies for tweet token...')
@@ -316,6 +320,20 @@ class DriftDetector:
 
 
 if __name__ == '__main__':
-    drift_detector = DriftDetector()
-    report = drift_detector.predict("Vihanga Bandara, nice to meet you", 1)
+    # drift_detector = DriftDetector()
+    # report = drift_detector.predict("Obtain complimentary coin, check it out now", 1)
+    spell = SpellChecker()
+    misspelled = spell.unknown(['telephne', 'dog', 'battry'])
+    if len(misspelled) == 1:
+        correction = spell.correction(misspelled[0])
+
+    elif len(misspelled) > 1:
+        for word in misspelled:
+            # Get the one `most likely` answer
+            print(spell.correction(word))
+
+            # Get a list of `likely` options
+            print(spell.candidates(word))
+
+
     exit(0)
