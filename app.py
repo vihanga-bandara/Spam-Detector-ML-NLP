@@ -42,14 +42,24 @@ def classify():
 @app.route("/review", methods=['GET', 'POST'])
 def review():
     if request.method == 'POST':
-        drifted_check = request.form['checked_drift']
+        if 'checked_drift' in request.form:
+            drifted_check_tweets = request.form['checked_drift']
+            drifted_check_tweets = drifted_check_tweets.split(", ")
+            retrain = Retrainer()
+            retrain.write_flagged_drifted_tweets(drifted_check_tweets)
+            retrain.get_number_flagged_drifted_tweets()
+            return render_template('review.html', retrain_information_array='lol')
+        else:
+            # invalid operation
+            flash(f'Operation is invalid', 'danger')
+            return redirect(url_for('review'))
 
-        return render_template('review.html', retrain_information_array='lol')
+
 
     else:
         retrain = Retrainer()
-        retrain.retrieve_drifted_tweets()
-        drifted_tweets = retrain.get_drifted_tweets()
+        retrain.retrieve_unflagged_drifted_tweets()
+        drifted_tweets = retrain.get_unflagged_drifted_tweets()
         return render_template('review.html', drifted=drifted_tweets)
 
 

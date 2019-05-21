@@ -6,6 +6,15 @@
             <form method="post" action="{{ url_for('review') }}">
                 <div class="row no-gutters">
                     <div class="col-md-12">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages%}
+                        {% for category, message in messages %}
+                        <div class="alert alert-{{category}}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
                         <div>
                             <p class="tweet-main"><strong>Flag Drifted Tweets</strong></p>
                         </div>
@@ -18,7 +27,7 @@
                                     <div class="col-md-10"><p class="tweet-main">{{ drift }}</p></div>
                                     <div class="col-md-2">
                                         <p class="text-right">
-                                            <input type="checkbox" name="checked_drift[]" id="review{{ count }}"
+                                            <input type="checkbox" name="checked_drift" id="review{{ count }}"
                                                    value="{{ drift }}"/>
                                             <label for="review{{ count }}"></label>
                                         </p>
