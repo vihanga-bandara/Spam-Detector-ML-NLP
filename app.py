@@ -47,14 +47,14 @@ def review():
             drifted_check_tweets = drifted_check_tweets.split(", ")
             retrain = Retrainer()
             retrain.write_flagged_drifted_tweets(drifted_check_tweets)
-            retrain.get_number_flagged_drifted_tweets()
-            return render_template('review.html', retrain_information_array='lol')
+            retrain_information_array = retrain.retrain_information()
+            # successfully writted drifted tweets
+            flash(f'Flagged Tweets Successfully', 'success')
+            return render_template('review.html', retrain_information_array=retrain_information_array)
         else:
             # invalid operation
             flash(f'Operation is invalid', 'danger')
             return redirect(url_for('review'))
-
-
 
     else:
         retrain = Retrainer()

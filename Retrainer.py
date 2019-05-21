@@ -59,6 +59,25 @@ class Retrainer:
         self.drifted_tweets_list = flagged_drifted_tweets
         return flagged_drifted_tweets
 
+    def retrain_information(self):
+        retrain_information = dict()
+
+        flagged_drift_tweets = self.get_flagged_drifted_tweets()
+
+        retrain_information["flagged_drift_tweets"] = 'No Flagged Drifts available'
+        retrain_information["number_drift_tweets"] = 0
+
+        if flagged_drift_tweets is not None and len(flagged_drift_tweets) > 0:
+            retrain_information["flagged_drift_tweets"] = flagged_drift_tweets
+        else:
+            retrain_information["flagged_drift_tweets"] = 'No Flagged Drifts available'
+
+        number_flagged_tweets = self.get_number_flagged_drifted_tweets()
+
+        if number_flagged_tweets is not None:
+            retrain_information["number_drift_tweets"] = number_flagged_tweets
+
+
     # def retrain_tweet_classifier(self):
     #
     # def get_retrain_score(self):

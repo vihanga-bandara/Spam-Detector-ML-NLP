@@ -211,7 +211,6 @@ class SpamDetector:
             # calculate elapsed time
             end = timer()
             print("Drift Algorithm executed in {0} seconds".format(end - start))
-
         return drift_report
 
 
