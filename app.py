@@ -39,7 +39,7 @@ def classify():
         return redirect(url_for('home'))
 
 
-@app.route("/review", methods=['POST'])
+@app.route("/review", methods=['GET', 'POST'])
 def review():
     if request.method == 'POST':
         drifted_check = request.form['checked_drift']
