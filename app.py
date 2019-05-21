@@ -43,14 +43,26 @@ def classify():
 def review():
     if request.method == 'POST':
         if 'checked_drift' in request.form:
-            drifted_check_tweets = request.form['checked_drift']
-            drifted_check_tweets = drifted_check_tweets.split(", ")
             retrain = Retrainer()
-            retrain.write_flagged_drifted_tweets(drifted_check_tweets)
-            retrain_information_array = retrain.retrain_information()
-            # successfully writted drifted tweets
-            flash(f'Flagged Tweets Successfully', 'success')
-            return render_template('review.html', retrain_information_array=retrain_information_array)
+            if 'confirm_spam' in request.form:
+                drifted_check_tweets = request.form['checked_drift']
+                drifted_check_tweets = drifted_check_tweets.split(", ")
+                retrain.write_flagged_drifted_tweets(drifted_check_tweets)
+                retrain_information_array = retrain.retrain_information()
+                drifted_tweets = retrain.delete_flagged_drifted_tweets()
+                # successfully written drifted tweets
+                flash(f'Flagged Tweets Successfully', 'success')
+                return render_template('review.html', retrain_information_array=retrain_information_array,
+                                       drifted=drifted_tweets)
+            elif 'remove' in request.form:
+                delete_tweets = request.form['checked_drift']
+                delete_tweets = delete_tweets.split(", ")
+                retrain.delete_unflagged_drifted_tweets(delete_tweets)
+                # successfully writted drifted tweets
+                flash(f'Deleted Tweets Successfully', 'success')
+                return redirect(url_for('review'))
+            # elif 'retrain' in request.form:
+
         else:
             # invalid operation
             flash(f'Operation is invalid', 'danger')
@@ -60,7 +72,9 @@ def review():
         retrain = Retrainer()
         retrain.retrieve_unflagged_drifted_tweets()
         drifted_tweets = retrain.get_unflagged_drifted_tweets()
-        return render_template('review.html', drifted=drifted_tweets)
+        retrain_information_array = retrain.retrain_information()
+        return render_template('review.html', retrain_information_array=retrain_information_array,
+                               drifted=drifted_tweets)
 
 
 @app.route("/classify_tweet")

@@ -64,9 +64,6 @@ class Retrainer:
 
         flagged_drift_tweets = self.get_flagged_drifted_tweets()
 
-        retrain_information["flagged_drift_tweets"] = 'No Flagged Drifts available'
-        retrain_information["number_drift_tweets"] = 0
-
         if flagged_drift_tweets is not None and len(flagged_drift_tweets) > 0:
             retrain_information["flagged_drift_tweets"] = flagged_drift_tweets
         else:
@@ -77,6 +74,28 @@ class Retrainer:
         if number_flagged_tweets is not None:
             retrain_information["number_drift_tweets"] = number_flagged_tweets
 
+    def delete_unflagged_drifted_tweets(self, delete_tweets):
+
+        # load the spam tokens
+        filename = self.data + "drifted_tweets.p"
+        unflagged_drifted_tweets = pickle.load(open(filename, 'rb'))
+        new_unflagged_drifted_tweets = [item for item in unflagged_drifted_tweets if item not in delete_tweets]
+
+        # save drifted tweets to file using pickle
+        filename = self.data + "drifted_tweets.p"
+        pickle.dump(new_unflagged_drifted_tweets, open(filename, "wb"))
+
+    def delete_flagged_drifted_tweets(self, drifted_check_tweets):
+
+        # load the spam tokens
+        filename = self.data + "drifted_tweets.p"
+        unflagged_drifted_tweets = pickle.load(open(filename, 'rb'))
+        new_unflagged_drifted_tweets = [item for item in unflagged_drifted_tweets if item not in drifted_check_tweets]
+
+        # save drifted tweets to file using pickle
+        filename = self.data + "drifted_tweets.p"
+        pickle.dump(new_unflagged_drifted_tweets, open(filename, "wb"))
+        return new_unflagged_drifted_tweets
 
     # def retrain_tweet_classifier(self):
     #

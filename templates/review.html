@@ -3,7 +3,7 @@
 <div class="row no-gutters">
     <div class="col-md-8 offset-md-2">
         <div class="dash-wrap">
-            <form method="post" action="{{ url_for('review') }}">
+            <form method="post" action="{{ url_for('review') }}" id="flag-drift-tweets">
                 <div class="row no-gutters">
                     <div class="col-md-12">
                         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -52,7 +52,11 @@
                         <div class="row no-gutters">
                             <div class="col-md-12 text-right">
                                 <button class="btn btn-primary btn-review" type="reset">Reset</button>
-                                <button class="btn btn-success btn-review" type="submit">Submit</button>
+                                <!--                                <button class="btn btn-success btn-review" id="select-all">Select All</button>-->
+                                <button class="btn btn-success btn-review" name="confirm_spam" type="submit">Confirm
+                                    Spam
+                                </button>
+                                <button class="btn btn-danger btn-review" name="remove" type="submit">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -86,7 +90,7 @@
                 <div class="col-md-12">
                     <div class="row no-gutters">
                         <div class="col-md-6">
-                            <button class="btn btn-danger btn-review" type="submit">Re-train</button>
+                            <button class="btn btn-danger btn-review" name="retrain" type="submit">Re-train</button>
                         </div>
                     </div>
                 </div>
@@ -94,4 +98,12 @@
         </div>
     </div>
 </div>
+<!--<script>-->
+<!--    $("#select-all").on("click", function () {-->
+
+<!--    $("#flag-drift-tweets").each( function() {-->
+<!--             $(this).find("input").attr('checked', true);-->
+<!--    });-->
+<!--});-->
+<!--</script>-->
 {% endblock content %}
