@@ -42,21 +42,20 @@ def classify():
 @app.route("/review", methods=['GET', 'POST'])
 def review():
     if request.method == 'POST':
+        list = request.form.to_dict(flat=False)
         if 'checked_drift' in request.form:
             retrain = Retrainer()
             if 'confirm_spam' in request.form:
-                drifted_check_tweets = request.form['checked_drift']
-                drifted_check_tweets = drifted_check_tweets.split(", ")
+                drifted_check_tweets = request.form.getlist('checked_drift')
                 retrain.write_flagged_drifted_tweets(drifted_check_tweets)
                 retrain_information_array = retrain.retrain_information()
-                drifted_tweets = retrain.delete_flagged_drifted_tweets()
+                drifted_tweets = retrain.delete_flagged_drifted_tweets(drifted_check_tweets)
                 # successfully written drifted tweets
                 flash(f'Flagged Tweets Successfully', 'success')
                 return render_template('review.html', retrain_information_array=retrain_information_array,
                                        drifted=drifted_tweets)
             elif 'remove' in request.form:
-                delete_tweets = request.form['checked_drift']
-                delete_tweets = delete_tweets.split(", ")
+                delete_tweets = request.form.getlist('checked_drift')
                 retrain.delete_unflagged_drifted_tweets(delete_tweets)
                 # successfully writted drifted tweets
                 flash(f'Deleted Tweets Successfully', 'success')

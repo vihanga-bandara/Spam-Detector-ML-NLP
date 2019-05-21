@@ -1,3 +1,22 @@
 {% extends "header.html" %}
 {% block content %}
+<div class="row no-gutters">
+    <div class="col-md-8 offset-md-2">
+        <div class="dash-wrap">
+            <form method="post" action="{{ url_for('review') }}" id="flag-drift-tweets">
+                <div class="boxes">
+                    <input type="checkbox" name="checked_drift1" id="box-1" value="box-1">
+                    <label for="box-1">Sustainable typewriter cronut</label>
+
+                    <input type="checkbox" name="checked_drift2" id="box-2" value="box-2">
+                    <label for="box-2">Gentrify pickled kale chips </label>
+
+                    <input type="checkbox" name="checked_drift3" id="box-3" value="box-3">
+                    <label for="box-3">Gastropub butcher</label>
+                </div>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}
