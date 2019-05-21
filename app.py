@@ -35,13 +35,22 @@ def classify():
                 spam_detector.main(tweet_obj, 1)
                 classification_report = spam_detector.get_prediction_report()
                 return render_template('full_detection.html', prediction=classification_report)
+    else:
+        return redirect(url_for('home'))
 
 
-@app.route("/review")
+@app.route("/review", methods=['POST'])
 def review():
-    retrain = Retrainer()
-    drifted_tweets = retrain.get_drifted_tweets()
-    return render_template('review.html', drifted=drifted_tweets)
+    if request.method == 'POST':
+        drifted_check = request.form['checked_drift']
+
+        return render_template('review.html', retrain_information_array='lol')
+
+    else:
+        retrain = Retrainer()
+        retrain.retrieve_drifted_tweets()
+        drifted_tweets = retrain.get_drifted_tweets()
+        return render_template('review.html', drifted=drifted_tweets)
 
 
 @app.route("/classify_tweet")

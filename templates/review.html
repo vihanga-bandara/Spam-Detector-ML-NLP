@@ -3,38 +3,74 @@
 <div class="row no-gutters">
     <div class="col-md-8 offset-md-2">
         <div class="dash-wrap">
-            <div class="row no-gutters">
-                <div class="col-md-12">
-                    {% count = 1 %}
-                    {% for drift in drifted %}
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row no-gutters">
-                                <div class="col-md-10"><p class="tweet-main">{{ drift }}</p></div>
-                                <div class="col-md-2">
-                                    <p class="text-right">
-                                        <input type="checkbox" id="test{{ count }}" name="test{{count}}"/>
-                                        <label for="test{{ count }}"></label>
-                                    </p>
+            <form method="post" action="{{ url_for('review') }}">
+                <div class="row no-gutters">
+                    <div class="col-md-12">
+                        <div>
+                            <p class="tweet-main"><strong>Flag Drifted Tweets</strong></p>
+                        </div>
+                        {% if (drifted is defined) and drifted %}
+                        {% set count = [1] %}
+                        {% for drift in drifted %}
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row no-gutters">
+                                    <div class="col-md-10"><p class="tweet-main">{{ drift }}</p></div>
+                                    <div class="col-md-2">
+                                        <p class="text-right">
+                                            <input type="checkbox" name="checked_drift[]" id="review{{ count }}"
+                                                   value="{{ drift }}"/>
+                                            <label for="review{{ count }}"></label>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-
+                        </div>
+                        {% if count.append(count.pop() + 1) %}{% endif %}
+                        {% endfor %}
+                        {% else %}
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row no-gutters">
+                                    <div class="col-md-10"><p class="tweet-main"> No Drifted Tweets available at the
+                                        moment for reviewing</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row no-gutters">
+                            <div class="col-md-12 text-right">
+                                <button class="btn btn-primary btn-review" type="reset">Reset</button>
+                                <button class="btn btn-success btn-review" type="submit">Submit</button>
+                            </div>
                         </div>
                     </div>
-                    {% endfor%}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row no-gutters">
+    <div class="col-md-8 offset-md-2">
+        <div class="dash-wrap">
+            <div class="row no-gutters">
+                <div class="col-md-12">
+                    <div>
+                        <p class="tweet-main"><strong> Retraining Classifier Details</strong></p>
+                        <p class="tweet-main"> Number of Flagged Tweets : 12</p>
+                    </div>
                     <div class="card">
                         <div class="card-body">
                             <div class="row no-gutters">
-                                <div class="col-md-10"><p class="tweet-main">This is some text within a card
-                                    body.</p></div>
-                                <div class="col-md-2">
-                                    <p class="text-right">
-                                        <input type="checkbox" id="test2" checked="checked"/>
-                                        <label for="test2"></label>
-                                    </p>
-                                </div>
+                                <div class="col-md-10"><p class="tweet-main"> No Drifted Tweets available at the moment
+                                    for reviewing</p></div>
                             </div>
-
+                            <div class="row no-gutters">
+                                <div class="col-md-10"><p class="tweet-main"> No Drifted Tweets available at the moment
+                                    for reviewing</p></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,13 +79,7 @@
                         <div class="col-md-6">
                             <button class="btn btn-danger btn-review" type="submit">Re-train</button>
                         </div>
-                        <div class="col-md-6 text-right">
-                            <button class="btn btn-primary btn-review" type="submit">Reset</button>
-                            <button class="btn btn-success btn-review" type="submit">Submit</button>
-                        </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
