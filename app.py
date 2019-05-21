@@ -60,7 +60,11 @@ def review():
                 # successfully writted drifted tweets
                 flash(f'Deleted Tweets Successfully', 'success')
                 return redirect(url_for('review'))
-            # elif 'retrain' in request.form:
+
+            elif 'retrain' in request.form:
+                retrain_tweets = retrain.get_flagged_drifted_tweets()
+                retrain.retrain_tweet_classifier(retrain_tweets)
+
 
         else:
             # invalid operation

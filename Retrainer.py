@@ -1,5 +1,6 @@
 import pickle
 import os
+import csv
 
 
 class Retrainer:
@@ -104,8 +105,30 @@ class Retrainer:
         pickle.dump(new_unflagged_drifted_tweets, open(filename, "wb"))
         return new_unflagged_drifted_tweets
 
-    # def retrain_tweet_classifier(self):
-    #
+    def retrain_tweet_classifier(self, retrain_tweets):
+        self.load_add_dataset(retrain_tweets)
+        try:
+            with open('dataset/SpamTweetsFinalDataset.csv', 'a') as fd:
+                for tweet in retrain_tweets:
+                    tweet = tweet.replace(',', '')
+                    tweet_string = tweet + ", spam"
+                    fd.write(tweet_string)
+
+            return True
+
+        except Exception as e:
+            return False
+
     # def get_retrain_score(self):
     #
-    # def load_tweets_dataset(self):
+    def load_add_dataset(self, retrain_tweets):
+        try:
+            with open('dataset/SpamTweetsFinalDataset.csv', 'a') as fd:
+                for tweet in retrain_tweets:
+                    tweet = tweet.replace(',', '')
+                    tweet_string = tweet + ", spam"
+                    fd.write(tweet_string)
+            return True
+
+        except Exception as e:
+            return False
