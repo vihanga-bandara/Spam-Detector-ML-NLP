@@ -116,11 +116,7 @@ def classify_tweet():
 
 
 @app.route("/error")
-# @app.errorhandler(Exception)
-def handle_error(e):
-    code = 500
-    if isinstance(e, HTTPException):
-        code = e.code
+def handle_error():
     return render_template('error.html')
 if __name__ == '__main__':
     app.run(debug=True)
