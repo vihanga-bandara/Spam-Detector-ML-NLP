@@ -30,7 +30,6 @@ class SpamTweetDetectModel:
     # load the dataset
     df = pd.read_csv('dataset/SpamTweetsFinalDataset.csv', header=None)
 
-    # print general information about the dataset that is loaded
     # print(df.info())
     # print(df.head())
 
