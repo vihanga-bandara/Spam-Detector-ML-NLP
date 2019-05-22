@@ -47,11 +47,15 @@ class TweetDetectModel:
             print(df.info())
             print(df.head())
 
+            # sort data frame to avoid bias
+            # df.sort_values(1, ascending=False)
+            df.sort_values(by=[1], inplace=True, ascending=False)
             # check the class balance ratio / distribution
             df_spam = df.loc[df[1] == 'spam']
             df_ham = df.loc[df[1] == 'ham']
-            ratio = int(df.count()[0] / df_spam.count()[0])
-            print("ratio of spam to to total data is {0}".format(ratio))
+
+            ratio = float("{0:.2f}".format(df_spam.count()[0] / df.count()[0]))
+            print("Ratio of Spam Tweets to Total Tweets is {0}".format(ratio))
 
             # separate label column to add numerical label
             column_names = list(df.head(0))
@@ -69,7 +73,7 @@ class TweetDetectModel:
 
         except Exception as e:
             # if loading dataset does not work return false
-            print("Error loading the dataset")
+            print("Error loading the dataset", str(e))
 
             return False
 
@@ -127,7 +131,7 @@ class TweetDetectModel:
 
     def train_model(self, dataset):
         # split the data to train and test
-        X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.25)
+        X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.40)
 
         # create pipeline that will consecutively carry out the training process
         pipeline = Pipeline(
@@ -143,6 +147,23 @@ class TweetDetectModel:
         # probability of prediction of test data using trained model
         y_pred_proba = pipeline.predict_proba(X_test)
         print(np.mean(y_pred == y_test))
+
+        # running cross validation score on training data
+        scores = cross_val_score(pipeline, X_train, y_train, scoring='accuracy', cv=10)
+        accuracy = scores
+        mean = scores.mean()
+        std = scores.std()
+
+        print('Accuracy is {} | Mean is {} | Standard Deviation is {} on train data'.format(accuracy, mean, std))
+
+        # running cross validation score on all data
+        scores_full = cross_val_score(pipeline, dataset[0], dataset[1], scoring='accuracy', cv=10)
+        accuracy_full = scores_full.mean() * 100
+        mean_full = scores_full.mean()
+        std_full = scores_full.std()
+
+        print('Accuracy is {} | Mean is {} | Standard Deviation is {} on all data'.format(accuracy_full, mean_full,
+                                                                                          std_full))
 
         return pipeline, y_test, y_pred, y_pred_proba
 
@@ -254,3 +275,8 @@ class TweetDetectModel:
 
         else:
             return False
+
+
+if __name__ == '__main__':
+    train = TweetDetectModel()
+    train.main()

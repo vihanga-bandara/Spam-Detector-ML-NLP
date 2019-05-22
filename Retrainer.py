@@ -137,7 +137,7 @@ class Retrainer:
             with open('dataset/SpamTweetsFinalDataset.csv', 'a') as fd:
                 for tweet in retrain_tweets:
                     tweet = tweet.replace(',', '')
-                    tweet_string = tweet + ", spam\n"
+                    tweet_string = tweet + ",spam\n"
                     fd.write(tweet_string)
             # close the file
             fd.close()

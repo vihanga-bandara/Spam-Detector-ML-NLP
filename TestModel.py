@@ -117,7 +117,7 @@ pipeline = Pipeline(
 
 from sklearn.model_selection import cross_val_score
 
-scores = cross_val_score(pipeline, X_train, y_train, scoring='accuracy', cv=5, n_jobs=-1)
+scores = cross_val_score(pipeline, X_train, y_train, scoring='accuracy', cv=10, n_jobs=-1)
 
 mean = scores.mean()
 std = scores.std()
