@@ -99,60 +99,65 @@ class SpamDetector:
             print("Tweet Spam Prediction = {0}".format(tweet_prediction_score))
             print("Tweet Spam Probabilities = spam({0}) ham({1})".format(tweet_prediction_proba[1],
                                                                          tweet_prediction_proba[0]))
-            drift_report = self.drift_detection(tweet_prediction_score, tweet_obj)
+            """ Drift Detection """
+            drift_report = dict()
+            if tweet_prediction_score != 1:
+                drift_report = self.drift_detection(tweet_prediction_score, tweet_obj)
+            else:
+                drift_report = None
 
-            self.information_array = self.info_prediction(None, tweet_prediction_score, tweet_prediction_proba[1],
-                                                          None, None, tweet_obj, drift_report)
+            self.information_array = self.info_prediction(None, None, tweet_prediction_score, tweet_prediction_proba[1],
+                                                          None, tweet_obj, drift_report)
 
-        # if 'tweet_id' in locals() and tweet_id is not None:
-        #
-        #     """ Tweet Classification """
-        #     # initialize tweet classification
-        #     tweet_classifier = TweetClassifier()
-        #
-        #     # classify tweet and get prediction
-        #     tweet_classifier.classify(tweet_obj, 2)
-        #     tweet_prediction_score = tweet_classifier.get_prediction_score()
-        #     tweet_prediction_proba = tweet_classifier.get_proba_value()
-        #
-        #     print("Tweet Spam Prediction = {0}".format(tweet_prediction_score))
-        #     print("Tweet Spam Probabilities = {0}".format(tweet_prediction_proba))
-        #
-        #     """ User Classification """
-        #
-        #     # initialize user classification
-        #     user_classifier = UserClassifier()
-        #
-        #     # classify user and get prediction
-        #     user_classifier.classify(tweet_obj)
-        #     user_prediction_score = user_classifier.get_prediction_score()
-        #     user_prediction_proba = user_classifier.get_proba_value()
-        #
-        #     print("User Spam Prediction = {0}".format(user_prediction_score))
-        #     print("User Spam Probabilities = {0}".format(user_prediction_proba))
-        #
-        #     """ Fuzzy Logic """
-        #
-        #     # send two model output proba through fuzzy logic controller to determine final output
-        #     fuzzy_system = SpamFuzzyController()
-        #     fuzzy_system.fuzzy_initialize()
-        #     spam_score_fuzzy = fuzzy_system.fuzzy_predict(tweet_prediction_proba, user_prediction_proba)
-        #     print('Fuzzy Controller predicts {} of the user and twitter connection for spam activity'.format(
-        #         spam_score_fuzzy))
-        #
-        #     """ Basic flow ends here, displays spam predictions from both models
-        #                 and then the combined spam value using fuzzy logic       """
-        #
-        #     """ Drift Detection """
-        #
-        #     if tweet_prediction_score is not 1:
-        #         print("Checking Tweet for Drift Possibility")
-        #         # drift_detector = DriftDetector()
-        #         # drift_detector.predict(tweet_obj)
-        #         # print('done')
-        #
-        #     self.information_array = self.get_info_prediction(user_prediction_score,
-        #                                                       tweet_prediction_score, spam_score_fuzzy)
+            # if 'tweet_id' in locals() and tweet_id is not None:
+            #
+            #     """ Tweet Classification """
+            #     # initialize tweet classification
+            #     tweet_classifier = TweetClassifier()
+            #
+            #     # classify tweet and get prediction
+            #     tweet_classifier.classify(tweet_obj, 2)
+            #     tweet_prediction_score = tweet_classifier.get_prediction_score()
+            #     tweet_prediction_proba = tweet_classifier.get_proba_value()
+            #
+            #     print("Tweet Spam Prediction = {0}".format(tweet_prediction_score))
+            #     print("Tweet Spam Probabilities = {0}".format(tweet_prediction_proba))
+            #
+            #     """ User Classification """
+            #
+            #     # initialize user classification
+            #     user_classifier = UserClassifier()
+            #
+            #     # classify user and get prediction
+            #     user_classifier.classify(tweet_obj)
+            #     user_prediction_score = user_classifier.get_prediction_score()
+            #     user_prediction_proba = user_classifier.get_proba_value()
+            #
+            #     print("User Spam Prediction = {0}".format(user_prediction_score))
+            #     print("User Spam Probabilities = {0}".format(user_prediction_proba))
+            #
+            #     """ Fuzzy Logic """
+            #
+            #     # send two model output proba through fuzzy logic controller to determine final output
+            #     fuzzy_system = SpamFuzzyController()
+            #     fuzzy_system.fuzzy_initialize()
+            #     spam_score_fuzzy = fuzzy_system.fuzzy_predict(tweet_prediction_proba, user_prediction_proba)
+            #     print('Fuzzy Controller predicts {} of the user and twitter connection for spam activity'.format(
+            #         spam_score_fuzzy))
+            #
+            #     """ Basic flow ends here, displays spam predictions from both models
+            #                 and then the combined spam value using fuzzy logic       """
+            #
+            #     """ Drift Detection """
+            #
+            #     if tweet_prediction_score is not 1:
+            #         print("Checking Tweet for Drift Possibility")
+            #         # drift_detector = DriftDetector()
+            #         # drift_detector.predict(tweet_obj)
+            #         # print('done')
+            #
+            #     self.information_array = self.get_info_prediction(user_prediction_score,
+            #                                                       tweet_prediction_score, spam_score_fuzzy)
 
     def info_prediction(self, user_score, user_percentage, tweet_score, tweet_percentage, fuzzy_score, tweet_obj,
                         drift_report):
@@ -161,32 +166,25 @@ class SpamDetector:
             information_array['user_prediction'] = "spam"
         elif user_score is not None and user_score == 0:
             information_array['user_prediction'] = "ham"
-
         if tweet_score is not None and tweet_score == 1:
             information_array['tweet_prediction'] = "spam"
         elif tweet_score is not None and tweet_score == 0:
             information_array['tweet_prediction'] = "ham"
-
         if user_percentage is not None:
             information_array['user_percentage'] = int(round(user_percentage * 100))
-
         if tweet_percentage is not None:
             tweet_percent = int(round(tweet_percentage * 100))
             if tweet_percent >= 99:
                 tweet_percent = 98
             information_array['tweet_percentage'] = tweet_percent
-
         if fuzzy_score is not None:
             information_array['fuzzy_score'] = fuzzy_score
-
         if drift_report is not None and len(drift_report) > 0:
             information_array["spam_status"] = drift_report["spam_status"]
             information_array["spam_score"] = drift_report["spam_score"]
-
         if drift_report is None:
             information_array["spam_status"] = 'Negative'
             information_array["spam_score"] = 'N/A'
-
         if self.check == 0:
             information_array["tweet"] = tweet_obj.text
             information_array["user"] = tweet_obj.user.screen_name
@@ -195,7 +193,6 @@ class SpamDetector:
             # preprocessor = Preprocessor()
             # processed_tweet = preprocessor.preprocess_tweet(tweet_obj)
             information_array["tweet"] = tweet_obj
-
         return information_array
 
     def get_prediction_report(self):
@@ -218,7 +215,7 @@ if __name__ == '__main__':
     twitter_api = TwitterAPI()
     twitter_api.authenticate()
     spamdet = SpamDetector()
-    tweetObj = twitter_api.getTweet("1125183305265991681")
-    spamdet.main(tweetObj, None, None)
+    tweetObj = 'Obtain complimentary coin, check it out now'
+    spamdet.main(tweetObj, 2)
     classification_report = spamdet.get_prediction_report()
     exit(0)
