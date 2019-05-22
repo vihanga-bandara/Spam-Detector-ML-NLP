@@ -230,7 +230,7 @@ class TweetDetectModel:
 
     def main(self):
         # get package version details
-        package_version = self.__get_package_versions()
+        package_version = self.get_package_versions()
 
         # load dataset
         if self.load_dataset():
