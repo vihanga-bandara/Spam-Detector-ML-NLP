@@ -2,10 +2,10 @@ from flask import Flask, render_template, url_for, request, flash, redirect
 from TweetListener import TweetListener
 from SpamDetector import SpamDetector
 from Retrainer import Retrainer
-from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 
+# secret key needed to initiate flash messages
 app.config['SECRET_KEY'] = '4551a264s45df5scs541'
 
 
@@ -81,7 +81,9 @@ def review():
                     flash(f'Successfully Retrained Classifier', 'success')
                     # generate retrain information details
                     retrain_information_array = retrain.retrain_information()
-                    # retrieve un flagged tweets
+                    # generate un flagged tweets
+                    retrain.retrieve_unflagged_drifted_tweets()
+                    # retrieve drifted tweets
                     drifted_tweets = retrain.get_unflagged_drifted_tweets()
                     return render_template('review.html', retrain_information_array=retrain_information_array,
                                            drifted=drifted_tweets)
@@ -115,8 +117,10 @@ def classify_tweet():
     return render_template('tweet_detection.html')
 
 
-@app.route("/error")
-def handle_error():
+@app.errorhandler(Exception)
+def handle_error(e):
     return render_template('error.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
