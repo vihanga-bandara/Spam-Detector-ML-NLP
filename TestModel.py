@@ -30,7 +30,7 @@ import numpy as np
 import nltk
 
 # load the dataset
-df = pd.read_csv('dataset/NewSpamDataTesting.csv', header=None)
+df = pd.read_csv('dataset/SpamTweetsFinalDataset.csv', header=None)
 
 # print general information about the dataset that is loaded
 print(df.info())

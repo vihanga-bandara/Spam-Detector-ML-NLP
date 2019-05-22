@@ -39,7 +39,6 @@ class SpamTweetDetectModel:
     print(classes.value_counts())
 
     # pre-processing the data before classification
-
     # convert the labels into binary values
     # where 0 = ham and 1 = spam
     from sklearn.preprocessing import LabelEncoder
