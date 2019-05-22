@@ -21,6 +21,7 @@ import datetime
 import pickle
 import seaborn as sns
 import matplotlib.pyplot as plt
+from Preprocessor import Preprocessor
 
 
 class TweetDetectModel:
@@ -276,7 +277,28 @@ class TweetDetectModel:
         else:
             return False
 
+    def classify(self, tweet):
+        # load the SpamTweetDetectModel from directory
+        filename = "pickle/SpamTweetDetectModel.sav"
+        pipeline_ensemble = pickle.load(open(filename, 'rb'))
+
+        # get model
+        pipeline_model = pipeline_ensemble["model"]
+
+        # preprocess tweet
+        preprocessor = Preprocessor()
+        processed_tweet = list()
+        processed_tweet.append(preprocessor.preprocess_tweet(tweet))
+
+        proba_score = pipeline_model.predict(processed_tweet)
+        proba_value = pipeline_model.predict_proba(processed_tweet)
+
+        blah = proba_value.tolist()[0]
+
+        return proba_score, proba_value, tweet
+
 
 if __name__ == '__main__':
     train = TweetDetectModel()
-    train.main()
+    res = train.classify('Build Your Twitter Account For FREE! http://tinyurl.com/ygv3gcr/?22399')
+    print(res)

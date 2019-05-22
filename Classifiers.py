@@ -39,7 +39,7 @@ class TweetClassifier(Classifier):
 
     def classify(self, tweet_obj, check):
         # load from pickle
-        nltk_ensemble_model = self.load_model()
+        pipeline_ = self.load_model()
         word_features = self.load_word_features()
 
         # preprocess tweet
@@ -47,21 +47,22 @@ class TweetClassifier(Classifier):
             processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
         elif check is 1:
             processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj)
-        elif check is 2:
+        else:
             tweet_obj = self.twitter_api.getTweet(tweet_obj)
             processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
 
         # find features
-        features_tweet = self.find_features(word_features, processed_tweet)
+        # features_tweet = self.find_features(word_features, processed_tweet)
 
         # classify using model and get scores
-        self._proba_score = nltk_ensemble_model.classify(features_tweet)
-        proba_value = nltk_ensemble_model.prob_classify(features_tweet)
-        self._proba_value = proba_value._prob_dict
+        self._proba_score = nltk_ensemble_model.predict(processed_tweet)
+        proba_value = nltk_ensemble_model.predict_proba(processed_tweet)
+        # self._proba_value = proba_value._prob_dict
+        self._proba_value = proba_value.tolist()[0]
 
-    def find_features(self, word_features, processed_tweet):
-        features_tweet = self.preprocessor.find_features_tweet(word_features, processed_tweet)
-        return features_tweet
+    # def find_features(self, word_features, processed_tweet):
+    #     features_tweet = self.preprocessor.find_features_tweet(word_features, processed_tweet)
+    #     return features_tweet
 
     def get_proba_value(self):
         return self._proba_value
