@@ -47,7 +47,7 @@ def classify():
 def review():
     if request.method == 'POST':
         # check whether checkbox has been checked and data exists
-        if 'checked_drift' in request.form:
+        if 'checked_drift' in request.form or 'retrain' in request.form:
             # instantiate retrainer object
             retrain = Retrainer()
             # check the type of submit button that was pressed (confirm spam, delete useless spam, retrain)
@@ -119,6 +119,11 @@ def classify_tweet():
 
 @app.errorhandler(Exception)
 def handle_error(e):
+    return redirect(url_for('error'))
+
+
+@app.route("/error")
+def error():
     return render_template('error.html')
 
 

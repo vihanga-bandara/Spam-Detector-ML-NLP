@@ -515,7 +515,3 @@ label:hover:before {
         transform: translateY(-3px);
     }
 }
-
-#body-permission {
-    background: #24344c !important;
-}

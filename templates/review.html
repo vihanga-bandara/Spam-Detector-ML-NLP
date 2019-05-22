@@ -98,16 +98,17 @@
                     {% endif %}
                 </div>
                 <div class="col-md-12">
-                    <div class="row no-gutters">
-                        <div class="col-md-6">
-                            {% if retrain_information_array['number_drift_tweets'] == 0 %}
-                            <button class="btn btn-danger btn-review" name="retrain" type="submit" disabled>Re-train
-                            </button>
-                            {% else %}
-                            <button class="btn btn-danger btn-review" name="retrain" type="submit">Re-train</button>
-                            {% endif %}
+                    <form method="post" action="{{ url_for('review') }}" id="retrain-details">
+                        <div class="row no-gutters">
+                            <div class="col-md-6">
+                                {% if retrain_information_array['number_drift_tweets'] == 0 %}
+                                <button class="btn btn-danger btn-review" name="retrain" type="submit" disabled>Re-train
+                                </button>
+                                {% else %}
+                                <button class="btn btn-danger btn-review" name="retrain" type="submit">Re-train</button>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

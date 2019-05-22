@@ -133,12 +133,22 @@ class Retrainer:
 
     def load_add_dataset(self, retrain_tweets):
         try:
+            # open file containing dataset
             with open('dataset/SpamTweetsFinalDataset.csv', 'a') as fd:
                 for tweet in retrain_tweets:
                     tweet = tweet.replace(',', '')
-                    tweet_string = tweet + ", spam"
+                    tweet_string = tweet + ", spam\n"
                     fd.write(tweet_string)
+            # close the file
+            fd.close()
             return True
 
         except Exception as e:
             return False
+
+
+if __name__ == '__main__':
+    retrain = Retrainer()
+    lala = retrain.load_add_dataset(
+        ["hi how are you and what are you doing these days lalala", "check this out blah blah blah"])
+    print(lala)

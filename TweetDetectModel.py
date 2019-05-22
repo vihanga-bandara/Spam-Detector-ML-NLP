@@ -224,7 +224,7 @@ class TweetDetectModel:
         })
 
         # save model using pickle
-        filename = 'SpamTweetDetectModel.sav'
+        filename = 'pickle/SpamTweetDetectModel.sav'
         pickle.dump(model_information, open(filename, 'wb'))
         return True
 
@@ -251,8 +251,6 @@ class TweetDetectModel:
 
             # save model to pickle
             self.save_model_pickle(pipeline)
-            from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
-
 
         else:
             return False
