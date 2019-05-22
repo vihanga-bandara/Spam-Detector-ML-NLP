@@ -1,6 +1,6 @@
 {% extends "header.html" %}
 {% block content %}
-<div class="row no-gutters">
+<div class="row no-gutters" id="review-div">
     <div class="col-md-8 offset-md-2">
         <div class="dash-wrap">
             <form method="post" action="{{ url_for('review') }}" id="flag-drift-tweets">
@@ -65,7 +65,7 @@
         </div>
     </div>
 </div>
-<div class="row no-gutters">
+<div class="row no-gutters" id="review-div2">
     <div class="col-md-8 offset-md-2">
         <div class="dash-wrap">
             <div class="row no-gutters">
@@ -74,6 +74,8 @@
                         <p class="tweet-main"><strong> Retraining Classifier Details</strong></p>
                         <p class="tweet-main"> Number of Flagged Tweets : {{
                             retrain_information_array['number_drift_tweets']}}</p>
+                        <p class="tweet-main"> Last Retrained Data/Time : {{
+                            retrain_information_array['date_time']}}</p>
                     </div>
                     {% if (retrain_information_array is defined) and (retrain_information_array['number_drift_tweets']
                     != 0) %}
@@ -105,10 +107,28 @@
                                 <button class="btn btn-danger btn-review" name="retrain" type="submit" disabled>Re-train
                                 </button>
                                 {% else %}
-                                <button class="btn btn-danger btn-review" name="retrain" type="submit">Re-train</button>
+                                <button class="btn btn-danger btn-review" name="retrain" onclick="onclick_event()"
+                                        type="submit">Re-train
+                                </button>
                                 {% endif %}
                             </div>
                         </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row no-gutters height-cust" id="loader-review" style="display:none;">
+    <div class="col-md-4 offset-md-4 landing-wrap align-self-center">
+        <div class="row no-gutters">
+            <div class="col-md-12">
+                <div class="wrap-inside">
+                    <div class="col-md-12 text-center" style="text-align: center">
+                        <div id="loading" style="display:none;"><img
+                                src="{{ url_for('static', filename = 'images/loader.gif') }}" alt="Loading"/>
+                            <p style="text-align: center" id="loader_detail">Retraining Classifier...</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,6 +142,14 @@
 <!--    });-->
 <!--});-->
 <!--</script>-->
+<script>
+    function onclick_event() {
+        $('#review-div').hide();
+        $('#review-div2').hide();
+        $('#loader-review').show();
+        $('#loading').show();
+    }
+</script>
 <script>
     $(document).ready(function () {
         // $("#flash-message").delay(2000).slideUp(300);

@@ -54,6 +54,16 @@ class Retrainer:
             self.number_flagged_drifted_tweet = 0
             return 0
 
+    def get_date_time_retrained_model(self):
+        # load the SpamTweetDetectModel from directory
+        filename = "pickle/SpamTweetDetectModel.sav"
+        pipeline_ensemble = pickle.load(open(filename, 'rb'))
+
+        # get model
+        date_time = pipeline_ensemble["metadata"]["date"]
+
+        return date_time
+
     def get_flagged_drifted_tweets(self):
         # load the spam tokens
         flagged_drifted_tweets = []
@@ -80,6 +90,11 @@ class Retrainer:
 
         if number_flagged_tweets is not None:
             retrain_information["number_drift_tweets"] = number_flagged_tweets
+
+        date_time = self.get_date_time_retrained_model()
+
+        if date_time is not None:
+            retrain_information["date_time"] = date_time
 
         return retrain_information
 

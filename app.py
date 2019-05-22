@@ -127,5 +127,10 @@ def error():
     return render_template('error.html')
 
 
+@app.route("/hello")
+def hello():
+    return render_template('extra.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)

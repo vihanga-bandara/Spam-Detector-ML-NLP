@@ -126,7 +126,7 @@ class UserClassifier(Classifier):
 
 if __name__ == '__main__':
     classifier = TweetClassifier()
-    classifier.classify("check this out now", 1)
+    classifier.classify("bandara taking the ride home", 1)
     getprobval = classifier.get_proba_value()
     getprobscore = classifier.get_prediction_score()
     getpredtype = classifier.get_prediction_type()
