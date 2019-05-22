@@ -11,6 +11,7 @@ class TweetDetectModel:
     tweets_dataset = None
     tweets_class_col = None
     tweets_col = None
+    tweets_processed_col = None
 
     def get_package_versions(self):
         package_version = dict()
@@ -57,14 +58,57 @@ class TweetDetectModel:
 
     def preprocessing_tweets(self, unprocessed_tweets):
 
-    # pre-processing the tweets before classification
+        # pre-processing the tweets before classification
+        # using regex to identify different combinations in the tweet
+
+        # replacing email addresses with 'emailaddr'
+        processed = unprocessed_tweets.str.replace(r'^.+@[^\.].*\.[a-z]{2,}$', 'emailaddr')
+
+        # replacing links / web addresses with 'webaddr'
+        processed = processed.str.replace(
+            r'(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?', 'webaddr')
+
+        # replacing money symbol with 'moneysymb'
+        processed = processed.str.replace(r'$', 'moneysymbol')
+
+        # replacing normal numbers with numbers
+        # some not working might need to manually remove
+        processed = processed.str.replace(r'^(\+|-)?\d+$', 'numbr')
+
+        # remove punctuation
+        processed = processed.str.replace(r'[^\w\d\s]', ' ')
+
+        # replaces whitespaces between terms with single space
+        processed = processed.str.replace(r'\s+', ' ')
+
+        # removing leading and trailing whitespaces
+        processed = processed.str.replace(r'^s+|\s+?$', '')
+
+        # try hashtagsss as well which can be a new feature
+
+        # change all letters to lowercase
+        processed = processed.str.lower()
+
+        # remove stop words or useless meaningless words from the tweets
+
+        from nltk.corpus import stopwords
+
+        stop_words = set(stopwords.words('english'))
+
+        processed = processed.apply(lambda x: ' '.join(term for term in x.split() if term not in stop_words))
+
+        # using a Porter stemmer to remove word stems
+        ps = nltk.PorterStemmer()
+        processed = processed.apply(lambda x: ' '.join(ps.stem(term) for term in x.split()))
+
+        self.tweets_processed_col = processed
+        return processed
 
     def label_encoding(self, classes_column):
         # convert the labels into binary values
         # where 0 = ham and 1 = spam
         label_encoder = LabelEncoder()
-        self.tweets_dataset[1] = label_encoder.fit_transform(classes_column)
-        self.tweets_class_col = self.tweets_dataset[1]
+        self.tweets_class_col = label_encoder.fit_transform(classes_column)
 
     def main(self):
         # get package version details
@@ -76,3 +120,6 @@ class TweetDetectModel:
             self.label_encoding(self.tweets_class_col)
             unprocessed_tweets = self.tweets_col
             self.preprocessing_tweets(unprocessed_tweets)
+            # finalising dataset with labelled classes and processed tweets
+            self.tweets_dataset[1] = self.tweets_class_col
+            self.tweets_dataset[0] = self.tweets_processed_col
