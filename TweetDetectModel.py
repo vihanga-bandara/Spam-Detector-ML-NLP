@@ -143,6 +143,7 @@ class TweetDetectModel:
     def generate_performance_reports(self):
 
     def save_model_pickle(self, pipeline):
+        info = ['92.6', '0.906', '0.946', '0.925', ['106|6|11|107'], '0.96']
 
         # get current date time
         current_date_time = datetime.datetime.now()
@@ -156,12 +157,18 @@ class TweetDetectModel:
                 'name': 'Tweet Spam Detection Model Pipeline',
                 'author': 'Vihanga Bandara',
                 'date': current_date_time_string,
-                'source_code_version': 'c1fd8820eb8eb61740229c1c6c0d1ca53f82120e',
+                'source_code_version': 'unreleased_1',
                 'metrics': {
-                    'accuracy': 1.0
+                    'tweet_model_accuracy': info[0],
+                    'recall': info[1],
+                    'precision': info[2],
+                    'f_measure': info[3],
+                    'confusion_matrix_scores': info[4],
+                    'auc_score': info[5]
                 }
             }
         })
+
         # save model using pickle
         filename = 'SpamTweetDetectModel.sav'
         pickle.dump(model_information, open(filename, 'wb'))
