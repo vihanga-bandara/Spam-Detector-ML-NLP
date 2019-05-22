@@ -252,3 +252,7 @@ class TweetDetectModel:
             # save model to pickle
             self.save_model_pickle(pipeline)
             from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+
+
+        else:
+            return False

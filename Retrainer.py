@@ -1,6 +1,7 @@
 import pickle
 import os
 import csv
+from TweetDetectModel import TweetDetectModel
 
 
 class Retrainer:
@@ -105,15 +106,31 @@ class Retrainer:
         pickle.dump(new_unflagged_drifted_tweets, open(filename, "wb"))
         return new_unflagged_drifted_tweets
 
+    def delete_retrained_flagged_drifted_tweets(self, retrain_tweets):
+
+        # load the spam tokens
+        filename = self.data + "flagged_drifted_tweets.p"
+        flagged_drifted_tweets = pickle.load(open(filename, 'rb'))
+        empty_flagged_drifted_tweets = [item for item in flagged_drifted_tweets if item not in retrain_tweets]
+
+        # save drifted tweets to file using pickle
+        filename = self.data + "drifted_tweets.p"
+        pickle.dump(empty_flagged_drifted_tweets, open(filename, "wb"))
+
     def retrain_tweet_classifier(self, retrain_tweets):
-        self.load_add_dataset(retrain_tweets)
         if self.load_add_dataset(retrain_tweets):
 
+            # run the tweet detect model with newly added flagged drifted tweets
+            retrain_model = TweetDetectModel()
+            if retrain_model.main():
+                self.delete_retrained_flagged_drifted_tweets(retrain_tweets)
+                return True
+            else:
+                return False
 
+        else:
+            return False
 
-
-    # def get_retrain_score(self):
-    #
     def load_add_dataset(self, retrain_tweets):
         try:
             with open('dataset/SpamTweetsFinalDataset.csv', 'a') as fd:

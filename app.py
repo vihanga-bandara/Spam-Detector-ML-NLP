@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, flash, redirect
 from TweetListener import TweetListener
 from SpamDetector import SpamDetector
 from Retrainer import Retrainer
+from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 
@@ -31,8 +32,11 @@ def classify():
 
             elif isinstance(tweet_obj, object):
                 # custom user or normal user
+                # call spam detector instance
                 spam_detector = SpamDetector()
+                # send tweet object to spam detector instance
                 spam_detector.main(tweet_obj, 1)
+                # generate classification report
                 classification_report = spam_detector.get_prediction_report()
                 return render_template('full_detection.html', prediction=classification_report)
     else:
@@ -42,28 +46,49 @@ def classify():
 @app.route("/review", methods=['GET', 'POST'])
 def review():
     if request.method == 'POST':
-        list = request.form.to_dict(flat=False)
+        # check whether checkbox has been checked and data exists
         if 'checked_drift' in request.form:
+            # instantiate retrainer object
             retrain = Retrainer()
+            # check the type of submit button that was pressed (confirm spam, delete useless spam, retrain)
             if 'confirm_spam' in request.form:
+                # get post form data
                 drifted_check_tweets = request.form.getlist('checked_drift')
+                # write the flagged tweets by the sysadmin to pickle
                 retrain.write_flagged_drifted_tweets(drifted_check_tweets)
+                # generate retrain information details
                 retrain_information_array = retrain.retrain_information()
+                # delete the tweets that have been flagged already by the admin
                 drifted_tweets = retrain.delete_flagged_drifted_tweets(drifted_check_tweets)
                 # successfully written drifted tweets
                 flash(f'Flagged Tweets Successfully', 'success')
                 return render_template('review.html', retrain_information_array=retrain_information_array,
                                        drifted=drifted_tweets)
             elif 'remove' in request.form:
+                # get post form data
                 delete_tweets = request.form.getlist('checked_drift')
+                # delete tweets flagged as not spam from pickle
                 retrain.delete_unflagged_drifted_tweets(delete_tweets)
-                # successfully writted drifted tweets
                 flash(f'Deleted Tweets Successfully', 'success')
                 return redirect(url_for('review'))
 
             elif 'retrain' in request.form:
+                # retrieve all tweets flagged by user for retraining
                 retrain_tweets = retrain.get_flagged_drifted_tweets()
-                retrain.retrain_tweet_classifier(retrain_tweets)
+                # add the newly identified spammy tweets and retrain the tweet classifier
+                if retrain.retrain_tweet_classifier(retrain_tweets):
+                    # successfully retrained path
+                    flash(f'Successfully Retrained Classifier', 'success')
+                    # generate retrain information details
+                    retrain_information_array = retrain.retrain_information()
+                    # retrieve un flagged tweets
+                    drifted_tweets = retrain.get_unflagged_drifted_tweets()
+                    return render_template('review.html', retrain_information_array=retrain_information_array,
+                                           drifted=drifted_tweets)
+                else:
+                    # unsuccessful path
+                    flash(f'Retraining not successfully, Please Try again', 'danger')
+                    return redirect(url_for('review'))
 
 
         else:
@@ -72,9 +97,14 @@ def review():
             return redirect(url_for('review'))
 
     else:
+        # normal path without any post or get method involved
+        # instantiate retrainer object
         retrain = Retrainer()
+        # generate tweets that have been identified as drifted
         retrain.retrieve_unflagged_drifted_tweets()
+        # retrieve drifted tweets
         drifted_tweets = retrain.get_unflagged_drifted_tweets()
+        # generate retrain information details
         retrain_information_array = retrain.retrain_information()
         return render_template('review.html', retrain_information_array=retrain_information_array,
                                drifted=drifted_tweets)
@@ -85,5 +115,12 @@ def classify_tweet():
     return render_template('tweet_detection.html')
 
 
+@app.route("/error")
+# @app.errorhandler(Exception)
+def handle_error(e):
+    code = 500
+    if isinstance(e, HTTPException):
+        code = e.code
+    return render_template('error.html')
 if __name__ == '__main__':
     app.run(debug=True)
