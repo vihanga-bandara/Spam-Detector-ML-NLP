@@ -5,12 +5,18 @@ import numpy as np
 import nltk
 import matplotlib
 from sklearn.preprocessing import LabelEncoder
+from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble.forest import RandomForestClassifier
 from sklearn.ensemble.voting_classifier import VotingClassifier
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+from matplotlib import pyplot
 
 
 class TweetDetectModel:
@@ -97,7 +103,7 @@ class TweetDetectModel:
 
         # remove stop words or useless meaningless words from the tweets
 
-        from nltk.corpus import stopwords
+
 
         stop_words = set(stopwords.words('english'))
 
@@ -116,6 +122,24 @@ class TweetDetectModel:
         label_encoder = LabelEncoder()
         self.tweets_class_col = label_encoder.fit_transform(classes_column)
 
+    def train_model(self, dataset):
+        # split the data to train and test
+        X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.25)
+
+        # create pipeline that will consecutively carry out the training process
+        pipeline = Pipeline(
+            [('vectorizer', CountVectorizer()),
+             ('tfidf', TfidfTransformer()),
+             ('classifier', RandomForestClassifier())])
+
+        train_score = pipeline.fit(X_train, y_train)
+        print(train_score)
+
+        y_pred = pipeline.predict(X_test)
+        print(np.mean(y_pred == y_test))
+
+    def generate_performance_reports(self):
+
     def main(self):
         # get package version details
         package_version = self.__get_package_versions()
@@ -126,6 +150,14 @@ class TweetDetectModel:
             self.label_encoding(self.tweets_class_col)
             unprocessed_tweets = self.tweets_col
             self.preprocessing_tweets(unprocessed_tweets)
+
             # finalising dataset with labelled classes and processed tweets
             self.tweets_dataset[1] = self.tweets_class_col
             self.tweets_dataset[0] = self.tweets_processed_col
+
+            # split data and train model using pipeline
+            self.train_model(self.tweets_dataset)
+
+            # save model to pickle
+
+            # generate performance reports
