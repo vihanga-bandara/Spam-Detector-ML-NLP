@@ -138,12 +138,15 @@ class TweetDetectModel:
         train_score = pipeline.fit(X_train, y_train)
         print(train_score)
 
+        # predict test data using trained model
         y_pred = pipeline.predict(X_test)
+        # probability of prediction of test data using trained model
+        y_pred_proba = pipeline.predict_proba(X_test)
         print(np.mean(y_pred == y_test))
 
-        return pipeline, y_test, y_pred
+        return pipeline, y_test, y_pred, y_pred_proba
 
-    def generate_performance_reports(self, pipeline, y_test, y_pred):
+    def generate_performance_reports(self, pipeline, y_test, y_pred, y_pred_proba):
 
         # get confusion matrix
         # from sklearn.metrics import confusion_matrix
@@ -156,28 +159,33 @@ class TweetDetectModel:
         cm = confusion_matrix(y_test, y_pred)
         ax = plt.subplot()
         svm = sns.heatmap(cm, annot=True, ax=ax, fmt='g', cmap='Greens')
+
         # labels, title and ticks
         ax.set_xlabel('Predicted labels')
         ax.set_ylabel('True labels')
         ax.set_title('Confusion Matrix')
-        ax.xaxis.set_ticklabels(['ham', 'spam']);
-        ax.yaxis.set_ticklabels(['ham', 'spam']);
+        ax.xaxis.set_ticklabels(['ham', 'spam'])
+        ax.yaxis.set_ticklabels(['ham', 'spam'])
         figure = svm.get_figure()
         figure.savefig('images/confusion_matrix.png', dpi=400)
         plt.close()
-        # predict probabilities
-        probs = pipeline.predict_proba(X_test)
+
         # keep probabilities for the positive outcome only
-        probs = probs[:, 1]
-        # calculate AUC
+        probs = y_pred_proba[:, 1]
+
+        # calculate AUC Score
         auc = roc_auc_score(y_test, probs)
         print('AUC: %.3f' % auc)
+
         # calculate roc curve
         fpr, tpr, thresholds = roc_curve(y_test, probs)
+
         # plot no skill
         pyplot.plot([0, 1], [0, 1], linestyle='--')
+
         # plot the roc curve for the model
         pyplot.plot(fpr, tpr, marker='.')
+
         # show the plot
         plt.xlabel('False Positive Rate')
         plt.ylabel('True Positive Rate')
@@ -215,11 +223,10 @@ class TweetDetectModel:
             }
         })
 
-        return True
-
         # save model using pickle
         filename = 'SpamTweetDetectModel.sav'
         pickle.dump(model_information, open(filename, 'wb'))
+        return True
 
     def main(self):
         # get package version details
@@ -237,16 +244,11 @@ class TweetDetectModel:
             self.tweets_dataset[0] = self.tweets_processed_col
 
             # split data and train model using pipeline
-            pipeline, y_test, y_pred = self.train_model(self.tweets_dataset)
+            pipeline, y_test, y_pred, y_pred_proba = self.train_model(self.tweets_dataset)
 
             # generate performance reports
-            self.generate_performance_reports(pipeline, y_test, y_pred)
+            self.generate_performance_reports(pipeline, y_test, y_pred, y_pred_proba)
 
             # save model to pickle
             self.save_model_pickle(pipeline)
             from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
-            confusion_matrix = pd.DataFrame(
-                confusion_matrix(y_test, y_pred),
-                index=[['actual', 'actual '], ['ham', 'spam']],
-                columns=[['predicted', 'predicted'], ['ham', 'spam']])
-            print(confusion_matrix)
