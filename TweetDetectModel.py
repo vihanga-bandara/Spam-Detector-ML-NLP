@@ -13,12 +13,14 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import cross_val_score
-from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
 from matplotlib import pyplot
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 import datetime
 import pickle
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 class TweetDetectModel:
@@ -26,6 +28,7 @@ class TweetDetectModel:
     tweets_class_col = None
     tweets_col = None
     tweets_processed_col = None
+    info = ['92.6', '0.906', '0.946', '0.925', ['106|6|11|107'], '0.96']
 
     def get_package_versions(self):
         package_version = dict()
@@ -138,12 +141,55 @@ class TweetDetectModel:
         y_pred = pipeline.predict(X_test)
         print(np.mean(y_pred == y_test))
 
-        return pipeline
+        return pipeline, y_test, y_pred
 
-    def generate_performance_reports(self):
+    def generate_performance_reports(self, pipeline, y_test, y_pred):
+
+        # get confusion matrix
+        # from sklearn.metrics import confusion_matrix
+        # confusion_matrix = pd.DataFrame(
+        #     confusion_matrix(y_test, y_pred),
+        #     index=[['actual', 'actual '], ['ham', 'spam']],
+        #     columns=[['predicted', 'predicted'], ['ham', 'spam']])
+
+        # get graphs
+        cm = confusion_matrix(y_test, y_pred)
+        ax = plt.subplot()
+        svm = sns.heatmap(cm, annot=True, ax=ax, fmt='g', cmap='Greens')
+        # labels, title and ticks
+        ax.set_xlabel('Predicted labels')
+        ax.set_ylabel('True labels')
+        ax.set_title('Confusion Matrix')
+        ax.xaxis.set_ticklabels(['ham', 'spam']);
+        ax.yaxis.set_ticklabels(['ham', 'spam']);
+        figure = svm.get_figure()
+        figure.savefig('images/confusion_matrix.png', dpi=400)
+        plt.close()
+        # predict probabilities
+        probs = pipeline.predict_proba(X_test)
+        # keep probabilities for the positive outcome only
+        probs = probs[:, 1]
+        # calculate AUC
+        auc = roc_auc_score(y_test, probs)
+        print('AUC: %.3f' % auc)
+        # calculate roc curve
+        fpr, tpr, thresholds = roc_curve(y_test, probs)
+        # plot no skill
+        pyplot.plot([0, 1], [0, 1], linestyle='--')
+        # plot the roc curve for the model
+        pyplot.plot(fpr, tpr, marker='.')
+        # show the plot
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title('Receiver operating characteristic')
+
+        pyplot.savefig('images/roc_curve.png', dpi=400)
+        pyplot.show()
+        pyplot.close()
+        print(confusion_matrix)
 
     def save_model_pickle(self, pipeline):
-        info = ['92.6', '0.906', '0.946', '0.925', ['106|6|11|107'], '0.96']
+        info = self.info
 
         # get current date time
         current_date_time = datetime.datetime.now()
@@ -169,6 +215,8 @@ class TweetDetectModel:
             }
         })
 
+        return True
+
         # save model using pickle
         filename = 'SpamTweetDetectModel.sav'
         pickle.dump(model_information, open(filename, 'wb'))
@@ -189,8 +237,16 @@ class TweetDetectModel:
             self.tweets_dataset[0] = self.tweets_processed_col
 
             # split data and train model using pipeline
-            pipeline = self.train_model(self.tweets_dataset)
+            pipeline, y_test, y_pred = self.train_model(self.tweets_dataset)
+
+            # generate performance reports
+            self.generate_performance_reports(pipeline, y_test, y_pred)
 
             # save model to pickle
             self.save_model_pickle(pipeline)
-            # generate performance reports
+            from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+            confusion_matrix = pd.DataFrame(
+                confusion_matrix(y_test, y_pred),
+                index=[['actual', 'actual '], ['ham', 'spam']],
+                columns=[['predicted', 'predicted'], ['ham', 'spam']])
+            print(confusion_matrix)

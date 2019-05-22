@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TweetDetectModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/TweetDetectModel.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,10 +83,10 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="257">
+                <state relative-caret-position="527">
                   <caret line="298" column="28" lean-forward="true" selection-start-line="298" selection-start-column="28" selection-end-line="298" selection-end-column="28" />
                   <folding>
                     <element signature="e#113#123#0" expanded="true" />
@@ -105,11 +107,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/TestModel.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="92">
-                  <caret line="163" column="23" selection-start-line="163" selection-start-column="23" selection-end-line="163" selection-end-column="23" />
+                <state relative-caret-position="152">
+                  <caret line="149" column="31" lean-forward="true" selection-start-line="149" selection-start-column="31" selection-end-line="149" selection-end-column="31" />
                   <folding>
                     <element signature="e#113#123#0" expanded="true" />
                   </folding>
@@ -232,8 +234,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/TweetDetectModel.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="272">
-                  <caret line="159" column="28" lean-forward="true" selection-start-line="159" selection-start-column="28" selection-end-line="159" selection-end-column="28" />
+                <state relative-caret-position="212">
+                  <caret line="192" lean-forward="true" selection-start-line="192" selection-end-line="192" />
                   <folding>
                     <element signature="e#0#10#0" expanded="true" />
                   </folding>
@@ -344,8 +346,8 @@
         <option value="$PROJECT_DIR$/templates/review.html" />
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/Retrainer.py" />
-        <option value="$PROJECT_DIR$/TestModel.py" />
         <option value="$PROJECT_DIR$/SpamTweetDetectModel.py" />
+        <option value="$PROJECT_DIR$/TestModel.py" />
         <option value="$PROJECT_DIR$/TweetDetectModel.py" />
       </list>
     </option>
@@ -383,6 +385,16 @@
               <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
               <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
               <item name="dataset" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
+              <item name="pickle" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
@@ -684,21 +696,7 @@
       <workItem from="1558364943996" duration="18194000" />
       <workItem from="1558386646777" duration="7608000" />
       <workItem from="1558425115242" duration="40533000" />
-      <workItem from="1558502568066" duration="14688000" />
-    </task>
-    <task id="LOCAL-00075" summary="Adding Spam Dictionary to optimize performance of the drift algorithm">
-      <created>1555661072977</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1555661072977</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Adding Spam Dictionary to optimize performance of the drift algorithm">
-      <created>1555665968015</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1555665968015</updated>
+      <workItem from="1558502568066" duration="16417000" />
     </task>
     <task id="LOCAL-00077" summary="Adding Drifted Spam Tweets for Review">
       <created>1555674377641</created>
@@ -1029,11 +1027,25 @@
       <option name="project" value="LOCAL" />
       <updated>1558517620795</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="UI Integration with backend and Code Refactoring">
+      <created>1558518654733</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1558518654733</updated>
+    </task>
+    <task id="LOCAL-00125" summary="UI Integration with backend and Code Refactoring">
+      <created>1558519201286</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1558519201286</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="550662000" />
+    <option name="totallyTimeSpent" value="552391000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1048,7 +1060,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.78867924" visible="true" weight="0.14222468" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.78867924" visible="true" weight="0.22246818" />
       <window_info id="Structure" order="1" sideWeight="0.21132076" side_tool="true" weight="0.0802435" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1151,7 +1163,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Trying to apply fuzzy logic to probabilistic values of two classifiers" />
     <MESSAGE value="Implementing fuzzy logic to probabilistic values of two classifiers" />
     <MESSAGE value="Reformat DriftDetector to a class and connecting it to SpamDetector class" />
     <MESSAGE value="Renamed file and adding connections to spam detector and drift detector" />
@@ -1176,7 +1187,8 @@
     <MESSAGE value="Refactor code and UI development" />
     <MESSAGE value="Refactor code and UI development and Integration" />
     <MESSAGE value="Add backup files contain models and pickle data" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add backup files contain models and pickle data" />
+    <MESSAGE value="UI Integration with backend and Code Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI Integration with backend and Code Refactoring" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -2218,20 +2230,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestModel.py">
+    <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="163" column="23" selection-start-line="163" selection-start-column="23" selection-end-line="163" selection-end-column="23" />
+        <state relative-caret-position="527">
+          <caret line="298" column="28" lean-forward="true" selection-start-line="298" selection-start-column="28" selection-end-line="298" selection-end-column="28" />
           <folding>
             <element signature="e#113#123#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
+    <entry file="file://$PROJECT_DIR$/TestModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="298" column="28" lean-forward="true" selection-start-line="298" selection-start-column="28" selection-end-line="298" selection-end-column="28" />
+        <state relative-caret-position="152">
+          <caret line="149" column="31" lean-forward="true" selection-start-line="149" selection-start-column="31" selection-end-line="149" selection-end-column="31" />
           <folding>
             <element signature="e#113#123#0" expanded="true" />
           </folding>
@@ -2240,8 +2252,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TweetDetectModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="159" column="28" lean-forward="true" selection-start-line="159" selection-start-column="28" selection-end-line="159" selection-end-column="28" />
+        <state relative-caret-position="212">
+          <caret line="192" lean-forward="true" selection-start-line="192" selection-end-line="192" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

@@ -138,11 +138,11 @@ print(np.mean(y_pred == y_test))
 score = pipeline.predict(input)
 print(score)
 print(classification_report(y_test, y_pred))
-# confusion_matrix = pd.DataFrame(
-#     confusion_matrix(y_test, y_pred),
-#     index=[['actual', 'actual '], ['ham', 'spam']],
-#     columns=[['predicted', 'predicted'], ['ham', 'spam']])
-# print(confusion_matrix)
+confusion_matrix = pd.DataFrame(
+    confusion_matrix(y_test, y_pred),
+    index=[['actual', 'actual '], ['ham', 'spam']],
+    columns=[['predicted', 'predicted'], ['ham', 'spam']])
+print(confusion_matrix)
 
 cm = confusion_matrix(y_test, y_pred)
 
