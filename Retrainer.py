@@ -107,17 +107,10 @@ class Retrainer:
 
     def retrain_tweet_classifier(self, retrain_tweets):
         self.load_add_dataset(retrain_tweets)
-        try:
-            with open('dataset/SpamTweetsFinalDataset.csv', 'a') as fd:
-                for tweet in retrain_tweets:
-                    tweet = tweet.replace(',', '')
-                    tweet_string = tweet + ", spam"
-                    fd.write(tweet_string)
+        if self.load_add_dataset(retrain_tweets):
 
-            return True
 
-        except Exception as e:
-            return False
+
 
     # def get_retrain_score(self):
     #
