@@ -122,7 +122,7 @@ class Retrainer:
 
             # run the tweet detect model with newly added flagged drifted tweets
             retrain_model = TweetDetectModel()
-            if retrain_model.main():
+            if retrain_model.main(0):
                 self.delete_retrained_flagged_drifted_tweets(retrain_tweets)
                 return True
             else:

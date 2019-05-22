@@ -168,6 +168,26 @@ class TweetDetectModel:
 
         return pipeline, y_test, y_pred, y_pred_proba
 
+    def train_model_realtime(self, dataset):
+
+        # create pipeline that will consecutively carry out the training process
+        pipeline = Pipeline(
+            [('vectorizer', CountVectorizer()),
+             ('tfidf', TfidfTransformer()),
+             ('classifier', RandomForestClassifier())])
+
+        pipeline.fit(dataset[0], dataset[1])
+
+        # running cross validation score on full data
+        scores_full = cross_val_score(pipeline, dataset[0], dataset[1], scoring='accuracy', cv=10)
+        accuracy_full = scores_full.mean() * 100
+        mean_full = scores_full.mean()
+        std_full = scores_full.std()
+
+        print('Accuracy is {} | Mean is {} | Standard Deviation is {} on all data'.format(accuracy_full, mean_full,
+                                                                                          std_full))
+        return pipeline
+
     def generate_performance_reports(self, pipeline, y_test, y_pred, y_pred_proba):
 
         # get confusion matrix
@@ -250,7 +270,7 @@ class TweetDetectModel:
         pickle.dump(model_information, open(filename, 'wb'))
         return True
 
-    def main(self):
+    def main(self, check):
         # get package version details
         package_version = self.get_package_versions()
 
@@ -265,14 +285,18 @@ class TweetDetectModel:
             self.tweets_dataset[1] = self.tweets_class_col
             self.tweets_dataset[0] = self.tweets_processed_col
 
-            # split data and train model using pipeline
-            pipeline, y_test, y_pred, y_pred_proba = self.train_model(self.tweets_dataset)
+            """check = 0 means realtime model check = 1 is for performance testing"""
 
-            # generate performance reports
-            self.generate_performance_reports(pipeline, y_test, y_pred, y_pred_proba)
-
-            # save model to pickle
-            self.save_model_pickle(pipeline)
+            if check == 0:
+                # train model using pipeline
+                pipeline = self.train_model_realtime(self.tweets_dataset)
+                # save model to pickle
+                self.save_model_pickle(pipeline)
+            else:
+                # split data and train model using pipeline
+                pipeline, y_test, y_pred, y_pred_proba = self.train_model(self.tweets_dataset)
+                # generate performance reports
+                self.generate_performance_reports(pipeline, y_test, y_pred, y_pred_proba)
 
         else:
             return False
@@ -290,12 +314,14 @@ class TweetDetectModel:
         processed_tweet = list()
         processed_tweet.append(preprocessor.preprocess_tweet(tweet))
 
+        # get proba score and value after predicting
         proba_score = pipeline_model.predict(processed_tweet)
         proba_value = pipeline_model.predict_proba(processed_tweet)
 
-        blah = proba_value.tolist()[0]
+        # convert proba value to list
+        proba_values = proba_value.tolist()[0]
 
-        return proba_score, proba_value, tweet
+        return proba_score, proba_values, tweet
 
 
 if __name__ == '__main__':

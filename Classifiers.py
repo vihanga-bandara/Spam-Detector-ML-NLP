@@ -39,8 +39,8 @@ class TweetClassifier(Classifier):
 
     def classify(self, tweet_obj, check):
         # load from pickle
-        pipeline_ = self.load_model()
-        word_features = self.load_word_features()
+        pipeline_ensemble = self.load_model()
+        # word_features = self.load_word_features()
 
         # preprocess tweet
         if check is 0:
@@ -53,10 +53,17 @@ class TweetClassifier(Classifier):
 
         # find features
         # features_tweet = self.find_features(word_features, processed_tweet)
+        # convert tweet to a list for pipeline detection
+        processed_tweet_list = list()
+        processed_tweet_list.append(processed_tweet)
+
+        # get model from pipeline details
+        pipeline_ensemble_model = pipeline_ensemble["model"]
 
         # classify using model and get scores
-        self._proba_score = nltk_ensemble_model.predict(processed_tweet)
-        proba_value = nltk_ensemble_model.predict_proba(processed_tweet)
+        self._proba_score = pipeline_ensemble_model.predict(processed_tweet_list)
+        proba_value = pipeline_ensemble_model.predict_proba(processed_tweet_list)
+
         # self._proba_value = proba_value._prob_dict
         self._proba_value = proba_value.tolist()[0]
 
