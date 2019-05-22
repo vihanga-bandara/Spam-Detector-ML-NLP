@@ -17,6 +17,8 @@ from sklearn.metrics import classification_report, accuracy_score, confusion_mat
 from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
 from matplotlib import pyplot
+import datetime
+import pickle
 
 
 class TweetDetectModel:
@@ -103,8 +105,6 @@ class TweetDetectModel:
 
         # remove stop words or useless meaningless words from the tweets
 
-
-
         stop_words = set(stopwords.words('english'))
 
         processed = processed.apply(lambda x: ' '.join(term for term in x.split() if term not in stop_words))
@@ -138,7 +138,33 @@ class TweetDetectModel:
         y_pred = pipeline.predict(X_test)
         print(np.mean(y_pred == y_test))
 
+        return pipeline
+
     def generate_performance_reports(self):
+
+    def save_model_pickle(self, pipeline):
+
+        # get current date time
+        current_date_time = datetime.datetime.now()
+        current_date_time_string = "{0} - {1}".format(current_date_time.strftime("%a, %b %d, %Y"),
+                                                      current_date_time.strftime("%I:%M:%S %p"))
+
+        # add model and model information to dictionary
+        model_information = dict({
+            'model': pipeline,
+            'metadata': {
+                'name': 'Tweet Spam Detection Model Pipeline',
+                'author': 'Vihanga Bandara',
+                'date': current_date_time_string,
+                'source_code_version': 'c1fd8820eb8eb61740229c1c6c0d1ca53f82120e',
+                'metrics': {
+                    'accuracy': 1.0
+                }
+            }
+        })
+        # save model using pickle
+        filename = 'SpamTweetDetectModel.sav'
+        pickle.dump(model_information, open(filename, 'wb'))
 
     def main(self):
         # get package version details
@@ -156,8 +182,8 @@ class TweetDetectModel:
             self.tweets_dataset[0] = self.tweets_processed_col
 
             # split data and train model using pipeline
-            self.train_model(self.tweets_dataset)
+            pipeline = self.train_model(self.tweets_dataset)
 
             # save model to pickle
-
+            self.save_model_pickle(pipeline)
             # generate performance reports
