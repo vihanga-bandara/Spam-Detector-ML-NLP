@@ -134,15 +134,15 @@ class TweetDetectModel:
         label_encoder = LabelEncoder()
         self.tweets_class_col = label_encoder.fit_transform(classes_column)
 
-    def train_model_realtime(self, dataset):
+    # dummy variable pass to avoid tokenizing and preprocessor since its already been done
+    def dummy_fun(self, doc):
+        return doc
 
-        # dummy variable pass to avoid tokenizing and preprocessor since its already been done
-        def dummy_fun(doc):
-            return doc
+    def train_model_realtime(self, dataset):
 
         # initialize TF-ID Vectorizer
         tfidf = TfidfVectorizer(
-            analyzer='word', tokenizer=dummy_fun, preprocessor=dummy_fun,
+            analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
             token_pattern=None, stop_words=None,
             ngram_range=(1, 1), use_idf=True)
 
@@ -150,7 +150,7 @@ class TweetDetectModel:
 
         # create a new random forest classifier with best params from grid search
         rf_classifier = RandomForestClassifier(n_estimators=200, max_features="auto", criterion="gini", max_depth=7)
-        rf_classifier.fit(features_set_train, dataset[0])
+        rf_classifier.fit(features_set_train, dataset[1])
 
         # running cross validation score on full dataset needed for realtime
         scores_full = cross_val_score(rf_classifier, features_set_train, dataset[1], scoring='accuracy', cv=5)
@@ -181,8 +181,13 @@ class TweetDetectModel:
             return doc
 
         # initialize TF-ID Vectorizer
+        # tfidf = TfidfVectorizer(
+        #     analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
+        #     token_pattern=None, stop_words=None,
+        #     ngram_range=(1, 2), use_idf=True)
+
         tfidf = TfidfVectorizer(
-            analyzer='word', tokenizer=dummy_fun, preprocessor=dummy_fun,
+            analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
             token_pattern=None, stop_words=None,
             ngram_range=(1, 1), use_idf=True)
 
@@ -229,7 +234,7 @@ class TweetDetectModel:
         print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
 
         # probability of prediction of test data using trained model
-        y_pred_proba = rf_classifier.predict_proba(X_test)
+        y_pred_proba = rf_classifier.predict_proba(features_set_test)
         print(np.mean(y_pred_test == y_test))
 
         # running cross validation score on testing data
@@ -331,6 +336,8 @@ class TweetDetectModel:
         filename = 'pickle/SpamTweetDetectModel.sav'
         pickle.dump(model_information, open(filename, 'wb'))
 
+        print("Successfully saved model information to pickle")
+
         return True
 
     def main(self, check):
@@ -352,7 +359,7 @@ class TweetDetectModel:
 
             if check == 0:
                 # train model
-                model, tfidf_vectorizer = self.train_model_realtime_test(self.tweets_dataset)
+                model, tfidf_vectorizer = self.train_model_realtime(self.tweets_dataset)
                 # save model to pickle
                 self.save_model_pickle(model, tfidf_vectorizer)
             else:
@@ -361,6 +368,9 @@ class TweetDetectModel:
 
                 # generate performance reports
                 self.generate_performance_reports(model, y_test, y_pred_test, y_pred_proba, tfidf_vectorizer)
+
+                # save model to pickle
+                self.save_model_pickle(model, tfidf_vectorizer)
 
         else:
             return False
@@ -399,6 +409,20 @@ class TweetDetectModel:
 
 if __name__ == '__main__':
     train = TweetDetectModel()
+
+    # #run model manually
     train.main(0)
-    res = train.classify('Obtain complimentary coin, check it out now')
-    print(res)
+
+    print(train.classify('HOW DO YOU GET UNLIMITED FREE TWITTER FOLLOWERS? http://tinyurl.com/3xkr5hc'))
+    print(train.classify('free twitter followers is the choice that i have and i know it'))
+    print(train.classify('Want thousands of people to follow you for free?'))
+    print(train.classify('Special free offers EXTRA 6% Off on Gold and Silver coins'))
+
+    print(train.classify('I am going back to your Genius Bar to complain. #annoyed'))
+    print(train.classify(
+        'I am suing my insurance company and you just managed to make it to the top of my shit list #Ineedthosepictures'))
+
+    print(train.classify('Click to check your daily and become rich'))
+    print(train.classify('Here is a small gift for you #gifts'))
+    print(train.classify('Best investment from us, retweet to win'))
+    print(train.classify('Obtain complimentary coin, check it out now'))
