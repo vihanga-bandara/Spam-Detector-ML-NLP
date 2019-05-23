@@ -249,7 +249,7 @@ class TweetDetectModel:
         # # fit the model to the training data
         # log_reg.fit(X_train, y_train)
 
-    def generate_performance_reports(self, pipeline, y_test, y_pred, y_pred_proba, tfidf_vectorizer):
+    def generate_performance_reports(self, model, y_test, y_pred, y_pred_proba, tfidf_vectorizer):
 
         # get confusion matrix
         # from sklearn.metrics import confusion_matrix
@@ -312,7 +312,7 @@ class TweetDetectModel:
             'model': model,
             'tfidf_vectorizer': tfidf_vectorizer,
             'metadata': {
-                'name': 'Tweet Spam Detection Model Pipeline',
+                'name': 'Tweet Spam Detection Model',
                 'author': 'Vihanga Bandara',
                 'date': current_date_time_string,
                 'source_code_version': 'unreleased_{0}'.format(current_date_time.strftime("%I:%M:%S %p")),
@@ -356,7 +356,7 @@ class TweetDetectModel:
                 # save model to pickle
                 self.save_model_pickle(model, tfidf_vectorizer)
             else:
-                # split data and train model using pipeline
+                # split data and train model
                 model, tfidf_vectorizer, y_test, y_pred_test, y_pred_proba = self.train_model(self.tweets_dataset)
 
                 # generate performance reports
@@ -368,19 +368,28 @@ class TweetDetectModel:
     def classify(self, tweet):
         # load the SpamTweetDetectModel from directory
         filename = "pickle/SpamTweetDetectModel.sav"
-        pipeline_ensemble = pickle.load(open(filename, 'rb'))
+        model_information = pickle.load(open(filename, 'rb'))
 
         # get model
-        pipeline_model = pipeline_ensemble["model"]
+        model = model_information["model"]
+
+        # get vectorizer
+        tfidf_vectorizer = model_information["tfidf_vectorizer"]
 
         # preprocess tweet
         preprocessor = Preprocessor()
         processed_tweet = list()
         processed_tweet.append(preprocessor.preprocess_tweet(tweet))
 
+        # create dataframe to hold tweet
+        df = pd.DataFrame(processed_tweet)
+
+        # transform tweet
+        transformed_text = tfidf_vectorizer.transform(df[0])
+
         # get proba score and value after predicting
-        proba_score = pipeline_model.predict(processed_tweet)
-        proba_value = pipeline_model.predict_proba(processed_tweet)
+        proba_score = model.predict(transformed_text)
+        proba_value = model.predict_proba(transformed_text)
 
         # convert proba value to list
         proba_values = proba_value.tolist()[0]

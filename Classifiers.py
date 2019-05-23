@@ -1,6 +1,7 @@
 import pickle
 import Preprocessor
 import TwitterAPI
+import pandas as pd
 
 
 class Classifier(object):
@@ -35,20 +36,11 @@ class TweetClassifier(Classifier):
         # load the SpamTweetDetectModel word_features from directory
         filename = self.pickle + "wordfeatures.p"
         word_features = pickle.load(open(filename, 'rb'))
-
-        data = ['webaddr do you want to go out with me']
-        df = pd.DataFrame(data)
-
-        check_test = tfidf.transform(df[0])
-
-        check_model_predict = rf_classifier.predict(check_test)
-
         return word_features
 
     def classify(self, tweet_obj, check):
         # load from pickle
-        pipeline_ensemble = self.load_model()
-        # word_features = self.load_word_features()
+        model_information = self.load_model()
 
         # preprocess tweet
         if check is 0:
@@ -59,25 +51,28 @@ class TweetClassifier(Classifier):
             tweet_obj = self.twitter_api.getTweet(tweet_obj)
             processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
 
-        # find features
-        # features_tweet = self.find_features(word_features, processed_tweet)
-        # convert tweet to a list for pipeline detection
+        # convert tweet to a list
         processed_tweet_list = list()
         processed_tweet_list.append(processed_tweet)
 
-        # get model from pipeline details
-        pipeline_ensemble_model = pipeline_ensemble["model"]
+        # get model
+        model = model_information["model"]
+
+        # get vectorizer
+        tfidf_vectorizer = model_information["tfidf_vectorizer"]
+
+        # create dataframe to hold tweet
+        df = pd.DataFrame(processed_tweet)
+
+        # transform tweet
+        transformed_text = tfidf_vectorizer.transform(df[0])
 
         # classify using model and get scores
-        self._proba_score = pipeline_ensemble_model.predict(processed_tweet_list)
-        proba_value = pipeline_ensemble_model.predict_proba(processed_tweet_list)
+        self._proba_score = model.predict(transformed_text)
+        proba_value = model.predict_proba(transformed_text)
 
         # self._proba_value = proba_value._prob_dict
         self._proba_value = proba_value.tolist()[0]
-
-    # def find_features(self, word_features, processed_tweet):
-    #     features_tweet = self.preprocessor.find_features_tweet(word_features, processed_tweet)
-    #     return features_tweet
 
     def get_proba_value(self):
         return self._proba_value

@@ -57,10 +57,10 @@ class Retrainer:
     def get_date_time_retrained_model(self):
         # load the SpamTweetDetectModel from directory
         filename = "pickle/SpamTweetDetectModel.sav"
-        pipeline_ensemble = pickle.load(open(filename, 'rb'))
+        model = pickle.load(open(filename, 'rb'))
 
         # get model
-        date_time = pipeline_ensemble["metadata"]["date"]
+        date_time = model["metadata"]["date"]
 
         return date_time
 
