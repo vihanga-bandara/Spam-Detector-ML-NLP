@@ -143,8 +143,8 @@ class TweetDetectModel:
         # initialize TF-ID Vectorizer
         tfidf = TfidfVectorizer(
             analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
-            token_pattern=None, stop_words=None,
-            ngram_range=(1, 1), use_idf=True)
+            token_pattern=None,
+            ngram_range=(1, 3))
 
         features_set_train = tfidf.fit_transform(dataset[0])
 
@@ -188,8 +188,8 @@ class TweetDetectModel:
 
         tfidf = TfidfVectorizer(
             analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
-            token_pattern=None, stop_words=None,
-            ngram_range=(1, 1), use_idf=True)
+            token_pattern=None,
+            ngram_range=(1, 3))
 
         features_set_train = tfidf.fit_transform(X_train)
 
@@ -411,7 +411,8 @@ if __name__ == '__main__':
     train = TweetDetectModel()
 
     # #run model manually
-    train.main(0)
+    # train.main(0)
+    train.main(1)
 
     print(train.classify('HOW DO YOU GET UNLIMITED FREE TWITTER FOLLOWERS? http://tinyurl.com/3xkr5hc'))
     print(train.classify('free twitter followers is the choice that i have and i know it'))
