@@ -108,6 +108,22 @@ class UserClassifier(Classifier):
         prob_arr = [proba_value.min(), proba_value.max()]
         self._proba_value = prob_arr
 
+    def classify_user_name(self, screen_name):
+        # load from pickle
+        decision_tree_model = self.load_model()
+
+        # get user object from tweet object
+        user_obj = self.twitter_api.getUser(screen_name)
+
+        # get features from user obj
+        user_features = self.get_features_user(user_obj)
+
+        # classify and add score to classifier
+        self._proba_score = decision_tree_model.predict(user_features)
+        proba_value = decision_tree_model.predict_proba(user_features)
+        prob_arr = [proba_value.min(), proba_value.max()]
+        self._proba_value = prob_arr
+
     def get_proba_value(self):
         return self._proba_value
 
@@ -125,8 +141,14 @@ class UserClassifier(Classifier):
 
 
 if __name__ == '__main__':
-    classifier = TweetClassifier()
-    classifier.classify("bandara taking the ride home", 1)
+    # classifier = TweetClassifier()
+    # classifier.classify("bandara taking the ride home", 1)
+    # getprobval = classifier.get_proba_value()
+    # getprobscore = classifier.get_prediction_score()
+    # getpredtype = classifier.get_prediction_type()
+
+    classifier = UserClassifier()
+    classifier.classify_user_name("rameshliyanage")
     getprobval = classifier.get_proba_value()
     getprobscore = classifier.get_prediction_score()
     getpredtype = classifier.get_prediction_type()
