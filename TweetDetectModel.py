@@ -136,26 +136,6 @@ class TweetDetectModel:
 
     def train_model_realtime(self, dataset):
 
-        # create pipeline that will consecutively carry out the training process
-        pipeline = Pipeline(
-            [('vectorizer', CountVectorizer()),
-             ('tfidf', TfidfTransformer()),
-             ('classifier', RandomForestClassifier())])
-
-        pipeline.fit(dataset[0], dataset[1])
-
-        # running cross validation score on full data
-        scores_full = cross_val_score(pipeline, dataset[0], dataset[1], scoring='accuracy', cv=10)
-        accuracy_full = scores_full.mean() * 100
-        mean_full = scores_full.mean()
-        std_full = scores_full.std()
-
-        print('Accuracy is {} | Mean is {} | Standard Deviation is {} on all data'.format(accuracy_full, mean_full,
-                                                                                          std_full))
-        return pipeline
-
-    def train_model_realtime(self, dataset):
-
         # dummy variable pass to avoid tokenizing and preprocessor since its already been done
         def dummy_fun(doc):
             return doc
