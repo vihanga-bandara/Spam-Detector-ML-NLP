@@ -4,6 +4,7 @@ from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 import pickle
 import pandas as pd
+from Dataframe import Dataframe as dt
 
 
 class Preprocessor:

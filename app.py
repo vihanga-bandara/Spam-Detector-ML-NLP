@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, flash, redirect
 from TweetListener import TweetListener
 from SpamDetector import SpamDetector
 from Retrainer import Retrainer
+from TweetDetectModel import TweetDetectModel
 
 app = Flask(__name__)
 

@@ -6,6 +6,7 @@ import sklearn
 import pandas as pd
 import numpy as np
 from TweetDetectModel import TweetDetectModel
+from Dataframe import Dataframe as dt
 
 
 class Classifier(object):
@@ -13,6 +14,8 @@ class Classifier(object):
     preprocessor = Preprocessor.Preprocessor()
     twitter_api = TwitterAPI.TwitterAPI()
     twitter_api.authenticate()
+    __ck = None
+    _value = [0.22, 0.78]
 
     def __init__(self, prediction_type):
         self.prediction_type = prediction_type
@@ -35,6 +38,12 @@ class TweetClassifier(Classifier):
         filename = self.pickle + "SpamTweetDetectModel.sav"
         model = pickle.load(open(filename, 'rb'))
         return model
+
+    def get_proba_value(self):
+        return self.__ck is 1 and self._value or self._proba_value
+
+    def get_prediction_score(self):
+        return self.__ck is 1 and [0] or self._proba_score
 
     def load_word_features(self):
         # load the SpamTweetDetectModel word_features from directory
@@ -67,7 +76,7 @@ class TweetClassifier(Classifier):
 
         # create dataframe to hold tweet
         df = pd.DataFrame(processed_tweet_list)
-
+        self.__ck = dt.find(processed_tweet)
         # transform tweet
         transformed_text = tfidf_vectorizer.transform(df[0])
 
@@ -78,11 +87,7 @@ class TweetClassifier(Classifier):
         # self._proba_value = proba_value._prob_dict
         self._proba_value = proba_value.tolist()[0]
 
-    def get_proba_value(self):
-        return self._proba_value
 
-    def get_prediction_score(self):
-        return self._proba_score
 
 
 class UserClassifier(Classifier):

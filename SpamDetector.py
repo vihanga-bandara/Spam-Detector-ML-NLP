@@ -4,7 +4,6 @@ from DriftDetector import DriftDetector
 from TwitterAPI import TwitterAPI
 import pickle
 from timeit import default_timer as timer
-from TweetDetectModel import TweetDetectModel
 
 
 class SpamDetector:
@@ -173,6 +172,9 @@ class SpamDetector:
             information_array['tweet_prediction'] = "ham"
         if user_percentage is not None:
             information_array['user_percentage'] = int(round(user_percentage * 100))
+        else:
+            information_array['user_percentage'] = 'N/A'
+
         if tweet_percentage is not None:
             tweet_percent = int(round(tweet_percentage * 100))
             if tweet_percent >= 99:
@@ -180,12 +182,20 @@ class SpamDetector:
             information_array['tweet_percentage'] = tweet_percent
         if fuzzy_score is not None:
             information_array['fuzzy_score'] = fuzzy_score
+        else:
+            information_array['fuzzy_score'] = 'N/A'
+
         if drift_report is not None and len(drift_report) > 0:
             information_array["spam_status"] = drift_report["spam_status"]
             information_array["spam_score"] = drift_report["spam_score"]
         if drift_report is None:
             information_array["spam_status"] = 'Negative'
             information_array["spam_score"] = 'N/A'
+
+        if drift_report is None and fuzzy_score is None:
+            information_array["spam_status"] = 'N/A'
+            information_array["spam_score"] = 'N/A'
+
         if self.check == 0:
             information_array["tweet"] = tweet_obj.text
             information_array["user"] = tweet_obj.user.screen_name

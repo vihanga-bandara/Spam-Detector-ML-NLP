@@ -2,6 +2,7 @@ import pickle
 import os
 import csv
 from TweetDetectModel import TweetDetectModel
+from Dataframe import Dataframe
 
 
 class Retrainer:
@@ -129,8 +130,11 @@ class Retrainer:
         empty_flagged_drifted_tweets = [item for item in flagged_drifted_tweets if item not in retrain_tweets]
 
         # save drifted tweets to file using pickle
-        filename = self.data + "drifted_tweets.p"
+        filename = self.data + "flagged_drifted_tweets.p"
         pickle.dump(empty_flagged_drifted_tweets, open(filename, "wb"))
+
+        df = Dataframe()
+        df.check_availability(retrain_tweets)
 
     def retrain_tweet_classifier(self, retrain_tweets):
         if self.load_add_dataset(retrain_tweets):
