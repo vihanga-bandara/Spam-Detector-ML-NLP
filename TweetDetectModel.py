@@ -6,9 +6,13 @@ import nltk
 import matplotlib
 from sklearn.preprocessing import LabelEncoder
 from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble.forest import RandomForestClassifier
-from sklearn.ensemble.voting_classifier import VotingClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import VotingClassifier
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
@@ -188,6 +192,105 @@ class TweetDetectModel:
                                                                                           std_full))
         return pipeline
 
+    def train_model_realtime_test(self, dataset):
+
+        # create pipeline that will consecutively carry out the training process
+        # check for train test split
+        # dummy variable pass to avoid tokenizing and preprocessor since its already been done
+        # X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.30,
+        #                                                     stratify=dataset[1])
+
+        # split data into train and test sets
+        X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.30)
+
+        def dummy_fun(doc):
+            return doc
+
+        # initialize TF-ID Vectorizer
+        tfidf = TfidfVectorizer(
+            analyzer='word', tokenizer=dummy_fun, preprocessor=dummy_fun,
+            token_pattern=None, stop_words=None,
+            ngram_range=(1, 1), use_idf=True)
+
+        features_set_train = tfidf.fit_transform(X_train)
+
+        features_set_test = tfidf.transform(X_test)
+
+        # create a new random forest classifier
+        rf_classifier = RandomForestClassifier()
+        # rf_classifier.fit(features_set_train, y_train)
+
+        # create a dictionary of all values we want to test for n_estimators
+        params_rf = {"n_estimators": [200, 500],
+                     "max_features": ['auto', 'sqrt', 'log2'],
+                     "max_depth": [4, 5, 6, 7, 8],
+                     "criterion": ['gini', 'entropy']
+                     }
+
+        # use gridsearch to test all values for n_estimators
+        rf_gs = GridSearchCV(rf_classifier, params_rf, cv=5)
+        # fit model to training data
+        rf_gs.fit(features_set_train, y_train)
+
+        # save best model
+        rf_best = rf_gs.best_estimator_
+        # check best n_estimators value
+        print(rf_gs.best_params_)
+
+        # predicting on the same trained set
+        y_pred_train = rf_classifier.predict(features_set_train)
+
+        # predict on the test dataset
+        y_pred_test = rf_classifier.predict(features_set_test)
+
+        # score of the test dataset
+        y_score_test = rf_classifier.score(features_set_test, y_test)
+        print(y_score_test)
+
+        # Output classifier results
+        print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
+        print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
+
+        data = ['webaddr do you want to go out with me']
+        df = pd.DataFrame(data)
+
+        check_test = tfidf.transform(df[0])
+
+        check_model_predict = rf_classifier.predict(check_test)
+
+        return tfidf
+
+        # # create new a knn model
+        # knn = KNeighborsClassifier()
+        #
+        # # create a dictionary of all values we want to test for n_neighbors
+        # params_knn = {"n_neighbors": np.arange(1, 25)}
+        # # use gridsearch to test all values for n_neighbors
+        # knn_gs = GridSearchCV(knn, params_knn, cv=5)
+        # # fit model to training data
+        # knn_gs.fit(X_train, y_train)
+        #
+        # # save best model
+        # knn_best = knn_gs.best_estimator_
+        # # check best n_neigbors value
+        # print(knn_gs.best_params_)
+
+        # # create a new logistic regression model
+        # log_reg = LogisticRegression()
+        #
+        # # fit the model to the training data
+        # log_reg.fit(X_train, y_train)
+
+        # # running cross validation score on full data
+        # scores_full = cross_val_score(pipeline, dataset[0], dataset[1], scoring='accuracy', cv=10)
+        # accuracy_full = scores_full.mean() * 100
+        # mean_full = scores_full.mean()
+        # std_full = scores_full.std()
+        #
+        # print('Accuracy is {} | Mean is {} | Standard Deviation is {} on all data'.format(accuracy_full, mean_full,
+        #                                                                                   std_full))
+        # return pipeline
+
     def generate_performance_reports(self, pipeline, y_test, y_pred, y_pred_proba):
 
         # get confusion matrix
@@ -289,7 +392,7 @@ class TweetDetectModel:
 
             if check == 0:
                 # train model using pipeline
-                pipeline = self.train_model_realtime(self.tweets_dataset)
+                pipeline = self.train_model_realtime_test(self.tweets_dataset)
                 # save model to pickle
                 self.save_model_pickle(pipeline)
             else:
@@ -326,5 +429,6 @@ class TweetDetectModel:
 
 if __name__ == '__main__':
     train = TweetDetectModel()
-    res = train.classify('Build Your Twitter Account For FREE! http://tinyurl.com/ygv3gcr/?22399')
+    train.main(0)
+    res = train.classify('Obtain complimentary coin, check it out now')
     print(res)
