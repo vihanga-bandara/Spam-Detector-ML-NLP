@@ -1,7 +1,10 @@
 import pickle
 import Preprocessor
 import TwitterAPI
+import sys
+import sklearn
 import pandas as pd
+import numpy as np
 from TweetDetectModel import TweetDetectModel
 
 
@@ -63,7 +66,7 @@ class TweetClassifier(Classifier):
         tfidf_vectorizer = model_information["tfidf_vectorizer"]
 
         # create dataframe to hold tweet
-        df = pd.DataFrame(processed_tweet)
+        df = pd.DataFrame(processed_tweet_list)
 
         # transform tweet
         transformed_text = tfidf_vectorizer.transform(df[0])

@@ -4,6 +4,7 @@ from DriftDetector import DriftDetector
 from TwitterAPI import TwitterAPI
 import pickle
 from timeit import default_timer as timer
+from TweetDetectModel import TweetDetectModel
 
 
 class SpamDetector:
@@ -212,10 +213,13 @@ class SpamDetector:
 
 
 if __name__ == '__main__':
-    twitter_api = TwitterAPI()
-    twitter_api.authenticate()
+    # twitter_api = TwitterAPI()
+    # twitter_api.authenticate()
+    # spamdet = SpamDetector()
+    # tweetObj = 'Obtain complimentary coin, check it out now'
+    # spamdet.main(tweetObj, 2)
+    # classification_report = spamdet.get_prediction_report()
     spamdet = SpamDetector()
-    tweetObj = 'Obtain complimentary coin, check it out now'
-    spamdet.main(tweetObj, 2)
+    spamdet.main('This is how i roll baby', 2)
     classification_report = spamdet.get_prediction_report()
     exit(0)
