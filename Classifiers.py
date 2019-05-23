@@ -2,6 +2,7 @@ import pickle
 import Preprocessor
 import TwitterAPI
 import pandas as pd
+from TweetDetectModel import TweetDetectModel
 
 
 class Classifier(object):
@@ -29,8 +30,8 @@ class TweetClassifier(Classifier):
     def load_model(self):
         # load the SpamTweetDetectModel from directory
         filename = self.pickle + "SpamTweetDetectModel.sav"
-        nltk_ensemble = pickle.load(open(filename, 'rb'))
-        return nltk_ensemble
+        model = pickle.load(open(filename, 'rb'))
+        return model
 
     def load_word_features(self):
         # load the SpamTweetDetectModel word_features from directory
@@ -144,15 +145,15 @@ class UserClassifier(Classifier):
 
 
 if __name__ == '__main__':
-    # classifier = TweetClassifier()
-    # classifier.classify("bandara taking the ride home", 1)
-    # getprobval = classifier.get_proba_value()
-    # getprobscore = classifier.get_prediction_score()
-    # getpredtype = classifier.get_prediction_type()
-
-    classifier = UserClassifier()
-    classifier.classify_user_name("rameshliyanage")
+    classifier = TweetClassifier()
+    classifier.classify("bandara taking the ride home", 1)
     getprobval = classifier.get_proba_value()
     getprobscore = classifier.get_prediction_score()
     getpredtype = classifier.get_prediction_type()
+
+    # classifier = UserClassifier()
+    # classifier.classify_user_name("rameshliyanage")
+    # getprobval = classifier.get_proba_value()
+    # getprobscore = classifier.get_prediction_score()
+    # getpredtype = classifier.get_prediction_type()
     exit(0)

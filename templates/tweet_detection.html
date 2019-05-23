@@ -3,19 +3,67 @@
 <div class="row no-gutters">
     <div class="col-md-8 offset-md-2">
         <div class="dash-wrap">
-            <form method="post" action="{{ url_for('review') }}" id="flag-drift-tweets">
-                <div class="boxes">
-                    <input type="checkbox" name="checked_drift1" id="box-1" value="box-1">
-                    <label for="box-1">Sustainable typewriter cronut</label>
+            <div class="row no-gutters mar-side">
+                <div class="col-md-4 box-wrap">
+                    <div class="box text-center">
+                        <p class="title">Tweet score</p>
+                        <p class="percent">{{prediction['tweet_percentage']}}%</p>
+                        <!--                        <p class="percent">{{prediction['tweet_prediction']}}</p>-->
 
-                    <input type="checkbox" name="checked_drift2" id="box-2" value="box-2">
-                    <label for="box-2">Gentrify pickled kale chips </label>
-
-                    <input type="checkbox" name="checked_drift3" id="box-3" value="box-3">
-                    <label for="box-3">Gastropub butcher</label>
+                    </div>
                 </div>
-                <input type="submit" value="Submit">
-            </form>
+                <div class="col-md-4 box-wrap fiz-score">
+                    <div class="box text-center">
+                        <p class="title">Final Fuzzy Score</p>
+                        <p class="percent">{{prediction['fuzzy_score']}}%</p>
+                    </div>
+                </div>
+                <div class="col-md-4 box-wrap">
+                    <div class="box text-center">
+                        <p class="title">User score</p>
+                        <p class="percent">{{prediction['user_percentage']}}%</p>
+                        <!--                        <p class="percent">{{prediction['user_prediction']}}</p>-->
+                    </div>
+                </div>
+                <div class="col-md-6 box-wrap">
+                    <div class="box text-center">
+                        <p class="title">Drifted</p>
+                        <p class="percent">{{prediction['spam_status']}}</p>
+                    </div>
+                </div>
+                <div class="col-md-6 box-wrap">
+                    <div class="box text-center">
+                        <p class="title">Drifted score</p>
+                        <p class="percent">{{prediction['spam_score']}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-md-8 offset-md-2 tweet-wrap">
+                    <div class="row no-gutters">
+                        <div class="col-md-12 tweet">
+                            <h5>Tweet</h5>
+                            <p>{{prediction['tweet']}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row no-gutters">
+                <div class="col-md-12">
+                    <p>
+                        <a class="btn btn-primary cust-btn" data-toggle="collapse" href="#collapseExample" role="button"
+                           aria-expanded="false" aria-controls="collapseExample">
+                            Get word cloud <span class="float-right"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            <img src="test.jpg" alt="This contains the word cloud of the tweet">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -99,15 +99,15 @@ class SpamDetector:
             print("Tweet Spam Prediction = {0}".format(tweet_prediction_score))
             print("Tweet Spam Probabilities = spam({0}) ham({1})".format(tweet_prediction_proba[1],
                                                                          tweet_prediction_proba[0]))
-            """ Drift Detection """
-            drift_report = dict()
-            if tweet_prediction_score != 1:
-                drift_report = self.drift_detection(tweet_prediction_score, tweet_obj)
-            else:
-                drift_report = None
+            # """ Drift Detection """
+            # drift_report = dict()
+            # if tweet_prediction_score != 1:
+            #     drift_report = self.drift_detection(tweet_prediction_score, tweet_obj)
+            # else:
+            #     drift_report = None
 
             self.information_array = self.info_prediction(None, None, tweet_prediction_score, tweet_prediction_proba[1],
-                                                          None, tweet_obj, drift_report)
+                                                          None, tweet_obj, None)
 
             # if 'tweet_id' in locals() and tweet_id is not None:
             #

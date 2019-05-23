@@ -112,14 +112,24 @@ def review():
                                drifted=drifted_tweets)
 
 
-@app.route("/classify_tweet")
+@app.route("/classify_tweet", methods=['GET', 'POST'])
 def classify_tweet():
-    return render_template('tweet_detection.html')
+    if request.method == 'POST':
+        if 'tweet' in request.form:
+            tweet = request.form.get('tweet')
+            spam_detector = SpamDetector()
+            spam_detector.main(tweet, 2)
+            classification_report = spam_detector.get_prediction_report()
+            return render_template('tweet_detection.html', prediction=classification_report)
+    else:
+        return render_template('tweet_only_landing.html')
 
 
-@app.errorhandler(Exception)
-def handle_error(e):
-    return redirect(url_for('error'))
+#
+# @app.errorhandler(Exception)
+# def handle_error(e):
+#     print(e)
+#     return redirect(url_for('error'))
 
 
 @app.route("/error")
@@ -127,9 +137,10 @@ def error():
     return render_template('error.html')
 
 
-@app.route("/hello")
-def hello():
-    return render_template('extra.html')
+#
+# @app.route("/hello")
+# def hello():
+#     return render_template('extra.html')
 
 
 if __name__ == '__main__':

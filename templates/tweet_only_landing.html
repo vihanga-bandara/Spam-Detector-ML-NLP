@@ -1,0 +1,102 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="row no-gutters height-cust">
+    <div class="col-md-4 offset-md-4 landing-wrap align-self-center">
+        <div class="row no-gutters">
+            <div class="col-md-12">
+                <div class="wrap-inside">
+                    <form method="post" action="{{ url_for('classify_tweet') }}">
+                        <div class="col-md-12 text-center">
+                            <div class="form-group">
+                                <label id="twitterlbl" for="tweet">Enter Tweet</label>
+                                <textarea class="form-control" id="tweet" name="tweet" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-primary btn-landing" id="twitteridbtn" type="submit"
+                                    onclick="onclick_event()">
+                                Classify Tweet
+                            </button>
+                            <div id="loading" style="display:none;"><img
+                                    src="{{ url_for('static', filename = 'images/loader.gif') }}" alt="Loading"/>
+                                <p style="text-align: center" id="loader_detail">Loading!</p>
+                            </div>
+                        </div>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages%}
+                        {% for category, message in messages %}
+                        <div class="alert alert-{{category}}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script>
+            function onclick_event() {
+                $('#loading').show();
+                $('#tweet').hide();
+                $('#twitterlbl').hide();
+                $('#twitterid').hide();
+                $('#twitteridbtn').hide();
+
+                setTimeout(function () {
+                    // Do something after 1 second
+                    document.getElementById('loader_detail').innerHTML = "Checking Twitter Handle";
+                }, 500);
+                setTimeout(function () {
+                    // Do something after 1 second
+                    document.getElementById('loader_detail').innerHTML = "Listening";
+                }, 1000);
+            }
+
+
+            // $(window).load(function () {
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Collecting data !!";
+            //     }, 500);
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Data collected. :)";
+            //     }, 1000);
+            // });
+            // function change_text(){
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Collecting data !!";
+            //     }, 500);
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Data collected. :)";
+            //     }, 1000);
+            //
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Setting up the view for you...";
+            //     }, 1400);
+            //
+            //     setTimeout(function () {
+            //         // Do something after 1 second
+            //         document.getElementById('loader_detail').innerHTML = "Almost done...";
+            //     }, 1900);
+            // }
+        </script>
+
+        <script>
+            $(window).load(function () {
+                setTimeout(function () {
+                    $("loader_detail").html("Collecting data");
+                }, 500);
+                setTimeout(function () {
+                    $("loader_detail").html("Almost done...");
+                }, 1000);
+            });
+        </script>
+    </div>
+</div>
+{% endblock content %}
+

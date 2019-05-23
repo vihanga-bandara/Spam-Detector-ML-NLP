@@ -143,10 +143,11 @@ class TweetDetectModel:
         # initialize TF-ID Vectorizer
         tfidf = TfidfVectorizer(
             analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
-            token_pattern=None,
-            ngram_range=(1, 3))
+            token_pattern=None)
 
         features_set_train = tfidf.fit_transform(dataset[0])
+
+        self.display_scores(tfidf, features_set_train)
 
         # create a new random forest classifier with best params from grid search
         rf_classifier = RandomForestClassifier(n_estimators=200, max_features="auto", criterion="gini", max_depth=7)
@@ -189,7 +190,7 @@ class TweetDetectModel:
         tfidf = TfidfVectorizer(
             analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
             token_pattern=None,
-            ngram_range=(1, 3))
+            ngram_range=(1, 2))
 
         features_set_train = tfidf.fit_transform(X_train)
 
@@ -336,6 +337,10 @@ class TweetDetectModel:
         filename = 'pickle/SpamTweetDetectModel.sav'
         pickle.dump(model_information, open(filename, 'wb'))
 
+        # load the SpamTweetDetectModel from directory
+        filename = "pickle/SpamTweetDetectModel.sav"
+        model = pickle.load(open(filename, 'rb'))
+
         print("Successfully saved model information to pickle")
 
         return True
@@ -406,13 +411,24 @@ class TweetDetectModel:
 
         return proba_score, proba_values, tweet
 
+    def display_scores(self, vectorizer, tfidf_result):
+        scores = zip(vectorizer.get_feature_names(),
+                     np.asarray(tfidf_result.sum(axis=0)).ravel())
+        sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
+        spam_tokens = []
+        for item in sorted_scores:
+            # print("{0:50} Score: {1}".format(item[0], item[1]))
+            if type(item[0]) == str and item[1] > 1.8:
+                spam_tokens.append(item[0])
+                # print('adding spam token - {0}'.format(item[0]))
+
 
 if __name__ == '__main__':
     train = TweetDetectModel()
 
     # #run model manually
+    # # train.main(0)
     # train.main(0)
-    train.main(1)
 
     print(train.classify('HOW DO YOU GET UNLIMITED FREE TWITTER FOLLOWERS? http://tinyurl.com/3xkr5hc'))
     print(train.classify('free twitter followers is the choice that i have and i know it'))
