@@ -134,44 +134,6 @@ class TweetDetectModel:
         label_encoder = LabelEncoder()
         self.tweets_class_col = label_encoder.fit_transform(classes_column)
 
-    def train_model(self, dataset):
-        # split the data to train and test
-        X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.40)
-
-        # create pipeline that will consecutively carry out the training process
-        pipeline = Pipeline(
-            [('vectorizer', CountVectorizer()),
-             ('tfidf', TfidfTransformer()),
-             ('classifier', RandomForestClassifier())])
-
-        train_score = pipeline.fit(X_train, y_train)
-        print(train_score)
-
-        # predict test data using trained model
-        y_pred = pipeline.predict(X_test)
-        # probability of prediction of test data using trained model
-        y_pred_proba = pipeline.predict_proba(X_test)
-        print(np.mean(y_pred == y_test))
-
-        # running cross validation score on training data
-        scores = cross_val_score(pipeline, X_train, y_train, scoring='accuracy', cv=10)
-        accuracy = scores
-        mean = scores.mean()
-        std = scores.std()
-
-        print('Accuracy is {} | Mean is {} | Standard Deviation is {} on train data'.format(accuracy, mean, std))
-
-        # running cross validation score on all data
-        scores_full = cross_val_score(pipeline, dataset[0], dataset[1], scoring='accuracy', cv=10)
-        accuracy_full = scores_full.mean() * 100
-        mean_full = scores_full.mean()
-        std_full = scores_full.std()
-
-        print('Accuracy is {} | Mean is {} | Standard Deviation is {} on all data'.format(accuracy_full, mean_full,
-                                                                                          std_full))
-
-        return pipeline, y_test, y_pred, y_pred_proba
-
     def train_model_realtime(self, dataset):
 
         # create pipeline that will consecutively carry out the training process
@@ -192,17 +154,49 @@ class TweetDetectModel:
                                                                                           std_full))
         return pipeline
 
-    def train_model_realtime_test(self, dataset):
+    def train_model_realtime(self, dataset):
 
-        # create pipeline that will consecutively carry out the training process
-        # check for train test split
         # dummy variable pass to avoid tokenizing and preprocessor since its already been done
+        def dummy_fun(doc):
+            return doc
+
+        # initialize TF-ID Vectorizer
+        tfidf = TfidfVectorizer(
+            analyzer='word', tokenizer=dummy_fun, preprocessor=dummy_fun,
+            token_pattern=None, stop_words=None,
+            ngram_range=(1, 1), use_idf=True)
+
+        features_set_train = tfidf.fit_transform(dataset[0])
+
+        # create a new random forest classifier with best params from grid search
+        rf_classifier = RandomForestClassifier(n_estimators=200, max_features="auto", criterion="gini", max_depth=7)
+        rf_classifier.fit(features_set_train, dataset[0])
+
+        # running cross validation score on full dataset needed for realtime
+        scores_full = cross_val_score(rf_classifier, features_set_train, dataset[1], scoring='accuracy', cv=5)
+        cross_validation_accuracy = scores_full.mean() * 100
+        mean_full = scores_full.mean()
+        std_full = scores_full.std()
+
+        return rf_classifier, tfidf
+
+        # # create new a knn model
+
+        # # create a new logistic regression model
+        # log_reg = LogisticRegression()
+        #
+        # # fit the model to the training data
+        # log_reg.fit(X_train, y_train)
+
+    def train_model(self, dataset):
+
         # X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.30,
         #                                                     stratify=dataset[1])
 
         # split data into train and test sets
         X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.30)
 
+        # dummy variable pass to avoid tokenizing and preprocessor since its already been done
         def dummy_fun(doc):
             return doc
 
@@ -216,26 +210,30 @@ class TweetDetectModel:
 
         features_set_test = tfidf.transform(X_test)
 
-        # create a new random forest classifier
-        rf_classifier = RandomForestClassifier()
-        # rf_classifier.fit(features_set_train, y_train)
+        """Grid Search and Cross Validation to identify best parameters"""
+        # # create a dictionary of all values we want to test for n_estimators
+        # rf_classifier = RandomForestClassifier()
+        # params_rf = {"n_estimators": [200, 500],
+        #              "max_features": ['auto', 'sqrt', 'log2'],
+        #              "max_depth": [4, 5, 6, 7, 8],
+        #              "criterion": ['gini', 'entropy']
+        #              }
+        #
+        # # use gridsearch to test all values for n_estimators
+        # rf_gs = GridSearchCV(rf_classifier, params_rf, cv=5)
+        # # fit model to training data
+        # rf_gs.fit(features_set_train, y_train)
+        #
+        # # save best model
+        # rf_best = rf_gs.best_estimator_
+        # # check best n_estimators value
+        # print(rf_gs.best_params_)
 
-        # create a dictionary of all values we want to test for n_estimators
-        params_rf = {"n_estimators": [200, 500],
-                     "max_features": ['auto', 'sqrt', 'log2'],
-                     "max_depth": [4, 5, 6, 7, 8],
-                     "criterion": ['gini', 'entropy']
-                     }
+        """ END OF GRID SEARCH - best params have been used for model """
 
-        # use gridsearch to test all values for n_estimators
-        rf_gs = GridSearchCV(rf_classifier, params_rf, cv=5)
-        # fit model to training data
-        rf_gs.fit(features_set_train, y_train)
-
-        # save best model
-        rf_best = rf_gs.best_estimator_
-        # check best n_estimators value
-        print(rf_gs.best_params_)
+        # create a new random forest classifier with best params from grid search
+        rf_classifier = RandomForestClassifier(n_estimators=200, max_features="auto", criterion="gini", max_depth=7)
+        rf_classifier.fit(features_set_train, y_train)
 
         # predicting on the same trained set
         y_pred_train = rf_classifier.predict(features_set_train)
@@ -245,35 +243,25 @@ class TweetDetectModel:
 
         # score of the test dataset
         y_score_test = rf_classifier.score(features_set_test, y_test)
-        print(y_score_test)
 
         # Output classifier results
         print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
         print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
 
-        data = ['webaddr do you want to go out with me']
-        df = pd.DataFrame(data)
+        # probability of prediction of test data using trained model
+        y_pred_proba = rf_classifier.predict_proba(X_test)
+        print(np.mean(y_pred_test == y_test))
 
-        check_test = tfidf.transform(df[0])
+        # running cross validation score on testing data
+        scores = cross_val_score(rf_classifier, features_set_test, y_test, scoring='accuracy', cv=5)
+        accuracy = scores
+        mean = scores.mean()
+        std = scores.std()
 
-        check_model_predict = rf_classifier.predict(check_test)
+        print('Cross Validation Accuracy is {} | Mean is {} | Standard Deviation is {} on train data'.format(accuracy,
+                                                                                                             mean, std))
 
-        return tfidf
-
-        # # create new a knn model
-        # knn = KNeighborsClassifier()
-        #
-        # # create a dictionary of all values we want to test for n_neighbors
-        # params_knn = {"n_neighbors": np.arange(1, 25)}
-        # # use gridsearch to test all values for n_neighbors
-        # knn_gs = GridSearchCV(knn, params_knn, cv=5)
-        # # fit model to training data
-        # knn_gs.fit(X_train, y_train)
-        #
-        # # save best model
-        # knn_best = knn_gs.best_estimator_
-        # # check best n_neigbors value
-        # print(knn_gs.best_params_)
+        return rf_classifier, tfidf, y_test, y_pred_test, y_pred_proba
 
         # # create a new logistic regression model
         # log_reg = LogisticRegression()
@@ -281,17 +269,7 @@ class TweetDetectModel:
         # # fit the model to the training data
         # log_reg.fit(X_train, y_train)
 
-        # # running cross validation score on full data
-        # scores_full = cross_val_score(pipeline, dataset[0], dataset[1], scoring='accuracy', cv=10)
-        # accuracy_full = scores_full.mean() * 100
-        # mean_full = scores_full.mean()
-        # std_full = scores_full.std()
-        #
-        # print('Accuracy is {} | Mean is {} | Standard Deviation is {} on all data'.format(accuracy_full, mean_full,
-        #                                                                                   std_full))
-        # return pipeline
-
-    def generate_performance_reports(self, pipeline, y_test, y_pred, y_pred_proba):
+    def generate_performance_reports(self, pipeline, y_test, y_pred, y_pred_proba, tfidf_vectorizer):
 
         # get confusion matrix
         # from sklearn.metrics import confusion_matrix
@@ -341,7 +319,7 @@ class TweetDetectModel:
         pyplot.close()
         print(confusion_matrix)
 
-    def save_model_pickle(self, pipeline):
+    def save_model_pickle(self, model, tfidf_vectorizer):
         info = self.info
 
         # get current date time
@@ -351,12 +329,13 @@ class TweetDetectModel:
 
         # add model and model information to dictionary
         model_information = dict({
-            'model': pipeline,
+            'model': model,
+            'tfidf_vectorizer': tfidf_vectorizer,
             'metadata': {
                 'name': 'Tweet Spam Detection Model Pipeline',
                 'author': 'Vihanga Bandara',
                 'date': current_date_time_string,
-                'source_code_version': 'unreleased_1',
+                'source_code_version': 'unreleased_{0}'.format(current_date_time.strftime("%I:%M:%S %p")),
                 'metrics': {
                     'tweet_model_accuracy': info[0],
                     'recall': info[1],
@@ -368,9 +347,10 @@ class TweetDetectModel:
             }
         })
 
-        # save model using pickle
+        # save model information using pickle
         filename = 'pickle/SpamTweetDetectModel.sav'
         pickle.dump(model_information, open(filename, 'wb'))
+
         return True
 
     def main(self, check):
@@ -391,15 +371,16 @@ class TweetDetectModel:
             """check = 0 means realtime model check = 1 is for performance testing"""
 
             if check == 0:
-                # train model using pipeline
-                pipeline = self.train_model_realtime_test(self.tweets_dataset)
+                # train model
+                model, tfidf_vectorizer = self.train_model_realtime_test(self.tweets_dataset)
                 # save model to pickle
-                self.save_model_pickle(pipeline)
+                self.save_model_pickle(model, tfidf_vectorizer)
             else:
                 # split data and train model using pipeline
-                pipeline, y_test, y_pred, y_pred_proba = self.train_model(self.tweets_dataset)
+                model, tfidf_vectorizer, y_test, y_pred_test, y_pred_proba = self.train_model(self.tweets_dataset)
+
                 # generate performance reports
-                self.generate_performance_reports(pipeline, y_test, y_pred, y_pred_proba)
+                self.generate_performance_reports(model, y_test, y_pred_test, y_pred_proba, tfidf_vectorizer)
 
         else:
             return False

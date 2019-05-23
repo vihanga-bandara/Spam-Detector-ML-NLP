@@ -35,6 +35,14 @@ class TweetClassifier(Classifier):
         # load the SpamTweetDetectModel word_features from directory
         filename = self.pickle + "wordfeatures.p"
         word_features = pickle.load(open(filename, 'rb'))
+
+        data = ['webaddr do you want to go out with me']
+        df = pd.DataFrame(data)
+
+        check_test = tfidf.transform(df[0])
+
+        check_model_predict = rf_classifier.predict(check_test)
+
         return word_features
 
     def classify(self, tweet_obj, check):
