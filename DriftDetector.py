@@ -221,11 +221,12 @@ class DriftDetector:
         tweet = ""
         if check is 0 or check is 2:
             # preprocess tweet
-            processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
             tweet = tweet_obj.text
         else:
-            processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj)
             tweet = tweet_obj
+
+        processed_tweet = self.preprocessor.preprocess_tweet_drift(tweet)
+
         print("Tweet after processing => is {0}".format(processed_tweet))
         tweet_tokens = nltk.word_tokenize(processed_tweet)
 
@@ -329,7 +330,10 @@ class DriftDetector:
 
 if __name__ == '__main__':
     drift_detector = DriftDetector()
-    report = drift_detector.predict("Here is a small gift for you #gifts", 1)
+    # report1 = drift_detector.predict("Here is a small gift for you #gifts", 1)
+    # report2 = drift_detector.predict("Obtain complimentary coin, check it out now", 1)
+    # report3 = drift_detector.predict("Best investment from us, retweet to win", 1)
+    report4 = drift_detector.predict("Im going back to your Genius Bar to complain. #annoyed", 1)
+    print(report4)
     # spell = SpellChecker()
     # token = spell.correction('complimentari')
-    exit(0)
