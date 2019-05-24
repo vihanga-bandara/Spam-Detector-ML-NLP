@@ -1,4 +1,5 @@
 from TweetDetectModel import TweetDetectModel
+from Classifiers import UserClassifier
 
 
 class Tester:
@@ -43,7 +44,18 @@ class Tester:
             res = detector.classify(test)
             print(res)
 
+    def user_detector_tests(self):
+        detector = UserClassifier()
+        detector.classify_user_name("rameshliyanage")
+        getprobval = detector.get_proba_value()
+        getprobscore = detector.get_prediction_score()
+        getpredtype = detector.get_prediction_type()
+
+        print("{} - Probability Value | {} - Probability Score | {} - Prediction Type".format(getprobval, getprobscore,
+                                                                                              getpredtype))
+
 
 if __name__ == '__main__':
     run_tests = Tester()
     run_tests.tweet_detector_tests()
+    run_tests.user_detector_tests()

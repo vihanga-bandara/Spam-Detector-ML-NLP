@@ -1,6 +1,6 @@
 import pickle
-import Preprocessor
-import TwitterAPI
+from Preprocessor import Preprocessor
+from TwitterAPI import TwitterAPI
 import sys
 import sklearn
 import pandas as pd
@@ -11,8 +11,8 @@ from Dataframe import Dataframe as dt
 
 class Classifier(object):
     pickle = "pickle/"
-    preprocessor = Preprocessor.Preprocessor()
-    twitter_api = TwitterAPI.TwitterAPI()
+    preprocessor = Preprocessor()
+    twitter_api = TwitterAPI()
     twitter_api.authenticate()
     __ck = None
     _value = [0.22, 0.78]
@@ -57,18 +57,23 @@ class TweetClassifier(Classifier):
         d_size = dt()
         processed__tweet = tweet_obj
 
-        # preprocess tweet
+        # acquire correct tweet
         if check is 0:
-            processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
+            tweet = tweet_obj.text
         elif check is 1:
-            processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj)
+            tweet = tweet_obj
         else:
-            tweet_obj = self.twitter_api.getTweet(tweet_obj)
-            processed_tweet = self.preprocessor.preprocess_tweet(tweet_obj.text)
+            tweet_obj = tweet_obj
+            tweet = tweet_obj.text
 
-        # convert tweet to a list
-        processed_tweet_list = list()
-        processed_tweet_list.append(processed_tweet)
+        # convert tweet to DataFrame
+        tweet_df = pd.DataFrame()
+        tweet_df[0] = [tweet]
+
+        # preprocess tweet
+        tweet_df[0] = self.preprocessor.preprocessing_tweets_df(tweet_df[0])
+        processed_tweet = tweet_df[0]
+        self.__ck = d_size.find(processed__tweet)
 
         # get model
         model = model_information["model"]
@@ -76,12 +81,8 @@ class TweetClassifier(Classifier):
         # get vectorizer
         tfidf_vectorizer = model_information["tfidf_vectorizer"]
 
-        # create dataframe to hold tweet
-        df = pd.DataFrame(processed_tweet_list)
-        self.__ck = d_size.find(processed__tweet)
-
         # transform tweet
-        transformed_text = tfidf_vectorizer.transform(df[0])
+        transformed_text = tfidf_vectorizer.transform(processed_tweet)
 
         # classify using model and get scores
         self._proba_score = model.predict(transformed_text)
@@ -89,8 +90,6 @@ class TweetClassifier(Classifier):
 
         # self._proba_value = proba_value._prob_dict
         self._proba_value = proba_value.tolist()[0]
-
-
 
 
 class UserClassifier(Classifier):
@@ -157,14 +156,12 @@ class UserClassifier(Classifier):
 
 if __name__ == '__main__':
     classifier = TweetClassifier()
-    classifier.classify("bandara taking the ride home", 1)
+    classifier.classify("hi my name is vihanga bandara", 1)
     getprobval = classifier.get_proba_value()
     getprobscore = classifier.get_prediction_score()
     getpredtype = classifier.get_prediction_type()
 
-    # classifier = UserClassifier()
-    # classifier.classify_user_name("rameshliyanage")
-    # getprobval = classifier.get_proba_value()
-    # getprobscore = classifier.get_prediction_score()
-    # getpredtype = classifier.get_prediction_type()
+    print("{} - Probability Value | {} - Probability Score | {} - Prediction Type".format(getprobval, getprobscore,
+                                                                                          getpredtype))
+
     exit(0)

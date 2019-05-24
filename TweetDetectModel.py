@@ -406,12 +406,8 @@ class TweetDetectModel:
 
         processed_tweet = tweet_df[0]
 
-        # create dataframe to hold tweet
-        df = pd.DataFrame()
-        df[0] = processed_tweet
-
         # transform tweet
-        transformed_text = tfidf_vectorizer.transform(df[0])
+        transformed_text = tfidf_vectorizer.transform(processed_tweet)
 
         # get proba score and value after predicting
         proba_score = model.predict(transformed_text)
@@ -441,45 +437,10 @@ if __name__ == '__main__':
     # train.main(1)
     # train.main(0)
 
-    # print(train.classify('HOW DO YOU GET UNLIMITED FREE TWITTER FOLLOWERS? http://tinyurl.com/3xkr5hc'))
-    # print(train.classify('free twitter followers is the choice that i have and i know it'))
-    # print(train.classify('Want thousands of people to follow you for free?'))
-    # print(train.classify('Special free offers EXTRA 6% Off on Gold and Silver coins'))
-    # #
-    # print(train.classify('Im going back to your Genius Bar to complain. #annoyed'))
-    # print(train.classify('I am suing my insurance company and you just managed '
-    #                      'to make it to the top of my shit list. #Ineedthosepictures'))
-    #
-    # print(train.classify('Click to check your daily and become rich'))
-    # print(train.classify('Here is a small gift for you #gifts'))
-    # print(train.classify('Best investment from us, retweet to win'))
-    # print(train.classify('Obtain complimentary coin, check it out now'))
-
-    print(train.classify(
-        'GET MORE FOLLOWERS FREE HERE. GET UP TO 70 FOLLOWERS -> http://poin.pixub.com <- #OPENFOLLOW #JFB'))
-    print(train.classify(
-        'Auto followers no spam! http://poin.pixub.com (ada limit untuk menghindari suspended) #OPENFOLLOW #JFB'))
-
-    print(train.classify(
-        'GET 70 FOLLOWERS http://poin.pixub.com #JFB'))
-
-    print(train.classify(
-        'GRATIS! Auto followers no spam! http://poin.pixub.com (ada limit untuk menghindari suspended) #OPENFOLLOW #JFB'))
-
-    print(train.classify(
-        'FREE Instagram followers ♛ Click ☟ http://followerzforfree.website/'))
-
-    print(train.classify(
-        'Save to 30% Off Your Order, $1.99 Hosting, $2.95 .Coms - http://promocodeus.net/stores/godaddy-promo-codes/ … #godaddy @godaddycouponus'))
-
-    print(train.classify(
-        'Super hyped about Bluestone Capital providing the support and backing to drive Esports in Sri Lanka and beyond. With the shared passion and commitment of #TeamGLK, we are excited for what lies in the future for Esports! #lka #Esports #gamerlk'))
-
-    print(train.classify(
-        'Police have arrested a 32 year old suspect (H Pawithra Madushanka) over the 13 hand grenades found in a school in Baduraliya. #SriLanka #lka'))
-
-    print(train.classify(
-        'Some trying to spread fake news UN deployed in #SriLanka. Total and absolute lies. I checked with CDS who told me these are dated photos of armored personal carriers prepared to be sent on UN peace keeping missions in Mali; perhaps on exercise w our troops.'))
+    print(train.classify('Click to check your daily and become rich'))
+    print(train.classify('Here is a small gift for you #gifts'))
+    print(train.classify('Best investment from us, retweet to win'))
+    print(train.classify('Obtain complimentary coin, check it out now'))
 
     # processed_tweet = ['this life is horrible right now','check me out now']
     # df = pd.DataFrame()
