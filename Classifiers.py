@@ -14,7 +14,7 @@ class Classifier(object):
     preprocessor = Preprocessor()
     twitter_api = TwitterAPI()
     twitter_api.authenticate()
-    __ck = None
+    __ck = 0
     _value = [0.22, 0.78]
 
     def __init__(self, prediction_type):
