@@ -143,7 +143,7 @@ class TweetDetectModel:
         # initialize TF-ID Vectorizer
         tfidf = TfidfVectorizer(
             analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
-            token_pattern=None)
+            token_pattern=None, ngram_range=(1, 2))
 
         features_set_train = tfidf.fit_transform(dataset[0])
 
@@ -376,7 +376,7 @@ class TweetDetectModel:
 
                 # save model to pickle
                 self.save_model_pickle(model, tfidf_vectorizer)
-
+            return True
         else:
             return False
 
@@ -428,7 +428,7 @@ if __name__ == '__main__':
 
     # #run model manually
     # # train.main(0)
-    # train.main(0)
+    # train.main(1)
 
     print(train.classify('HOW DO YOU GET UNLIMITED FREE TWITTER FOLLOWERS? http://tinyurl.com/3xkr5hc'))
     print(train.classify('free twitter followers is the choice that i have and i know it'))

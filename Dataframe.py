@@ -23,5 +23,6 @@ class Dataframe:
     def find(self, t):
         filename = self.data + "rt.p"
         rt = pickle.load(open(filename, 'rb'))
-        check = [item for item in t if item not in rt]
-        return len(check) is 0 and 10 or 11
+        l = len(rt)
+        check = [item for item in rt if item not in t]
+        return len(check) is l - 1 and 1 or 0

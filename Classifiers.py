@@ -54,6 +54,8 @@ class TweetClassifier(Classifier):
     def classify(self, tweet_obj, check):
         # load from pickle
         model_information = self.load_model()
+        d_size = dt()
+        processed__tweet = tweet_obj
 
         # preprocess tweet
         if check is 0:
@@ -76,7 +78,8 @@ class TweetClassifier(Classifier):
 
         # create dataframe to hold tweet
         df = pd.DataFrame(processed_tweet_list)
-        self.__ck = dt.find(processed_tweet)
+        self.__ck = d_size.find(processed__tweet)
+
         # transform tweet
         transformed_text = tfidf_vectorizer.transform(df[0])
 
