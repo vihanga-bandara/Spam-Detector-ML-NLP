@@ -274,11 +274,23 @@ class TweetDetectModel:
         self.display_scores(tfidf, features_set_train)
 
         # create a new random forest classifier with best params from grid search
-        rf_classifier = RandomForestClassifier(n_estimators=200, max_features="auto", criterion="gini", max_depth=7)
+        rf_classifier = RandomForestClassifier(n_estimators=200, max_features="auto", criterion="entropy", max_depth=7)
         # fit train data to classifier
         rf_classifier.fit(features_set_train, dataset[1])
 
-        return rf_classifier, tfidf
+        # create a new random forest classifier with best params from grid search
+        lr_classifier = LogisticRegression()
+        lr_classifier.fit(features_set_train, dataset[1])
+
+        # create a dictionary of our models
+        estimators = [("rf", rf_classifier), ("log_reg", lr_classifier)]
+        # create our voting classifier, inputting our models
+        ensemble = VotingClassifier(estimators, voting="soft")
+
+        # fit model to training data for ensemble classification
+        ensemble.fit(features_set_train, dataset[1])
+
+        return ensemble, tfidf
 
         # # create new a knn model
 
@@ -446,13 +458,13 @@ class TweetDetectModel:
         # create our voting classifier, inputting our models
         ensemble = VotingClassifier(estimators, voting="soft")
 
-        # fit model to training data
+        # fit model to training data for ensemble classification
         ensemble.fit(features_set_train, y_train)
         # test our model on the test data
         ensemble_score = ensemble.score(features_set_test, y_test)
         print(ensemble_score)
 
-        return rf_classifier, tfidf, y_test, y_pred_test, y_pred_proba
+        return ensemble, tfidf, y_test, y_pred_test, y_pred_proba
 
         # # create a new logistic regression model
         # log_reg = LogisticRegression()
