@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import nltk
 import matplotlib
+import re
 from sklearn.preprocessing import LabelEncoder
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -48,13 +49,13 @@ class TweetDetectModel:
     def load_dataset(self):
         # try to load the dataset
         try:
-            df = pd.read_csv('dataset/SpamTweetsFinalDataset.csv', header=None)
+            df = pd.read_csv('data/SpamTweetsFinalDataset.csv', header=None)
             print(df.info())
             print(df.head())
 
             # sort data frame to avoid bias
             # df.sort_values(1, ascending=False)
-            df.sort_values(by=[1], inplace=True, ascending=False)
+            # df.sort_values(by=[1], inplace=True, ascending=False)
             # check the class balance ratio / distribution
             df_spam = df.loc[df[1] == 'spam']
             df_ham = df.loc[df[1] == 'ham']
@@ -125,8 +126,15 @@ class TweetDetectModel:
         ps = nltk.PorterStemmer()
         processed = processed.apply(lambda x: ' '.join(ps.stem(term) for term in x.split()))
 
-        self.tweets_processed_col = processed
-        return processed
+        # store as list of lists of words
+        sentences_ted = []
+        for sent_str in processed:
+            tokens = re.sub(r"[^a-z0-9]+", " ", sent_str.lower()).split()
+            sentences_ted.append(tokens)
+
+        self.tweets_processed_col = sentences_ted
+
+        return sentences_ted
 
     def label_encoding(self, classes_column):
         # convert the labels into binary values
@@ -143,7 +151,8 @@ class TweetDetectModel:
         # initialize TF-ID Vectorizer
         tfidf = TfidfVectorizer(
             analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
-            token_pattern=None, ngram_range=(1, 2))
+            token_pattern=None, stop_words=None,
+            ngram_range=(1, 1), use_idf=True)
 
         features_set_train = tfidf.fit_transform(dataset[0])
 
@@ -151,13 +160,8 @@ class TweetDetectModel:
 
         # create a new random forest classifier with best params from grid search
         rf_classifier = RandomForestClassifier(n_estimators=200, max_features="auto", criterion="gini", max_depth=7)
+        # fit train data to classifier
         rf_classifier.fit(features_set_train, dataset[1])
-
-        # running cross validation score on full dataset needed for realtime
-        scores_full = cross_val_score(rf_classifier, features_set_train, dataset[1], scoring='accuracy', cv=5)
-        cross_validation_accuracy = scores_full.mean() * 100
-        mean_full = scores_full.mean()
-        std_full = scores_full.std()
 
         return rf_classifier, tfidf
 
@@ -175,22 +179,13 @@ class TweetDetectModel:
         #                                                     stratify=dataset[1])
 
         # split data into train and test sets
-        X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.30)
-
-        # dummy variable pass to avoid tokenizing and preprocessor since its already been done
-        def dummy_fun(doc):
-            return doc
+        X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.35)
 
         # initialize TF-ID Vectorizer
-        # tfidf = TfidfVectorizer(
-        #     analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
-        #     token_pattern=None, stop_words=None,
-        #     ngram_range=(1, 2), use_idf=True)
-
         tfidf = TfidfVectorizer(
             analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
-            token_pattern=None,
-            ngram_range=(1, 2))
+            token_pattern=None, stop_words=None,
+            ngram_range=(1, 1), use_idf=True)
 
         features_set_train = tfidf.fit_transform(X_train)
 
@@ -237,6 +232,16 @@ class TweetDetectModel:
         # probability of prediction of test data using trained model
         y_pred_proba = rf_classifier.predict_proba(features_set_test)
         print(np.mean(y_pred_test == y_test))
+
+        train_set = pd.DataFrame()
+        train_set[0] = X_train
+        train_set[1] = y_train
+        train_set[2] = y_pred_train
+
+        test_set = pd.DataFrame()
+        test_set[0] = X_test
+        test_set[1] = y_test
+        test_set[2] = y_pred_test
 
         # running cross validation score on testing data
         scores = cross_val_score(rf_classifier, features_set_test, y_test, scoring='accuracy', cv=5)
@@ -392,12 +397,18 @@ class TweetDetectModel:
         tfidf_vectorizer = model_information["tfidf_vectorizer"]
 
         # preprocess tweet
-        preprocessor = Preprocessor()
-        processed_tweet = list()
-        processed_tweet.append(preprocessor.preprocess_tweet(tweet))
+        # preprocessor = Preprocessor()
+
+        tweet_df = pd.DataFrame()
+        tweet_df[0] = [tweet]
+
+        tweet_df[0] = self.preprocessing_tweets(tweet_df[0])
+
+        processed_tweet = tweet_df[0]
 
         # create dataframe to hold tweet
-        df = pd.DataFrame(processed_tweet)
+        df = pd.DataFrame()
+        df[0] = processed_tweet
 
         # transform tweet
         transformed_text = tfidf_vectorizer.transform(df[0])
@@ -427,19 +438,50 @@ if __name__ == '__main__':
     train = TweetDetectModel()
 
     # #run model manually
-    # # train.main(0)
     # train.main(1)
+    # train.main(0)
 
-    print(train.classify('HOW DO YOU GET UNLIMITED FREE TWITTER FOLLOWERS? http://tinyurl.com/3xkr5hc'))
-    print(train.classify('free twitter followers is the choice that i have and i know it'))
-    print(train.classify('Want thousands of people to follow you for free?'))
-    print(train.classify('Special free offers EXTRA 6% Off on Gold and Silver coins'))
+    # print(train.classify('HOW DO YOU GET UNLIMITED FREE TWITTER FOLLOWERS? http://tinyurl.com/3xkr5hc'))
+    # print(train.classify('free twitter followers is the choice that i have and i know it'))
+    # print(train.classify('Want thousands of people to follow you for free?'))
+    # print(train.classify('Special free offers EXTRA 6% Off on Gold and Silver coins'))
+    # #
+    # print(train.classify('Im going back to your Genius Bar to complain. #annoyed'))
+    # print(train.classify('I am suing my insurance company and you just managed '
+    #                      'to make it to the top of my shit list. #Ineedthosepictures'))
+    #
+    # print(train.classify('Click to check your daily and become rich'))
+    # print(train.classify('Here is a small gift for you #gifts'))
+    # print(train.classify('Best investment from us, retweet to win'))
+    # print(train.classify('Obtain complimentary coin, check it out now'))
 
-    print(train.classify('I am going back to your Genius Bar to complain. #annoyed'))
     print(train.classify(
-        'I am suing my insurance company and you just managed to make it to the top of my shit list #Ineedthosepictures'))
+        'GET MORE FOLLOWERS FREE HERE. GET UP TO 70 FOLLOWERS -> http://poin.pixub.com <- #OPENFOLLOW #JFB'))
+    print(train.classify(
+        'Auto followers no spam! http://poin.pixub.com (ada limit untuk menghindari suspended) #OPENFOLLOW #JFB'))
 
-    print(train.classify('Click to check your daily and become rich'))
-    print(train.classify('Here is a small gift for you #gifts'))
-    print(train.classify('Best investment from us, retweet to win'))
-    print(train.classify('Obtain complimentary coin, check it out now'))
+    print(train.classify(
+        'GET 70 FOLLOWERS http://poin.pixub.com #JFB'))
+
+    print(train.classify(
+        'GRATIS! Auto followers no spam! http://poin.pixub.com (ada limit untuk menghindari suspended) #OPENFOLLOW #JFB'))
+
+    print(train.classify(
+        'FREE Instagram followers ♛ Click ☟ http://followerzforfree.website/'))
+
+    print(train.classify(
+        'Save to 30% Off Your Order, $1.99 Hosting, $2.95 .Coms - http://promocodeus.net/stores/godaddy-promo-codes/ … #godaddy @godaddycouponus'))
+
+    print(train.classify(
+        'Super hyped about Bluestone Capital providing the support and backing to drive Esports in Sri Lanka and beyond. With the shared passion and commitment of #TeamGLK, we are excited for what lies in the future for Esports! #lka #Esports #gamerlk'))
+
+    print(train.classify(
+        'Police have arrested a 32 year old suspect (H Pawithra Madushanka) over the 13 hand grenades found in a school in Baduraliya. #SriLanka #lka'))
+
+    print(train.classify(
+        'Some trying to spread fake news UN deployed in #SriLanka. Total and absolute lies. I checked with CDS who told me these are dated photos of armored personal carriers prepared to be sent on UN peace keeping missions in Mali; perhaps on exercise w our troops.'))
+
+    # processed_tweet = ['this life is horrible right now','check me out now']
+    # df = pd.DataFrame()
+    # df[0] = processed_tweet
+    # print(df)
