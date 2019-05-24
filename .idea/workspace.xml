@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriftDetector.py" beforeDir="false" afterPath="$PROJECT_DIR$/DriftDetector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Retrainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Retrainer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TweetDetectModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/TweetDetectModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,35 +37,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/DriftDetector.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="329" lean-forward="true" selection-start-line="329" selection-end-line="329" />
-              <folding>
-                <element signature="e#112#130#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Preprocessor.py">
+        <entry file="file://$PROJECT_DIR$/Retrainer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1254">
-              <caret line="324" selection-start-line="324" selection-end-line="324" />
+            <state relative-caret-position="402">
+              <caret line="158" column="50" lean-forward="true" selection-start-line="158" selection-start-column="50" selection-end-line="158" selection-end-column="50" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/spellchecker/spellchecker.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="124" selection-start-line="124" selection-end-line="124" />
             </state>
           </provider>
         </entry>
@@ -72,8 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tester.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+            <state relative-caret-position="193">
+              <caret line="18" column="78" lean-forward="true" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="78" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -81,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TweetDetectModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-722">
-              <caret line="561" column="56" selection-start-line="561" selection-start-column="56" selection-end-line="561" selection-end-column="56" />
+            <state relative-caret-position="194">
+              <caret line="653" column="25" selection-start-line="653" selection-start-column="25" selection-end-line="653" selection-end-column="25" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
                 <element signature="e#1328#1840#0" />
@@ -120,7 +100,6 @@
       <find>review</find>
       <find>6</find>
       <find>try</find>
-      <find>obtain</find>
       <find>retrain_model.main</find>
       <find>pipeline</find>
       <find>obta</find>
@@ -139,6 +118,7 @@
       <find>win</find>
       <find>coin</find>
       <find>rich</find>
+      <find>obtain</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -194,17 +174,17 @@
         <option value="$PROJECT_DIR$/templates/tweet_only_landing.html" />
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/review.html" />
-        <option value="$PROJECT_DIR$/Retrainer.py" />
         <option value="$PROJECT_DIR$/SpamDetector.py" />
         <option value="$PROJECT_DIR$/Dataframe.py" />
         <option value="$PROJECT_DIR$/dataset/full-corpus.csv" />
-        <option value="$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv" />
         <option value="$PROJECT_DIR$/Testing.py" />
         <option value="$PROJECT_DIR$/Classifiers.py" />
-        <option value="$PROJECT_DIR$/TweetDetectModel.py" />
         <option value="$PROJECT_DIR$/Preprocessor.py" />
         <option value="$PROJECT_DIR$/Tester.py" />
         <option value="$PROJECT_DIR$/DriftDetector.py" />
+        <option value="$PROJECT_DIR$/Retrainer.py" />
+        <option value="$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv" />
+        <option value="$PROJECT_DIR$/TweetDetectModel.py" />
       </list>
     </option>
   </component>
@@ -297,7 +277,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.DriftDetector">
+  <component name="RunManager" selected="Python.Tester">
     <configuration name="Spam-Detection-Spot-Bot-ML" type="JupiterNotebook" factoryName="Jupyter Notebook">
       <module name="Spam-Detection-Spot-Bot-ML" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -357,20 +337,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Preprocessor" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Retrainer" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spam-Detection-Spot-Bot-ML" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Preprocessor.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Retrainer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -441,11 +418,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.DriftDetector" />
         <item itemvalue="Python.Tester" />
         <item itemvalue="Python.TweetDetectModel" />
+        <item itemvalue="Python.Retrainer" />
+        <item itemvalue="Python.DriftDetector" />
         <item itemvalue="Python.Classifiers" />
-        <item itemvalue="Python.Preprocessor" />
       </list>
     </recent_temporary>
   </component>
@@ -548,21 +525,7 @@
       <workItem from="1558593222457" duration="44056000" />
       <workItem from="1558669452381" duration="599000" />
       <workItem from="1558671854179" duration="18629000" />
-      <workItem from="1558702252086" duration="24852000" />
-    </task>
-    <task id="LOCAL-00106" summary="Refactor code and UI development and Integration">
-      <created>1558385031129</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1558385031129</updated>
-    </task>
-    <task id="LOCAL-00107" summary="Refactor code and UI development and Integration">
-      <created>1558393946112</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1558393946112</updated>
+      <workItem from="1558702252086" duration="28363000" />
     </task>
     <task id="LOCAL-00108" summary="Refactor code and UI development and Integration">
       <created>1558394024124</created>
@@ -893,11 +856,25 @@
       <option name="project" value="LOCAL" />
       <updated>1558731706738</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="Drift Detector Fixed">
+      <created>1558732129692</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1558732129692</updated>
+    </task>
+    <task id="LOCAL-00156" summary="Drift Detector Fixed">
+      <created>1558733770565</created>
+      <option name="number" value="00156" />
+      <option name="presentableId" value="LOCAL-00156" />
+      <option name="project" value="LOCAL" />
+      <updated>1558733770565</updated>
+    </task>
+    <option name="localTasksCounter" value="157" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="672849000" />
+    <option name="totallyTimeSpent" value="676360000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -912,21 +889,21 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.78867924" visible="true" weight="0.22634201" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.78867924" visible="true" weight="0.22634201" />
       <window_info id="Structure" order="1" sideWeight="0.21132076" side_tool="true" weight="0.0802435" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4980631" weight="0.32937366" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32937366" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.581627" weight="0.5237581" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.5805202" weight="0.5237581" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4991699" weight="0.32937366" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.1615938" side_tool="true" visible="true" weight="0.57451403" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.16380742" side_tool="true" visible="true" weight="0.57451403" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.48865524" weight="0.24190065" />
-      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.8384062" visible="true" weight="0.57451403" />
+      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.8361926" visible="true" weight="0.57451403" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.49197567" weight="0.32829374" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -1573,12 +1550,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>513</line>
+          <line>524</line>
           <option name="timeStamp" value="780" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>516</line>
+          <line>527</line>
           <option name="timeStamp" value="781" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1593,7 +1570,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>196</line>
+          <line>195</line>
           <option name="timeStamp" value="787" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1603,12 +1580,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>616</line>
+          <line>627</line>
           <option name="timeStamp" value="801" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>550</line>
+          <line>561</line>
           <option name="timeStamp" value="802" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1643,62 +1620,62 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>571</line>
+          <line>582</line>
           <option name="timeStamp" value="828" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>574</line>
+          <line>585</line>
           <option name="timeStamp" value="829" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>573</line>
+          <line>584</line>
           <option name="timeStamp" value="830" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>276</line>
+          <line>275</line>
           <option name="timeStamp" value="840" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>271</line>
+          <line>270</line>
           <option name="timeStamp" value="841" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>612</line>
+          <line>623</line>
           <option name="timeStamp" value="846" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>613</line>
+          <line>624</line>
           <option name="timeStamp" value="847" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>582</line>
+          <line>593</line>
           <option name="timeStamp" value="848" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>454</line>
+          <line>465</line>
           <option name="timeStamp" value="849" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>304</line>
+          <line>315</line>
           <option name="timeStamp" value="850" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>306</line>
+          <line>317</line>
           <option name="timeStamp" value="851" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>273</line>
+          <line>272</line>
           <option name="timeStamp" value="856" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1803,7 +1780,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>280</line>
+          <line>291</line>
           <option name="timeStamp" value="889" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1863,7 +1840,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>296</line>
+          <line>307</line>
           <option name="timeStamp" value="905" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1873,77 +1850,77 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>299</line>
+          <line>310</line>
           <option name="timeStamp" value="907" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>646</line>
+          <line>657</line>
           <option name="timeStamp" value="922" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>648</line>
+          <line>659</line>
           <option name="timeStamp" value="923" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>606</line>
+          <line>617</line>
           <option name="timeStamp" value="928" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>601</line>
+          <line>612</line>
           <option name="timeStamp" value="933" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>596</line>
+          <line>607</line>
           <option name="timeStamp" value="934" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>640</line>
+          <line>651</line>
           <option name="timeStamp" value="935" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>641</line>
+          <line>652</line>
           <option name="timeStamp" value="936" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>642</line>
+          <line>653</line>
           <option name="timeStamp" value="937" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>327</line>
+          <line>338</line>
           <option name="timeStamp" value="939" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>332</line>
+          <line>343</line>
           <option name="timeStamp" value="940" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>352</line>
+          <line>363</line>
           <option name="timeStamp" value="941" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>357</line>
+          <line>368</line>
           <option name="timeStamp" value="942" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>370</line>
+          <line>381</line>
           <option name="timeStamp" value="943" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TweetDetectModel.py</url>
-          <line>444</line>
+          <line>455</line>
           <option name="timeStamp" value="944" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1972,6 +1949,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$Tester.coverage" NAME="Tester Coverage Results" MODIFIED="1558735576489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$DriftDetector.coverage" NAME="DriftDetector Coverage Results" MODIFIED="1558732109111" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$TestModel.coverage" NAME="TestModel Coverage Results" MODIFIED="1558526844247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$listen.coverage" NAME="listen Coverage Results" MODIFIED="1555561346041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -2360,16 +2338,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Retrainer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="77" column="37" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Classifiers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -2390,25 +2358,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3">
-          <column index="0" width="514" />
-          <column index="1" width="100" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="43">
-          <caret line="769" column="97" selection-start-line="769" selection-start-column="97" selection-end-line="769" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="278">
           <caret line="271" column="46" lean-forward="true" selection-start-line="271" selection-start-column="46" selection-end-line="271" selection-end-column="46" />
           <folding>
             <element signature="e#113#123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/sklearn/feature_extraction/text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="328" selection-start-line="328" selection-end-line="328" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DriftDetector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="329" lean-forward="true" selection-start-line="329" selection-end-line="329" />
+          <folding>
+            <element signature="e#112#130#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2430,41 +2402,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TweetDetectModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-722">
-          <caret line="561" column="56" selection-start-line="561" selection-start-column="56" selection-end-line="561" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#1328#1840#0" />
-            <element signature="e#1850#1888#0" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3">
+          <column index="0" width="514" />
+          <column index="1" width="100" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="236">
+          <caret line="790" column="208" selection-start-line="790" selection-start-column="208" selection-end-line="790" selection-end-column="208" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/sklearn/feature_extraction/text.py">
+    <entry file="file://$PROJECT_DIR$/Retrainer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="328" selection-start-line="328" selection-end-line="328" />
+        <state relative-caret-position="402">
+          <caret line="158" column="50" lean-forward="true" selection-start-line="158" selection-start-column="50" selection-end-line="158" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tester.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+        <state relative-caret-position="193">
+          <caret line="18" column="78" lean-forward="true" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="78" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DriftDetector.py">
+    <entry file="file://$PROJECT_DIR$/TweetDetectModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="329" lean-forward="true" selection-start-line="329" selection-end-line="329" />
+        <state relative-caret-position="194">
+          <caret line="653" column="25" selection-start-line="653" selection-start-column="25" selection-end-line="653" selection-end-column="25" />
           <folding>
-            <element signature="e#112#130#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#1328#1840#0" />
+            <element signature="e#1850#1888#0" />
           </folding>
         </state>
       </provider>

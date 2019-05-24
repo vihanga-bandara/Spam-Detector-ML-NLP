@@ -160,7 +160,6 @@ class TweetDetectModel:
     #     # # fit the model to the training data
     #     # log_reg.fit(X_train, y_train)
 
-
     def load_dataset(self):
         # try to load the dataset
         try:
@@ -648,7 +647,7 @@ if __name__ == '__main__':
     # #run model manually
     # train.main(1)
     # train.main(0)
-    train.main(1)
+    train.main(0)
 
     # print(train.classify('Click to check your daily and become rich'))
     # print(train.classify('Here is a small gift for you #gifts'))
