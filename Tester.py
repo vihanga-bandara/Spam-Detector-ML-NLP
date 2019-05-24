@@ -58,4 +58,4 @@ class Tester:
 if __name__ == '__main__':
     run_tests = Tester()
     run_tests.tweet_detector_tests()
-    run_tests.user_detector_tests()
+    # run_tests.user_detector_tests()

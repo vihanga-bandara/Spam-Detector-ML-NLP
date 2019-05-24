@@ -163,5 +163,3 @@ if __name__ == '__main__':
 
     print("{} - Probability Value | {} - Probability Score | {} - Prediction Type".format(getprobval, getprobscore,
                                                                                           getpredtype))
-
-    exit(0)

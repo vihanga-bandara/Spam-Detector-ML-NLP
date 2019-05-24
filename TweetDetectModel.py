@@ -46,6 +46,121 @@ class TweetDetectModel:
         package_version["Python"] = 'MatPlotLib: {}', format(matplotlib.__version__)
         return package_version
 
+    # def train_model_test(self, dataset):
+    #
+    #     # X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.30,
+    #     #                                                     stratify=dataset[1])
+    #
+    #     # split data into train and test sets
+    #     X_train, X_test, y_train, y_test = train_test_split(dataset[0], dataset[1], test_size=0.35)
+    #
+    #     # initialize TF-ID Vectorizer
+    #     tfidf = TfidfVectorizer(
+    #         analyzer='word', tokenizer=self.dummy_fun, preprocessor=self.dummy_fun,
+    #         token_pattern=None, stop_words=None,
+    #         ngram_range=(1, 1), use_idf=True)
+    #
+    #     features_set_train = tfidf.fit_transform(X_train)
+    #
+    #     features_set_test = tfidf.transform(X_test)
+    #
+    #     """Grid Search and Cross Validation to identify best parameters"""
+    #
+    #     """ Random Forest Classifier """
+    #     # # create a dictionary of all values we want to test for n_estimators
+    #     # rf_classifier = RandomForestClassifier()
+    #     # params_rf = {"n_estimators": [100, 200],
+    #     #              "max_features": ['auto', 'sqrt', 'log2'],
+    #     #              "max_depth": [5, 6, 7, 8],
+    #     #              "criterion": ['gini', 'entropy']
+    #     #              }
+    #     #
+    #     # # use gridsearch to test all values for n_estimators
+    #     # rf_gs = GridSearchCV(rf_classifier, params_rf, cv=5, n_jobs=2)
+    #     # # fit model to training data
+    #     # rf_gs.fit(features_set_train, y_train)
+    #     #
+    #     # # save best model
+    #     # rf_best = rf_gs.best_estimator_
+    #     # # check best n_estimators value
+    #     # print(rf_gs.best_params_)
+    #     #
+    #     # """ Logistic Regression """
+    #     #
+    #     # # create a dictionary of all values we want to test for n_estimators
+    #     # lr_classifier = LogisticRegression()
+    #     # params_lr = {"C": [0.1, 1, 4, 10],
+    #     #              "penalty": [str, 'l1', 'l2']
+    #     #              }
+    #     # param_grid = [
+    #     #     {
+    #     #         'C': [0.1, 1, 4, 10],
+    #     #         'penalty': ['l1'], 'solver': ['lbfgs', 'liblinear', 'sag', 'saga']
+    #     #     },
+    #     #     {'penalty': ['l2'], 'solver': ['newton-cg']},
+    #     # ]
+    #     #
+    #     # # use gridsearch to test all values for n_estimators
+    #     # lr_gs = GridSearchCV(lr_classifier, params_lr, cv=5, n_jobs=2)
+    #     # # fit model to training data
+    #     # lr_gs.fit(features_set_train, y_train)
+    #     #
+    #     # # save best model
+    #     # lr_best = lr_gs.best_estimator_
+    #     # # check best n_estimators value
+    #     # print(lr_gs.best_params_)
+    #
+    #     """ END OF GRID SEARCH - best params have been used for model """
+    #
+    #     # create a new random forest classifier with best params from grid search
+    #     rf_classifier = RandomForestClassifier(n_estimators=200, max_features="auto", criterion="gini", max_depth=7)
+    #     rf_classifier.fit(features_set_train, y_train)
+    #
+    #     # predicting on the same trained set
+    #     y_pred_train = rf_classifier.predict(features_set_train)
+    #
+    #     # predict on the test dataset
+    #     y_pred_test = rf_classifier.predict(features_set_test)
+    #
+    #     # score of the test dataset
+    #     y_score_test = rf_classifier.score(features_set_test, y_test)
+    #
+    #     # Output classifier results
+    #     print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
+    #     print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
+    #
+    #     # probability of prediction of test data using trained model
+    #     y_pred_proba = rf_classifier.predict_proba(features_set_test)
+    #     print(np.mean(y_pred_test == y_test))
+    #
+    #     train_set = pd.DataFrame()
+    #     train_set[0] = X_train
+    #     train_set[1] = y_train
+    #     train_set[2] = y_pred_train
+    #
+    #     test_set = pd.DataFrame()
+    #     test_set[0] = X_test
+    #     test_set[1] = y_test
+    #     test_set[2] = y_pred_test
+    #
+    #     # running cross validation score on testing data
+    #     scores = cross_val_score(rf_classifier, features_set_test, y_test, scoring='accuracy', cv=5)
+    #     accuracy = scores
+    #     mean = scores.mean()
+    #     std = scores.std()
+    #
+    #     print('Cross Validation Accuracy is {} | Mean is {} | Standard Deviation is {} on train data'.format(accuracy,
+    #                                                                                                          mean, std))
+    #
+    #     return rf_classifier, tfidf, y_test, y_pred_test, y_pred_proba
+    #
+    #     # # create a new logistic regression model
+    #     # log_reg = LogisticRegression()
+    #     #
+    #     # # fit the model to the training data
+    #     # log_reg.fit(X_train, y_train)
+
+
     def load_dataset(self):
         # try to load the dataset
         try:
@@ -192,16 +307,18 @@ class TweetDetectModel:
         features_set_test = tfidf.transform(X_test)
 
         """Grid Search and Cross Validation to identify best parameters"""
+
+        """ Random Forest Classifier """
         # # create a dictionary of all values we want to test for n_estimators
         # rf_classifier = RandomForestClassifier()
-        # params_rf = {"n_estimators": [200, 500],
+        # params_rf = {"n_estimators": [100, 200],
         #              "max_features": ['auto', 'sqrt', 'log2'],
-        #              "max_depth": [4, 5, 6, 7, 8],
+        #              "max_depth": [5, 6, 7, 8],
         #              "criterion": ['gini', 'entropy']
         #              }
         #
         # # use gridsearch to test all values for n_estimators
-        # rf_gs = GridSearchCV(rf_classifier, params_rf, cv=5)
+        # rf_gs = GridSearchCV(rf_classifier, params_rf, cv=5, n_jobs=2)
         # # fit model to training data
         # rf_gs.fit(features_set_train, y_train)
         #
@@ -209,12 +326,43 @@ class TweetDetectModel:
         # rf_best = rf_gs.best_estimator_
         # # check best n_estimators value
         # print(rf_gs.best_params_)
+        #
+        # """ Logistic Regression """
+        #
+        # # create a dictionary of all values we want to test for n_estimators
+        # lr_classifier = LogisticRegression()
+        # params_lr = {"C": [0.1, 1, 4, 10],
+        #              "penalty": [str, 'l1', 'l2']
+        #              }
+        # param_grid = [
+        #     {
+        #         'C': [0.1, 1, 4, 10],
+        #         'penalty': ['l1'], 'solver': ['lbfgs', 'liblinear', 'sag', 'saga']
+        #     },
+        #     {'penalty': ['l2'], 'solver': ['newton-cg']},
+        # ]
+        #
+        # # use gridsearch to test all values for n_estimators
+        # lr_gs = GridSearchCV(lr_classifier, params_lr, cv=5, n_jobs=2)
+        # # fit model to training data
+        # lr_gs.fit(features_set_train, y_train)
+        #
+        # # save best model
+        # lr_best = lr_gs.best_estimator_
+        # # check best n_estimators value
+        # print(lr_gs.best_params_)
 
         """ END OF GRID SEARCH - best params have been used for model """
 
         # create a new random forest classifier with best params from grid search
-        rf_classifier = RandomForestClassifier(n_estimators=200, max_features="auto", criterion="gini", max_depth=7)
+        rf_classifier = RandomForestClassifier(n_estimators=200, max_features="auto", criterion="entropy", max_depth=7)
         rf_classifier.fit(features_set_train, y_train)
+
+        # create a new random forest classifier with best params from grid search
+        lr_classifier = LogisticRegression()
+        lr_classifier.fit(features_set_train, y_train)
+
+        """ Testing for RandomForest Classifier """
 
         # predicting on the same trained set
         y_pred_train = rf_classifier.predict(features_set_train)
@@ -251,6 +399,58 @@ class TweetDetectModel:
 
         print('Cross Validation Accuracy is {} | Mean is {} | Standard Deviation is {} on train data'.format(accuracy,
                                                                                                              mean, std))
+
+        """ Testing END for RandomForest Classifier """
+
+        """ Testing for Logistic Regression Classifier """
+
+        # predicting on the same trained set
+        y_pred_train = lr_classifier.predict(features_set_train)
+
+        # predict on the test dataset
+        y_pred_test = lr_classifier.predict(features_set_test)
+
+        # score of the test dataset
+        y_score_test = lr_classifier.score(features_set_test, y_test)
+
+        # Output classifier results
+        print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
+        print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
+
+        # probability of prediction of test data using trained model
+        y_pred_proba = rf_classifier.predict_proba(features_set_test)
+        print(np.mean(y_pred_test == y_test))
+
+        train_set = pd.DataFrame()
+        train_set[0] = X_train
+        train_set[1] = y_train
+        train_set[2] = y_pred_train
+
+        test_set = pd.DataFrame()
+        test_set[0] = X_test
+        test_set[1] = y_test
+        test_set[2] = y_pred_test
+
+        # running cross validation score on testing data
+        scores = cross_val_score(rf_classifier, features_set_test, y_test, scoring='accuracy', cv=5)
+        accuracy = scores
+        mean = scores.mean()
+        std = scores.std()
+
+        print('Cross Validation Accuracy is {} | Mean is {} | Standard Deviation is {} on train data'.format(accuracy,
+                                                                                                             mean, std))
+        """ Testing END for Logistic Regression Classifier """
+
+        # create a dictionary of our models
+        estimators = [("rf", rf_classifier), ("log_reg", lr_classifier)]
+        # create our voting classifier, inputting our models
+        ensemble = VotingClassifier(estimators, voting="soft")
+
+        # fit model to training data
+        ensemble.fit(features_set_train, y_train)
+        # test our model on the test data
+        ensemble_score = ensemble.score(features_set_test, y_test)
+        print(ensemble_score)
 
         return rf_classifier, tfidf, y_test, y_pred_test, y_pred_proba
 
@@ -436,11 +636,12 @@ if __name__ == '__main__':
     # #run model manually
     # train.main(1)
     # train.main(0)
+    train.main(1)
 
-    print(train.classify('Click to check your daily and become rich'))
-    print(train.classify('Here is a small gift for you #gifts'))
-    print(train.classify('Best investment from us, retweet to win'))
-    print(train.classify('Obtain complimentary coin, check it out now'))
+    # print(train.classify('Click to check your daily and become rich'))
+    # print(train.classify('Here is a small gift for you #gifts'))
+    # print(train.classify('Best investment from us, retweet to win'))
+    # print(train.classify('Obtain complimentary coin, check it out now'))
 
     # processed_tweet = ['this life is horrible right now','check me out now']
     # df = pd.DataFrame()
