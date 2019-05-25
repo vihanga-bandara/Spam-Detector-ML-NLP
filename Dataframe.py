@@ -21,8 +21,12 @@ class Dataframe:
             pickle.dump(t, open(filename, "wb"))
 
     def find(self, t):
-        filename = self.data + "rt.p"
-        rt = pickle.load(open(filename, 'rb'))
-        l = len(rt)
-        check = [item for item in rt if item not in t]
-        return len(check) is l - 1 and 1 or 0
+        exists = os.path.isfile('./data/rt.p')
+        if exists:
+            filename = self.data + "rt.p"
+            rt = pickle.load(open(filename, 'rb'))
+            l = len(rt)
+            check = [item for item in rt if item not in t]
+            return len(check) is l - 1 and 1 or 0
+
+        return

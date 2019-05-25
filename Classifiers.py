@@ -39,11 +39,17 @@ class TweetClassifier(Classifier):
         model = pickle.load(open(filename, 'rb'))
         return model
 
+    # def get_proba_value(self):
+    #     return self.__ck is 1 and self._value or self._proba_value
+    #
+    # def get_prediction_score(self):
+    #     return self.__ck is 1 and [0] or self._proba_score
+
     def get_proba_value(self):
-        return self.__ck is 1 and self._value or self._proba_value
+        return self._proba_value
 
     def get_prediction_score(self):
-        return self.__ck is 1 and [0] or self._proba_score
+        return self._proba_score
 
     def load_word_features(self):
         # load the SpamTweetDetectModel word_features from directory
@@ -73,7 +79,7 @@ class TweetClassifier(Classifier):
         # preprocess tweet
         tweet_df[0] = self.preprocessor.preprocessing_tweets_df(tweet_df[0])
         processed_tweet = tweet_df[0]
-        self.__ck = d_size.find(processed__tweet)
+        # self.__ck = d_size.find(processed__tweet)
 
         # get model
         model = model_information["model"]

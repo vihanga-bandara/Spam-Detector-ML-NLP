@@ -1,8 +1,6 @@
 from SpamFuzzyController import SpamFuzzyController
 from Classifiers import TweetClassifier, UserClassifier
 from DriftDetector import DriftDetector
-from TwitterAPI import TwitterAPI
-import pickle
 from timeit import default_timer as timer
 
 

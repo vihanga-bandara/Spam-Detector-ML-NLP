@@ -13,23 +13,32 @@ class Listener(StreamListener):
 
     def on_status(self, status):
         tweets.append(status)
-        if len(tweets) == 1:
+        if len(tweets) > 0:
             return False
-        else:
-            return True
 
     def on_error(self, status):
         print(status)
 
-    def disconnect(self):
-        self.__stream.disconnect()
+    def on_limit(self, status):
+        print("Rate Limit Exceeded, Sleep for 15 Mins")
+        time.sleep(15 * 60)
+        return True
 
 
 class TwitterAPI:
-    _access_token = '250547225-fktvVk30HdHXnLgwhlHM5dBdv63YdrQBIuWjbjtV'
-    _access_token_secret = '7NU8T6AWypW2jT0DyvTvjb9UqFaF1TfIMBeknptRJYHjH'
-    _consumer_key = 'VhzN7FMeTq7lKvwAKV02Ho9Dw'
-    _consumer_secret = 'K8pAy6MTLtMB5R5WSklrR0lqudb75zFkjfHWtscHqj7YYixsRr'
+    # """ Main account token keys """
+    # _access_token = '250547225-fktvVk30HdHXnLgwhlHM5dBdv63YdrQBIuWjbjtV'
+    # _access_token_secret = '7NU8T6AWypW2jT0DyvTvjb9UqFaF1TfIMBeknptRJYHjH'
+    # _consumer_key = 'VhzN7FMeTq7lKvwAKV02Ho9Dw'
+    # _consumer_secret = 'K8pAy6MTLtMB5R5WSklrR0lqudb75zFkjfHWtscHqj7YYixsRr'
+
+    """ Fake account token keys """
+
+    _access_token = '1105567862419324936-tExRyZjEBSisoB3VnRsc1qkM912hbO'
+    _access_token_secret = 'lNnifwjeE56G2310gLLFj3CTZznsfTA69zX7LIoHR9XNk'
+    _consumer_key = 'aU0zQ6PqESrzxmq7rbvzbTD3M'
+    _consumer_secret = 'WYRhPGSjD5btgzvS1Ro2CZhSld5p7wWAiV1dmGZ7mawaFFhVC9'
+
     _auth = None
     _api = None
     _rate_limit = None
@@ -98,9 +107,11 @@ class TwitterAPI:
         print("Listening to incoming tweets")
         user_object = self.getUser(username)
         twitter_stream.filter(follow=[str(user_object.id)])
-        print(tweets[0].text)
+        latest_index = len(tweets) - 1
+        print(tweets[latest_index].text)
         print("Listener has disconnected")
-        tweet = tweets[0]
+        tweet = tweets[latest_index]
+        twitter_stream.disconnect()
         return tweet
 
     def rate_limit(self):
@@ -113,8 +124,7 @@ class TwitterAPI:
 
 
 if __name__ == '__main__':
-    twitter_api = TwitterAPI()
-    twitter_api.authenticate()
-    user = twitter_api.getUser("hapumalb")
-    print(user.id)
+    # twitter_api = TwitterAPI()
+    # twitter_api.authenticate()
+    # user = twitter_api.getUser("hapumalb")
     exit(0)

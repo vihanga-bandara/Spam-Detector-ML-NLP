@@ -168,5 +168,5 @@ class Retrainer:
 
 if __name__ == '__main__':
     retrain = Retrainer()
-    lala = retrain.load_add_dataset(["Obtain complimentary coin, check it out now"])
+    lala = retrain.load_add_dataset(["Click to check your daily and become rich"])
     print(lala)
