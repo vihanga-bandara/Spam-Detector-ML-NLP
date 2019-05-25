@@ -1,5 +1,8 @@
 from TweetDetectModel import TweetDetectModel
 from Classifiers import UserClassifier
+from SpamFuzzyController import SpamFuzzyController
+from DriftDetector import DriftDetector
+from SpamDetector import SpamDetector
 
 
 class Tester:
@@ -53,8 +56,46 @@ class Tester:
         print("{} - Probability Value | {} - Probability Score | {} - Prediction Type".format(getprobval, getprobscore,
                                                                                               getpredtype))
 
+    def spam_fuzzy_controller_tests(self):
+        spamfuz = SpamFuzzyController()
+        spamfuz.fuzzy_initialize()
+        spamfuz.fuzzy_predict(40, 40)
+        spamfuz.fuzzy_predict(50, 50)
+        spamfuz.fuzzy_predict(10, 10)
+        spamfuz.fuzzy_predict(40, 60)
+        spamfuz.fuzzy_predict(60, 60)
+        spamfuz.fuzzy_predict(80, 80)
+        spamfuz.fuzzy_predict(90, 90)
+        spamfuz.fuzzy_predict(20, 90)
+        spamfuz.fuzzy_predict(40, 90)
+        spamfuz.fuzzy_predict(90, 20)
+        spamfuz.fuzzy_predict(90, 40)
+        spamfuz.fuzzy_predict(45, 70)
+        spamfuz.fuzzy_predict(70, 60)
+
+    def drift_detector_tests(self):
+        drift_detector = DriftDetector()
+
+        tweets = ['Click to check your daily and become rich',
+                  'Here is a small gift for you #gifts',
+                  'Best investment from us, retweet to win',
+                  'Obtain complimentary coin, check it out now']
+
+        for tweet in tweets:
+            # run each test and classify tweets
+            report = drift_detector.predict(tweet, 1)
+            print(" Spam Status - {0} | Spam Score - {1} | Tweet - {2} ".format(report["spam_status"],
+                                                                                report["spam_score"], report["tweet"]))
+
+    def system_tests(self):
+        # full flow tests
+        # basic tweet entered identified as spam with user score, tweet score, fuzzy score
+        spam_detector = SpamDetector()
+
 
 if __name__ == '__main__':
     run_tests = Tester()
-    run_tests.tweet_detector_tests()
+    # run_tests.tweet_detector_tests()
     # run_tests.user_detector_tests()
+    # run_tests.spam_fuzzy_controller_tests()
+    # run_tests.spam_fuzzy_controller_tests()
