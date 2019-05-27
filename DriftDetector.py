@@ -331,11 +331,13 @@ class DriftDetector:
 if __name__ == '__main__':
     drift_detector = DriftDetector()
     # report1 = drift_detector.predict("", 1)
-    report2 = drift_detector.predict(
-        "Super hyped about Bluestone Capital providing the support and backing to drive Esports in Sri Lanka and beyond. With the shared passion and commitment of #TeamGLK, we are excited for what lies in the future for Esports! #lka #Esports #gamerlk",
-        1)
+    # report2 = drift_detector.predict(
+    #     "Super hyped about Bluestone Capital providing the support and backing to drive Esports in Sri Lanka and beyond. With the shared passion and commitment of #TeamGLK, we are excited for what lies in the future for Esports! #lka #Esports #gamerlk",
+    #     1)
     # report3 = drift_detector.predict("I am suing my insurance company and you just managed to make it to the top of my shit list. #Ineedthosepictures", 1)
     # report4 = drift_detector.predict("Im going back to your Genius Bar to complain. #annoyed", 1)
-    print(report2)
+    # print(report2)
+    report4 = drift_detector.predict("Limitless and Boundless donations, try it here now", 1)
+
     # spell = SpellChecker()
     # token = spell.correction('complimentari')

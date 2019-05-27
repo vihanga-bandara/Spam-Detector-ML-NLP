@@ -38,7 +38,7 @@
     <div class="col-md-12">
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light nav-cust">
-                <a class="navbar-brand" href="{{ url_for('home') }}"><i class='icon'></i>Spam Detection
+                <a class="navbar-brand" href="{{ url_for('home') }}"><i class="fab fa-steam-symbol"></i> Spam Detection
                     Framework</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
@@ -52,13 +52,16 @@
                         <!--                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
                         <!--                    </li>-->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('home') }}">Complete Detection</a>
+                            <a class="nav-link" href="{{ url_for('home') }}"><i class="far fa-eye"></i> Complete
+                                Detection</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('classify_tweet') }}">Tweet Detection</a>
+                            <a class="nav-link" href="{{ url_for('classify_tweet') }}"><i class="far fa-eye"></i> Tweet
+                                Detection</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('review') }}">Admin Review</a>
+                            <a class="nav-link" href="{{ url_for('review') }}"><i class="fas fa-user-shield"></i> Admin
+                                Review</a>
                         </li>
                     </ul>
                 </div>
