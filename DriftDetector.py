@@ -341,7 +341,8 @@ if __name__ == '__main__':
     # report4 = drift_detector.predict("Im going back to your Genius Bar to complain. #annoyed", 1)
     # print(report2)
     # report4 = drift_detector.predict("Best investment from us, retweet now to win", 1)
-    report4 = drift_detector.predict("Click to check your daily and become rich", 1)
+    # report4 = drift_detector.predict("Click to check your daily and become rich", 1)
+    report4 = drift_detector.predict("Obtain complimentary coin, check it out now #coins", 1)
     # report4 = drift_detector.predict("Acquire limitless currency and funds by checking out my profile right now #", 1)
 
     # spell = SpellChecker()

@@ -65,6 +65,27 @@ class UserDetectModel:
     def train_model(self, X, y):
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
 
+        """Grid Search and Cross Validation to identify best parameters"""
+
+        """ Decision Tree Classifier """
+        # dt_classifier = DecisionTreeClassifier()
+        # params_dt = {"min_samples_leaf": [5, 50, 100],
+        #              "max_depth": [5, 6, 7, 8, 9, 10],
+        #              "criterion": ['gini', 'entropy']
+        #              }
+        #
+        # # use gridsearch to test all values
+        # dt_gs = GridSearchCV(dt_classifier, params_dt, cv=5, n_jobs=2)
+        # # fit model to training data
+        # dt_gs.fit(features_set_train, y_train)
+        #
+        # # save best model
+        # dt_best = dt_gs.best_estimator_
+        # # check best n_estimators value
+        # print(dt_gs.best_params_)
+
+        """ END OF GRID SEARCH - best params have been used for model """
+
         clf = DecisionTreeClassifier(criterion='entropy', min_samples_leaf=50, min_samples_split=10)
 
         DecisionTreeClf = clf.fit(X_train, y_train)

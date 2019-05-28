@@ -20,7 +20,7 @@ class Tester:
                                   'Go to my account and attempt the url in the bio to obtain clear and outright funds',
                                   'Here is a small gift for you #gifts',
                                   'Best investment from us, retweet now to win',
-                                  'Obtain complimentary coin, check it now']
+                                  'Obtain complimentary coin, check it now #coins']
 
         test_array_real_data = [
             'GET MORE FOLLOWERS FREE HERE. GET UP TO 70 FOLLOWERS -> http://poin.pixub.com <- #OPENFOLLOW #JFB',
