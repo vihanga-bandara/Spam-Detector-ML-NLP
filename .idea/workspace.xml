@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="">
+    <list default="true" id="4fd865ea-7981-491a-a261-9542f44d8057" name="Default Changelist" comment="Adding Icons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Classifiers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classifiers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DriftDetector.py" beforeDir="false" afterPath="$PROJECT_DIR$/DriftDetector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Retrainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Retrainer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TweetDetectModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/TweetDetectModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/drifted_tweets.p" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pickle/SpamTweetDetectModel.sav" beforeDir="false" afterPath="$PROJECT_DIR$/pickle/SpamTweetDetectModel.sav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tweet_detection.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tweet_detection.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tweet_only_landing.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tweet_only_landing.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,97 +43,120 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8281839">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Classifiers.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="765">
-                  <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
-                  <folding>
-                    <element signature="e#0#13#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/DriftDetector.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="264">
-                  <caret line="339" column="88" lean-forward="true" selection-start-line="339" selection-start-column="38" selection-end-line="339" selection-end-column="88" />
-                  <folding>
-                    <element signature="e#112#130#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/header.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="137">
-                  <caret line="50" column="62" lean-forward="true" selection-start-line="50" selection-start-column="62" selection-end-line="50" selection-end-column="62" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/SpamFuzzyController.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="338">
-                  <caret line="125" column="52" lean-forward="true" selection-start-line="125" selection-start-column="52" selection-end-line="125" selection-end-column="52" />
-                  <folding>
-                    <element signature="e#0#18#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Tester.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="99">
-                  <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
-                  <folding>
-                    <element signature="e#0#45#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/UserDetectModel.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-                  <folding>
-                    <element signature="e#0#18#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/SpamUserDetectModel.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="118">
-                  <caret line="124" selection-start-line="124" selection-end-line="125" selection-end-column="31" />
-                  <folding>
-                    <element signature="e#43#61#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="158">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
+              <folding>
+                <element signature="e#0#75#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classifiers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="125" column="61" selection-start-line="125" selection-start-column="61" selection-end-line="125" selection-end-column="61" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DriftDetector.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="332" selection-start-line="332" selection-end-line="332" />
+              <folding>
+                <element signature="e#112#130#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Retrainer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="161" column="29" selection-start-line="161" selection-start-column="29" selection-end-line="161" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SpamDetector.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="278">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv">
+          <provider editor-type-id="csv-table-editor">
+            <state showInfoPanel="true" fixedHeaders="false" rowLines="3">
+              <column index="0" width="514" />
+              <column index="1" width="100" />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="csv-text-editor">
+            <state relative-caret-position="308">
+              <caret line="791" selection-start-line="791" selection-end-line="791" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Tester.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="21" column="80" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="80" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/tweet_only_landing.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="446">
+              <caret line="48" column="24" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+              <folding>
+                <element signature="n#style#0;n#p#0;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TweetDetectModel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="28">
+              <caret line="574" column="75" selection-start-line="574" selection-start-column="75" selection-end-line="574" selection-end-column="75" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#1846#1884#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -140,8 +170,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>|</find>
-      <find>on_</find>
       <find>on_status</find>
       <find>is</find>
       <find>.append</find>
@@ -167,9 +195,11 @@
       <find>win</find>
       <find>coin</find>
       <find>rich</find>
-      <find>obtain</find>
       <find>__t</find>
       <find>Obtain</find>
+      <find>coins</find>
+      <find>account</find>
+      <find>obtain</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -216,32 +246,32 @@
         <option value="$PROJECT_DIR$/templates/error.html" />
         <option value="$PROJECT_DIR$/templates/extra.html" />
         <option value="$PROJECT_DIR$/SpamTweetDetectModel.py" />
-        <option value="$PROJECT_DIR$/templates/tweet_detection.html" />
-        <option value="$PROJECT_DIR$/templates/tweet_only_landing.html" />
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/review.html" />
         <option value="$PROJECT_DIR$/dataset/full-corpus.csv" />
         <option value="$PROJECT_DIR$/Testing.py" />
         <option value="$PROJECT_DIR$/Preprocessor.py" />
-        <option value="$PROJECT_DIR$/TweetDetectModel.py" />
-        <option value="$PROJECT_DIR$/Retrainer.py" />
         <option value="$PROJECT_DIR$/Dataframe.py" />
-        <option value="$PROJECT_DIR$/Classifiers.py" />
-        <option value="$PROJECT_DIR$/SpamDetector.py" />
         <option value="$PROJECT_DIR$/TwitterAPI.py" />
-        <option value="$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv" />
         <option value="$PROJECT_DIR$/SpamFuzzyController.py" />
         <option value="$PROJECT_DIR$/SpamUserDetectModel.py" />
         <option value="$PROJECT_DIR$/UserDetectModel.py" />
         <option value="$PROJECT_DIR$/templates/header.html" />
-        <option value="$PROJECT_DIR$/Tester.py" />
+        <option value="$PROJECT_DIR$/templates/tweet_detection.html" />
+        <option value="$PROJECT_DIR$/templates/tweet_only_landing.html" />
+        <option value="$PROJECT_DIR$/SpamDetector.py" />
+        <option value="$PROJECT_DIR$/TweetDetectModel.py" />
+        <option value="$PROJECT_DIR$/Retrainer.py" />
         <option value="$PROJECT_DIR$/DriftDetector.py" />
+        <option value="$PROJECT_DIR$/Classifiers.py" />
+        <option value="$PROJECT_DIR$/Tester.py" />
+        <option value="$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="118" />
-    <option name="y" value="97" />
+    <option name="x" value="263" />
+    <option name="y" value="85" />
     <option name="width" value="1657" />
     <option name="height" value="941" />
   </component>
@@ -251,7 +281,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -263,16 +292,6 @@
               <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
               <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Spam-Detection-Spot-Bot-ML" type="462c0819:PsiDirectoryNode" />
-              <item name="pickle" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Spam-Detection-Spot-Bot-ML" type="b2602c69:ProjectViewProjectNode" />
@@ -294,6 +313,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -307,7 +327,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -347,20 +367,17 @@
       <option name="ipnbPort" value="8888" />
       <method v="2" />
     </configuration>
-    <configuration name="Classifiers" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="DriftDetector" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Spam-Detection-Spot-Bot-ML" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Classifiers.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DriftDetector.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -414,9 +431,6 @@
       <module name="Spam-Detection-Spot-Bot-ML" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -479,10 +493,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Tester" />
-        <item itemvalue="Python.app" />
-        <item itemvalue="Python.SpamFuzzyController" />
-        <item itemvalue="Python.Classifiers" />
         <item itemvalue="Python.TweetDetectModel" />
+        <item itemvalue="Python.app" />
+        <item itemvalue="Python.DriftDetector" />
+        <item itemvalue="Python.SpamFuzzyController" />
       </list>
     </recent_temporary>
   </component>
@@ -588,14 +602,12 @@
       <workItem from="1558702252086" duration="30826000" />
       <workItem from="1558738759980" duration="588000" />
       <workItem from="1558764041998" duration="21035000" />
-      <workItem from="1558922816895" duration="1767000" />
-    </task>
-    <task id="LOCAL-00114" summary="Refactor code and UI development and Integration">
-      <created>1558475034565</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1558475034565</updated>
+      <workItem from="1558922816895" duration="5564000" />
+      <workItem from="1558933567251" duration="3185000" />
+      <workItem from="1558941958144" duration="494000" />
+      <workItem from="1558973045977" duration="2653000" />
+      <workItem from="1558983290298" duration="5560000" />
+      <workItem from="1559024625306" duration="12907000" />
     </task>
     <task id="LOCAL-00115" summary="Refactor code and UI development and Integration">
       <created>1558475973867</created>
@@ -933,11 +945,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558790932890</updated>
     </task>
-    <option name="localTasksCounter" value="163" />
+    <task id="LOCAL-00163" summary="Adding Icons">
+      <created>1558925989552</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1558925989553</updated>
+    </task>
+    <option name="localTasksCounter" value="164" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="702213000" />
+    <option name="totallyTimeSpent" value="730809000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -952,28 +971,28 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.78867924" visible="true" weight="0.26508024" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.78867924" visible="true" weight="0.27725512" />
       <window_info id="Structure" order="1" sideWeight="0.21132076" side_tool="true" weight="0.0802435" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4980631" weight="0.32937366" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32937366" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.5799668" weight="0.5971922" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6109574" weight="0.46436286" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4991699" weight="0.32937366" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4980631" weight="0.32937366" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.42003322" side_tool="true" weight="0.5237581" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.48865524" weight="0.24190065" />
-      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.8345324" visible="true" weight="0.51403886" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.17100166" side_tool="true" weight="0.41036716" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.48810184" weight="0.24190065" />
+      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.8289983" visible="true" weight="0.41036716" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.49197567" weight="0.32829374" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="R Graphics" order="3" weight="0.32982844" />
-      <window_info anchor="right" id="SciView" order="4" sideWeight="0.49830508" weight="0.3431101" />
+      <window_info anchor="right" id="SciView" order="4" sideWeight="0.49830508" weight="0.5312673" />
       <window_info anchor="right" id="R Packages" order="5" weight="0.32982844" />
       <window_info anchor="right" id="Database" order="6" weight="0.32982844" />
       <window_info anchor="right" x="0" y="0" width="413" height="855" id="Documentation" order="7" sideWeight="0.5016949" side_tool="true" weight="0.32982844" />
@@ -1055,7 +1074,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add new datasets created" />
     <MESSAGE value="Code for adding new datasets" />
     <MESSAGE value="Added Loader" />
     <MESSAGE value="Refactor code" />
@@ -1080,7 +1098,8 @@
     <MESSAGE value="Testing Full Flow" />
     <MESSAGE value="Refactoring" />
     <MESSAGE value="Refactored UserDetectModel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored UserDetectModel" />
+    <MESSAGE value="Adding Icons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Icons" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1292,19 +1311,9 @@
           <option name="timeStamp" value="634" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>324</line>
-          <option name="timeStamp" value="647" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SpamDetector.py</url>
           <line>77</line>
           <option name="timeStamp" value="654" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SpamDetector.py</url>
-          <line>81</line>
-          <option name="timeStamp" value="655" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SpamDetector.py</url>
@@ -1373,11 +1382,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>270</line>
-          <option name="timeStamp" value="697" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DriftDetector.py</url>
           <line>284</line>
           <option name="timeStamp" value="700" />
         </line-breakpoint>
@@ -1423,17 +1427,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>80</line>
+          <line>86</line>
           <option name="timeStamp" value="721" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>82</line>
+          <line>88</line>
           <option name="timeStamp" value="722" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>115</line>
+          <line>121</line>
           <option name="timeStamp" value="724" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1518,57 +1522,57 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>139</line>
+          <line>145</line>
           <option name="timeStamp" value="751" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>142</line>
+          <line>148</line>
           <option name="timeStamp" value="752" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>153</line>
+          <line>159</line>
           <option name="timeStamp" value="753" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>155</line>
+          <line>161</line>
           <option name="timeStamp" value="754" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>156</line>
+          <line>162</line>
           <option name="timeStamp" value="755" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>157</line>
+          <line>163</line>
           <option name="timeStamp" value="756" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>158</line>
+          <line>164</line>
           <option name="timeStamp" value="757" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>159</line>
+          <line>165</line>
           <option name="timeStamp" value="758" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>164</line>
+          <line>170</line>
           <option name="timeStamp" value="759" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>165</line>
+          <line>171</line>
           <option name="timeStamp" value="760" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>162</line>
+          <line>168</line>
           <option name="timeStamp" value="761" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1588,7 +1592,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>170</line>
+          <line>176</line>
           <option name="timeStamp" value="783" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1613,17 +1617,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Classifiers.py</url>
-          <line>165</line>
+          <line>166</line>
           <option name="timeStamp" value="803" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>63</line>
+          <line>69</line>
           <option name="timeStamp" value="805" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>65</line>
+          <line>71</line>
           <option name="timeStamp" value="806" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1633,12 +1637,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Classifiers.py</url>
-          <line>141</line>
+          <line>142</line>
           <option name="timeStamp" value="810" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Classifiers.py</url>
-          <line>135</line>
+          <line>136</line>
           <option name="timeStamp" value="811" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1747,58 +1751,48 @@
           <option name="timeStamp" value="875" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SpamDetector.py</url>
-          <line>25</line>
-          <option name="timeStamp" value="878" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SpamDetector.py</url>
-          <line>16</line>
-          <option name="timeStamp" value="879" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>143</line>
+          <line>149</line>
           <option name="timeStamp" value="880" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>144</line>
+          <line>150</line>
           <option name="timeStamp" value="881" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>145</line>
+          <line>151</line>
           <option name="timeStamp" value="882" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>127</line>
+          <line>133</line>
           <option name="timeStamp" value="883" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>128</line>
+          <line>134</line>
           <option name="timeStamp" value="884" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>135</line>
+          <line>141</line>
           <option name="timeStamp" value="885" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>136</line>
+          <line>142</line>
           <option name="timeStamp" value="886" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>133</line>
+          <line>139</line>
           <option name="timeStamp" value="887" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Retrainer.py</url>
-          <line>132</line>
+          <line>138</line>
           <option name="timeStamp" value="888" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1947,21 +1941,6 @@
           <option name="timeStamp" value="944" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>331</line>
-          <option name="timeStamp" value="945" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>271</line>
-          <option name="timeStamp" value="949" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DriftDetector.py</url>
-          <line>316</line>
-          <option name="timeStamp" value="951" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TwitterAPI.py</url>
           <line>14</line>
           <option name="timeStamp" value="954" />
@@ -2011,6 +1990,61 @@
           <line>109</line>
           <option name="timeStamp" value="967" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SpamDictionary.py</url>
+          <line>77</line>
+          <option name="timeStamp" value="968" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SpamDictionary.py</url>
+          <line>78</line>
+          <option name="timeStamp" value="969" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Retrainer.py</url>
+          <line>167</line>
+          <option name="timeStamp" value="970" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Tester.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="975" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Tester.py</url>
+          <line>54</line>
+          <option name="timeStamp" value="976" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Tester.py</url>
+          <line>55</line>
+          <option name="timeStamp" value="977" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Classifiers.py</url>
+          <line>125</line>
+          <option name="timeStamp" value="978" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Classifiers.py</url>
+          <line>126</line>
+          <option name="timeStamp" value="979" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SpamDetector.py</url>
+          <line>81</line>
+          <option name="timeStamp" value="980" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SpamDetector.py</url>
+          <line>55</line>
+          <option name="timeStamp" value="981" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SpamDetector.py</url>
+          <line>54</line>
+          <option name="timeStamp" value="982" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -2022,19 +2056,19 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$Tester.coverage" NAME="Tester Coverage Results" MODIFIED="1558777060455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$DriftDetector.coverage" NAME="DriftDetector Coverage Results" MODIFIED="1558732109111" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$Tester.coverage" NAME="Tester Coverage Results" MODIFIED="1559046883594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$DriftDetector.coverage" NAME="DriftDetector Coverage Results" MODIFIED="1559044988821" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$TestModel.coverage" NAME="TestModel Coverage Results" MODIFIED="1558526844247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$listen.coverage" NAME="listen Coverage Results" MODIFIED="1555561346041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$Classifiers.coverage" NAME="Classifiers Coverage Results" MODIFIED="1558724070603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$TwitterAPI.coverage" NAME="TwitterAPI Coverage Results" MODIFIED="1558281269018" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$Retrainer.coverage" NAME="Retrainer Coverage Results" MODIFIED="1558538315072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$SpamFuzzyController.coverage" NAME="SpamFuzzyController Coverage Results" MODIFIED="1557108479472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$app.coverage" NAME="app Coverage Results" MODIFIED="1558924992746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$app.coverage" NAME="app Coverage Results" MODIFIED="1559049387277" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$create_dataset.coverage" NAME="create_dataset Coverage Results" MODIFIED="1556183078320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$SpamTweetDetectModel.coverage" NAME="SpamTweetDetectModel Coverage Results" MODIFIED="1556183065802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$Preprocessor.coverage" NAME="Preprocessor Coverage Results" MODIFIED="1558698878140" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$TweetDetectModel.coverage" NAME="TweetDetectModel Coverage Results" MODIFIED="1558727654470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$TweetDetectModel.coverage" NAME="TweetDetectModel Coverage Results" MODIFIED="1559050631080" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$SpamDictionary.coverage" NAME="SpamDictionary Coverage Results" MODIFIED="1555657402964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Spam_Detection_Spot_Bot_ML$SpamDetector.coverage" NAME="SpamDetector Coverage Results" MODIFIED="1558647425515" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -2086,6 +2120,21 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>proba_value[0][0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>proba_value[0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>proba_value[1]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>ensemble.predict_proba</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -2115,63 +2164,9 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>tfidf</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>item</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>vectorizer.get_feature_names()</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.tweets_dataset</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="379" column="18" selection-start-line="379" selection-start-column="18" selection-end-line="379" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home_landing.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="63" lean-forward="true" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
-          <folding>
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tweet_detection.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="29" column="52" lean-forward="true" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tweet_only_landing.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/pandas/core/frame.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -2231,19 +2226,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataset/corpus.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/dataset/full-corpus.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="675">
           <caret line="300" column="215" lean-forward="true" selection-start-line="300" selection-start-column="215" selection-end-line="300" selection-end-column="215" />
         </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TestModel.py">
@@ -2317,15 +2312,15 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/dataset/SpamTweetsFinalDataset.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="163">
-          <caret line="818" selection-start-line="818" selection-end-line="818" selection-end-column="55" />
-        </state>
-      </provider>
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3">
           <column index="0" width="318" />
           <column index="1" width="100" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="163">
+          <caret line="818" selection-start-line="818" selection-end-line="818" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -2387,47 +2382,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#0#75#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Retrainer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-355">
-          <caret line="136" column="25" selection-start-line="136" selection-start-column="25" selection-end-line="136" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SpamDetector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TweetDetectModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="628" selection-start-line="628" selection-end-line="628" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#1328#1840#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SpamTweetDetectModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2018">
@@ -2438,13 +2392,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Classifiers.py">
+    <entry file="file://$PROJECT_DIR$/templates/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="272">
+          <caret line="50" column="62" selection-start-line="50" selection-start-column="62" selection-end-line="50" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpamDictionary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="53" column="32" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tweet_detection.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="100" column="47" selection-start-line="100" selection-start-column="47" selection-end-line="100" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -2458,62 +2423,120 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UserDetectModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="50" column="62" lean-forward="true" selection-start-line="50" selection-start-column="62" selection-end-line="50" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="8077">
-          <caret line="790" column="208" selection-start-line="790" selection-start-column="208" selection-end-line="790" selection-end-column="208" />
-        </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3">
-          <column index="0" width="514" />
-          <column index="1" width="100" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/data/flagged_drifted_tweets.p">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/SpamFuzzyController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="125" column="52" lean-forward="true" selection-start-line="125" selection-start-column="52" selection-end-line="125" selection-end-column="52" />
+        <state relative-caret-position="540">
+          <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#80#148#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UserDetectModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-300">
+          <caret line="28" column="42" lean-forward="true" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tester.py">
+    <entry file="file://$PROJECT_DIR$/Retrainer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
+        <state relative-caret-position="300">
+          <caret line="161" column="29" selection-start-line="161" selection-start-column="29" selection-end-line="161" selection-end-column="29" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="e#0#75#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SpamDetector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classifiers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="125" column="61" selection-start-line="125" selection-start-column="61" selection-end-line="125" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tweet_only_landing.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="48" column="24" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DriftDetector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="339" column="88" lean-forward="true" selection-start-line="339" selection-start-column="38" selection-end-line="339" selection-end-column="88" />
+        <state relative-caret-position="165">
+          <caret line="332" selection-start-line="332" selection-end-line="332" />
           <folding>
             <element signature="e#112#130#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/SpamTweetsFinalDataset.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3">
+          <column index="0" width="514" />
+          <column index="1" width="100" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="308">
+          <caret line="791" selection-start-line="791" selection-end-line="791" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TweetDetectModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="574" column="75" selection-start-line="574" selection-start-column="75" selection-end-line="574" selection-end-column="75" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#1846#1884#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="21" column="80" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>

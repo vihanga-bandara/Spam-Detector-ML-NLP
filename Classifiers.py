@@ -125,7 +125,8 @@ class UserClassifier(Classifier):
         # classify and add score to classifier
         self._proba_score = decision_tree_model.predict(user_features)
         proba_value = decision_tree_model.predict_proba(user_features)
-        prob_arr = [proba_value.min(), proba_value.max()]
+        # prob_arr = [proba_value.min(), proba_value.max()]
+        prob_arr = [proba_value[0][0], proba_value[0][1]]
         self._proba_value = prob_arr
 
     def classify_user_name(self, screen_name):
@@ -141,7 +142,7 @@ class UserClassifier(Classifier):
         # classify and add score to classifier
         self._proba_score = decision_tree_model.predict(user_features)
         proba_value = decision_tree_model.predict_proba(user_features)
-        prob_arr = [proba_value.min(), proba_value.max()]
+        prob_arr = [proba_value[0][0], proba_value[0][1]]
         self._proba_value = prob_arr
 
     def get_proba_value(self):

@@ -11,15 +11,16 @@ class Tester:
         # tests run on the tweet detector
         detector = TweetDetectModel()
         test_array_thesis_data = ['HOW DO YOU GET UNLIMITED FREE TWITTER FOLLOWERS? http://tinyurl.com/3xkr5hc',
-                                  'free twitter followers is the choice that i have and i know it',
                                   'Want thousands of people to follow you for free?',
                                   'Special free offers EXTRA 6% Off on Gold and Silver coins',
                                   'Im going back to your Genius Bar to complain. #annoyed',
                                   'I am suing my insurance company and you just managed to make it to the top of my shit list. #Ineedthosepictures',
                                   'Click to check your daily and become rich',
+                                  'Earn effortlessly by purchasing coins from my account right now #now #complimentary',
+                                  'Go to my account and attempt the url in the bio to obtain clear and outright funds',
                                   'Here is a small gift for you #gifts',
-                                  'Best investment from us, retweet to win',
-                                  'Obtain complimentary coin, check it out now']
+                                  'Best investment from us, retweet now to win',
+                                  'Obtain complimentary coin, check it now']
 
         test_array_real_data = [
             'GET MORE FOLLOWERS FREE HERE. GET UP TO 70 FOLLOWERS -> http://poin.pixub.com <- #OPENFOLLOW #JFB',
@@ -48,7 +49,8 @@ class Tester:
 
     def user_detector_tests(self):
         detector = UserClassifier()
-        detector.classify_user_name("rameshliyanage")
+        # detector.classify_user_name("rameshliyanage")
+        detector.classify("IITRotaract")
         getprobval = detector.get_proba_value()
         getprobscore = detector.get_prediction_score()
         getpredtype = detector.get_prediction_type()
@@ -76,10 +78,13 @@ class Tester:
     def drift_detector_tests(self):
         drift_detector = DriftDetector()
 
-        tweets = ['Click to check your daily and become rich',
+        tweets = ['Click to check your daily luck and become rich',
                   'Here is a small gift for you #gifts',
                   'Best investment from us, retweet to win',
-                  'Obtain complimentary coin, check it out now']
+                  'Obtain complimentary coin, check it out now',
+                  'Acquire limitless currency and funds by checking out my profile right now #',
+                  'Go to my account and attempt the url in the bio to obtain clear and outright funds',
+                  'Earn effortlessly by purchasing coins from my account right now #now #complimentary']
 
         for tweet in tweets:
             # run each test and classify tweets

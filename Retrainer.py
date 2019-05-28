@@ -17,10 +17,16 @@ class Retrainer:
         print("Initialized Retrainer")
 
     def retrieve_unflagged_drifted_tweets(self):
-        # load the spam tokens
-        filename = self.data + "drifted_tweets.p"
-        drifted_tweets = pickle.load(open(filename, 'rb'))
-        self.drifted_tweets_list = drifted_tweets
+
+        exists = os.path.isfile('./data/drifted_tweets.p')
+        if exists:
+            # load the spam tokens
+            filename = self.data + "drifted_tweets.p"
+            drifted_tweets = pickle.load(open(filename, 'rb'))
+            self.drifted_tweets_list = drifted_tweets
+        else:
+            self.drifted_tweets_list = []
+
 
     def get_unflagged_drifted_tweets(self):
         return self.drifted_tweets_list

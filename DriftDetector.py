@@ -58,7 +58,7 @@ class DriftDetector:
         return score
 
     def tweet_token_analogy_alg(self, tweet_tokens, spam_tokens):
-        """ This function will retrieve all similar and related words from twinword and datamuse API
+        """ This function will retrieve all similar and related words from datamuse API
             for each tweet token and then will compare it with each spam token using jaro-winkler algorithm.
             If it has a matching counterpart that particular tweet token will be given a score. After the whole process is
             completed, average weighted score will be calculated and then returned"""
@@ -111,7 +111,7 @@ class DriftDetector:
                     similarity2 = textdistance.jaro_winkler(word1, word2)
                     similarity = (similarity1 + similarity2) / 2
                     # print(similarity)
-                    if similarity > 0.94:
+                    if similarity > 0.9:
                         tweet_score += 1
                         found_similiar_bool = True
                         print(
@@ -268,7 +268,7 @@ class DriftDetector:
         first_score, second_score, unsupervised_score, final_score = 0, 0, 0, 0
         while drift_check:
             first_score = self.tweet_token_analogy_alg(tweet_tokens, spam_tokens)
-            if first_score >= 40:
+            if first_score >= 30:
                 print('This tweet might be spam therefore it will be sent for reporting. Percentage - {0}%'.format(
                     first_score))
                 # add tweet to new drifted tweets file
@@ -292,8 +292,11 @@ class DriftDetector:
                 break
             elif second_score < 40 and first_score < 40:
                 drift_report["spam_status"] = "Negative"
-                drift_report["spam_score"] = 0
-                drift_report["tweet"] = tweet
+                if second_score > first_score:
+                    drift_report["spam_score"] = second_score
+                    drift_report["tweet"] = tweet
+                else:
+                    drift_report["spam_score"] = first_score
                 break
             # else:
             #     unsupervised_score = self.kmeans_unsupervised_predict(processed_tweet)
@@ -337,7 +340,9 @@ if __name__ == '__main__':
     # report3 = drift_detector.predict("I am suing my insurance company and you just managed to make it to the top of my shit list. #Ineedthosepictures", 1)
     # report4 = drift_detector.predict("Im going back to your Genius Bar to complain. #annoyed", 1)
     # print(report2)
-    report4 = drift_detector.predict("Limitless and Boundless donations, try it here now", 1)
+    # report4 = drift_detector.predict("Best investment from us, retweet now to win", 1)
+    report4 = drift_detector.predict("Click to check your daily and become rich", 1)
+    # report4 = drift_detector.predict("Acquire limitless currency and funds by checking out my profile right now #", 1)
 
     # spell = SpellChecker()
     # token = spell.correction('complimentari')

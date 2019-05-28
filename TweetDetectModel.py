@@ -385,8 +385,8 @@ class TweetDetectModel:
         y_score_test = rf_classifier.score(features_set_test, y_test)
 
         # Output classifier results
-        print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
-        print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
+        # print("Training Accuracy: %.5f" % accuracy_score(y_train, y_pred_train))
+        # print("Test Accuracy: %.5f" % accuracy_score(y_test, y_pred_test))
 
         # probability of prediction of test data using trained model
         y_pred_proba = rf_classifier.predict_proba(features_set_test)
@@ -408,8 +408,8 @@ class TweetDetectModel:
         mean = scores.mean()
         std = scores.std()
 
-        print('Cross Validation Accuracy is {} | Mean is {} | Standard Deviation is {} on train data'.format(accuracy,
-                                                                                                             mean, std))
+        # print('Cross Validation Accuracy is {} | Mean is {} | Standard Deviation is {} on train data'.format(accuracy,
+        #                                                                                                      mean, std))
 
         """ Testing END for RandomForest Classifier """
 
@@ -448,8 +448,8 @@ class TweetDetectModel:
         mean = scores.mean()
         std = scores.std()
 
-        print('Cross Validation Accuracy is {} | Mean is {} | Standard Deviation is {} on train data'.format(accuracy,
-                                                                                                             mean, std))
+        # print('Cross Validation Accuracy is {} | Mean is {} | Standard Deviation is {} on train data'.format(accuracy,
+        #                                                                                                      mean, std))
         """ Testing END for Logistic Regression Classifier """
 
         # create a dictionary of our models
@@ -461,7 +461,7 @@ class TweetDetectModel:
         ensemble.fit(features_set_train, y_train)
         # test our model on the test data
         ensemble_score = ensemble.score(features_set_test, y_test)
-        print(ensemble_score)
+        # print(ensemble_score)
 
         return ensemble, tfidf, y_test, y_pred_test, y_pred_proba
 
