@@ -26,18 +26,11 @@ class Listener(StreamListener):
 
 
 class TwitterAPI:
-    # """ Main account token keys """
-    # _access_token = '250547225-fktvVk30HdHXnLgwhlHM5dBdv63YdrQBIuWjbjtV'
-    # _access_token_secret = '7NU8T6AWypW2jT0DyvTvjb9UqFaF1TfIMBeknptRJYHjH'
-    # _consumer_key = 'VhzN7FMeTq7lKvwAKV02Ho9Dw'
-    # _consumer_secret = 'K8pAy6MTLtMB5R5WSklrR0lqudb75zFkjfHWtscHqj7YYixsRr'
 
-    """ Fake account token keys """
-
-    _access_token = '1105567862419324936-tExRyZjEBSisoB3VnRsc1qkM912hbO'
-    _access_token_secret = 'lNnifwjeE56G2310gLLFj3CTZznsfTA69zX7LIoHR9XNk'
-    _consumer_key = 'aU0zQ6PqESrzxmq7rbvzbTD3M'
-    _consumer_secret = 'WYRhPGSjD5btgzvS1Ro2CZhSld5p7wWAiV1dmGZ7mawaFFhVC9'
+    _access_token = ''
+    _access_token_secret = ''
+    _consumer_key = ''
+    _consumer_secret = ''
 
     _auth = None
     _api = None
